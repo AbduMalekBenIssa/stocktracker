@@ -98,5 +98,20 @@ public class User {
             transactions.add(transaction);
         }
 
+        /**
+         * Deposits funds into the user's account
+         *
+         * @param amount The amount to deposit
+         * @return True if successful
+         */
+        public boolean deposit(double amount) {
+            if (amount <= 0) {
+                return false;
+            }
+            balance += amount;
+            return true;
+        }
+
+
 
     }
