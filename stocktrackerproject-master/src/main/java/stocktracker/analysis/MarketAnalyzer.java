@@ -143,4 +143,21 @@ public class MarketAnalyzer {
         System.out.println("\n========== Most Actively Traded Stocks 🔥 ==========");
         List<String> active = stockMarket.getMostActivelyTraded();
 
+        if (active.isEmpty()) {
+            System.out.println("No data available for most actively traded stocks.");
+            return;
+        }
+
+        for (int i = 0; i < active.size(); i++) {
+            String symbol = active.get(i);
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                System.out.println((i + 1) + ". " + name + " (" + symbol + "): $" +
+                        String.format("%.2f", price));
+            } catch (IOException e) {
+                System.out.println((i + 1) + ". " + symbol + ": Error getting data");
+            }
+        }
+    }
 }
