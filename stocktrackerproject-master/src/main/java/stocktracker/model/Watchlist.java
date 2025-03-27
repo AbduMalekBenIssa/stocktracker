@@ -77,6 +77,16 @@ public class Watchlist {
         return stockList;
     }
 
+    /**
+     * Gets the size of the watchlist
+     *
+     * @return The number of stocks in the watchlist
+     */
+    public int size() {
+        return stocks.size();
+    }
+
+
 
 
 
