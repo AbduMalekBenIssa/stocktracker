@@ -68,4 +68,13 @@ public class User {
             return watchlist;
         }
 
+        /**
+         * Gets the user's transactions
+         *
+         * @return The transactions
+         */
+        public List<Transaction> getTransactions() {
+            return new ArrayList<>(transactions);
+        }
+
     }
