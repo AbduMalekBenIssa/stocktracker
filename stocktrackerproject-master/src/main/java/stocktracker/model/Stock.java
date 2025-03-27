@@ -48,5 +48,15 @@ public abstract class Stock implements Comparable<Stock> {
         return name;
     }
 
+    /**
+     * Gets the current price
+     *
+     * @return The current price
+     */
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
+
+
 
 }
