@@ -74,6 +74,18 @@ public abstract class Stock implements Comparable<Stock> {
         return this.symbol.compareTo(other.symbol);
     }
 
+    /**
+     * Checks if two stocks are equal based on their symbols
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass().getSuperclass() != obj.getClass().getSuperclass()) return false;
+        Stock stock = (Stock) obj;
+        return Objects.equals(symbol, stock.symbol);
+    }
+
+
 
 
 
