@@ -66,6 +66,15 @@ public abstract class Stock implements Comparable<Stock> {
         this.currentPrice = price;
     }
 
+    /**
+     * Compares stocks based on their symbols
+     */
+    @Override
+    public int compareTo(Stock other) {
+        return this.symbol.compareTo(other.symbol);
+    }
+
+
 
 
 
