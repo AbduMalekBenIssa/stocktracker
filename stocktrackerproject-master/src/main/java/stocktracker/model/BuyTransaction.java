@@ -22,4 +22,28 @@ public class BuyTransaction extends Transaction {
         super(symbol, quantity, price);
 
     }
+    /**
+     * Constructor with timestamp parameter
+     *
+     * @param symbol The stock symbol
+     * @param quantity The number of shares
+     * @param price The price per share
+     * @param timestamp The transaction timestamp
+     */
+    public BuyTransaction(String symbol, int quantity, double price, LocalDateTime timestamp) {
+        super(symbol, quantity, price, timestamp);
+    }
+
+    /**
+     * Gets the transaction type
+     *
+     * @return "Buy"
+     */
+    @Override
+    public String getType() {
+        return "Buy";
+    }
+}
+
+
 }
