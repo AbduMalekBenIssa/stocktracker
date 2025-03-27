@@ -73,6 +73,16 @@ public class FinancialModelPrepAPI implements StockMarket {
         }
     }
 
+    /**
+     * Gets the name of a company by its stock symbol
+     */
+    @Override
+    public String getCompanyName(String symbol) throws IOException {
+        // Check cache first
+        if (companyNameCache.containsKey(symbol)) {
+            return companyNameCache.get(symbol);
+        }
 
 
-}
+
+    }
