@@ -138,7 +138,30 @@ public class FileManager {
                 } else if (line.equals("TRANSACTIONS_END")) {
                     section = "";
                     continue;
-                }
+
+                    // Process the line based on the current section
+                    String[] parts = line.split("\\|");
+
+                    if (parts[0].equals("USER")) {
+                        String name = parts[1];
+                        double balance = Double.parseDouble(parts[2]);
+                        user = new User(name, balance);
+                    } else if (section.equals("PORTFOLIO") && parts[0].equals("OWNED")) {
+                        String symbol = parts[1];
+                        String name = parts[2];
+                        double currentPrice = Double.parseDouble(parts[3]);
+                        int quantity = Integer.parseInt(parts[4]);
+                        double purchasePrice = Double.parseDouble(parts[5]);
+
+                        OwnedStock stock = new OwnedStock(symbol, name, currentPrice, quantity, purchasePrice);
+                        portfolio.addStock(stock);
+                    } else if (section.equals("WATCHLIST") && parts[0].equals("WATCH")) {
+                        String symbol = parts[1];
+                        String name = parts[2];
+                        double currentPrice = Double.parseDouble(parts[3]);
+                        double changePercentage = Double.parseDouble(parts[4]);
+
+                    }
 
             }
 
