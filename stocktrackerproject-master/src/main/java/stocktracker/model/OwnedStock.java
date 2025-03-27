@@ -26,4 +26,13 @@ public class OwnedStock extends Stock {
         this.quantity = quantity;
         this.purchasePrice = purchasePrice;
     }
+    /**
+     * Gets the number of shares owned
+     *
+     * @return The quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
 }
