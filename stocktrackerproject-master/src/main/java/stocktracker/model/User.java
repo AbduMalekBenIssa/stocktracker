@@ -2,8 +2,6 @@ package stocktracker.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class User {
     /**
      * Class representing a user of the stock tracker application
      *
@@ -174,4 +172,3 @@ public class User {
             this.transactions = new ArrayList<>(transactions);
         }
     }
-}

@@ -22,7 +22,6 @@ import java.util.Scanner;
 public class FileManager {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-
     /**
      * Saves user data to a text file
      *

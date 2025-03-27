@@ -25,30 +25,30 @@ public class StockApplication {
     private Scanner scanner;
     private boolean running;
 
-/**
- * Constructor for the StockApplication class
- *
- * @param initialDataFile Optional file to load initial data from
- */
+    /**
+     * Constructor for the StockApplication class
+     *
+     * @param initialDataFile Optional file to load initial data from
+     */
 
-public StockApplication(String initialDataFile) {
-    this.stockMarket = new FinancialModelPrepAPI();
-    this.scanner = new Scanner(System.in);
-    this.running = true;
+    public StockApplication(String initialDataFile) {
+        this.stockMarket = new FinancialModelPrepAPI();
+        this.scanner = new Scanner(System.in);
+        this.running = true;
 
-    // Load data from file if provided
-    if (initialDataFile != null && !initialDataFile.isEmpty()) {
-        try {
-            this.user = FileManager.loadFromFile(initialDataFile);
-            System.out.println("Data loaded from " + initialDataFile);
-        } catch (IOException e) {
-            System.out.println("Error loading data: " + e.getMessage());
+        // Load data from file if provided
+        if (initialDataFile != null && !initialDataFile.isEmpty()) {
+            try {
+                this.user = FileManager.loadFromFile(initialDataFile);
+                System.out.println("Data loaded from " + initialDataFile);
+            } catch (IOException e) {
+                System.out.println("Error loading data: " + e.getMessage());
+                createNewUser();
+            }
+        } else {
             createNewUser();
         }
-    } else {
-        createNewUser();
     }
-}
 
 
     /**
@@ -120,20 +120,47 @@ public StockApplication(String initialDataFile) {
     private void processChoice(int choice) {
         try {
             switch (choice) {
-                case 1: viewPortfolio(); break;
-                case 2: viewWatchlist(); break;
-                case 3: addToWatchlist(); break;
-                case 4: removeFromWatchlist(); break;
-                case 5: buyStock(); break;
-                case 6: sellStock(); break;
-                case 7: viewRecentTransactions(); break;
-                case 8: showMarketInfo(); break;
-                case 9: manageFunds(); break;
-                case 10: saveData(); break;
-                case 11: loadData(); break;
-                case 12: showCoolStuffMenu(); break;
-                case 13: exit(); break;
-                default: System.out.println("Invalid choice. Please try again.");
+                case 1:
+                    viewPortfolio();
+                    break;
+                case 2:
+                    viewWatchlist();
+                    break;
+                case 3:
+                    addToWatchlist();
+                    break;
+                case 4:
+                    removeFromWatchlist();
+                    break;
+                case 5:
+                    buyStock();
+                    break;
+                case 6:
+                    sellStock();
+                    break;
+                case 7:
+                    viewRecentTransactions();
+                    break;
+                case 8:
+                    showMarketInfo();
+                    break;
+                case 9:
+                    manageFunds();
+                    break;
+                case 10:
+                    saveData();
+                    break;
+                case 11:
+                    loadData();
+                    break;
+                case 12:
+                    showCoolStuffMenu();
+                    break;
+                case 13:
+                    exit();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -462,38 +489,37 @@ public StockApplication(String initialDataFile) {
             }
         }
 
-        /**
-         * Saves data to a text file
-         */
-        private void saveData() {
-            System.out.print("Enter filename: ");
-            String filename = scanner.nextLine();
-
-            try {
-                FileManager.saveToFile(user, filename);
-            } catch (IOException e) {
-                System.out.println("Error saving data: " + e.getMessage());
-            }
-        }
-
-        /**
-         * Loads data from a text file
-         */
-        private void loadData() {
-            System.out.print("Enter filename: ");
-            String filename = scanner.nextLine();
-
-            try {
-                User newUser = FileManager.loadFromFile(filename);
-                this.user = newUser;
-                System.out.println("Data loaded from " + filename);
-            } catch (IOException e) {
-                System.out.println("Error loading data: " + e.getMessage());
-            }
-        }
-
     }
 
+    /**
+     * Saves data to a text file
+     */
+    private void saveData () {
+        System.out.print("Enter filename: ");
+        String filename = scanner.nextLine();
+
+        try {
+            FileManager.saveToFile(user, filename);
+        } catch (IOException e) {
+            System.out.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Loads data from a text file
+     */
+    private void loadData() {
+        System.out.print("Enter filename: ");
+        String filename = scanner.nextLine();
+
+        try {
+            User newUser = FileManager.loadFromFile(filename);
+            this.user = newUser;
+            System.out.println("Data loaded from " + filename);
+        } catch (IOException e) {
+            System.out.println("Error loading data: " + e.getMessage());
+        }
+    }
     /**
      * Displays the "Cool Stuff" menu with advanced insights
      */
@@ -530,19 +556,44 @@ public StockApplication(String initialDataFile) {
 
             try {
                 switch (choice) {
-                    case 1: analyzer.displayTotalPortfolioValue(); break;
-                    case 2: analyzer.displayTopValuableStocks(5); break;
-                    case 3: analyzer.displayBestPerformingStocks(5); break;
-                    case 4: analyzer.displayWorstPerformingStocks(5); break;
-                    case 5: analyzer.displayMostTradedStock(); break;
-                    case 6: analyzer.displayPortfolioDiversification(); break;
-                    case 7: analyzer.displayRecentTransactions(10); break;
-                    case 8: marketAnalyzer.checkUnusualMarketMovements(); break;
-                    case 9: marketAnalyzer.displayTopGainers(); break;
-                    case 10: marketAnalyzer.displayTopLosers(); break;
-                    case 11: marketAnalyzer.displayMostActivelyTradedStocks(); break;
-                    case 12: inCoolMenu = false; break;
-                    default: System.out.println("Invalid choice. Please try again.");
+                    case 1:
+                        analyzer.displayTotalPortfolioValue();
+                        break;
+                    case 2:
+                        analyzer.displayTopValuableStocks(5);
+                        break;
+                    case 3:
+                        analyzer.displayBestPerformingStocks(5);
+                        break;
+                    case 4:
+                        analyzer.displayWorstPerformingStocks(5);
+                        break;
+                    case 5:
+                        analyzer.displayMostTradedStock();
+                        break;
+                    case 6:
+                        analyzer.displayPortfolioDiversification();
+                        break;
+                    case 7:
+                        analyzer.displayRecentTransactions(10);
+                        break;
+                    case 8:
+                        marketAnalyzer.checkUnusualMarketMovements();
+                        break;
+                    case 9:
+                        marketAnalyzer.displayTopGainers();
+                        break;
+                    case 10:
+                        marketAnalyzer.displayTopLosers();
+                        break;
+                    case 11:
+                        marketAnalyzer.displayMostActivelyTradedStocks();
+                        break;
+                    case 12:
+                        inCoolMenu = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
                 }
             } catch (IOException e) {
                 System.out.println("Error: " + e.getMessage());
@@ -573,6 +624,7 @@ public StockApplication(String initialDataFile) {
         StockApplication app = new StockApplication(initialDataFile);
         app.run();
     }
+}
 
 
 
