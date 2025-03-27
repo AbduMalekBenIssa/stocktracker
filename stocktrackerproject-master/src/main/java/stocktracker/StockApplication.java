@@ -169,6 +169,33 @@ public StockApplication(String initialDataFile) {
         System.out.println(user.getWatchlist());
     }
 
+    /**
+     * Adds a stock to the watchlist
+     */
+    private void addToWatchlist() throws IOException {
+        System.out.print("Enter stock symbol: ");
+        String symbol = scanner.nextLine().toUpperCase();
+
+        if (!stockMarket.isValidSymbol(symbol)) {
+            System.out.println("Invalid stock symbol.");
+            return;
+        }
+
+        if (user.getWatchlist().containsStock(symbol)) {
+            System.out.println("Stock is already in watchlist.");
+            return;
+        }
+
+        String name = stockMarket.getCompanyName(symbol);
+        double price = stockMarket.getStockPrice(symbol);
+        double change = stockMarket.getDailyChangePercentage(symbol);
+
+        WatchlistStock stock = new WatchlistStock(symbol, name, price, change);
+        user.getWatchlist().addStock(stock);
+
+        System.out.println("Added " + name + " (" + symbol + ") to watchlist.");
+    }
+
 
 
 
