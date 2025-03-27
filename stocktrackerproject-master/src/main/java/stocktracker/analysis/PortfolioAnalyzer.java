@@ -56,5 +56,32 @@ public class PortfolioAnalyzer {
         }
     }
 
+    /**
+     * Shows the top most valuable stocks in the portfolio
+     *
+     * @param count The number of stocks to display
+     */
+    public void displayTopValuableStocks(int count) {
+        System.out.println("\n========== Top " + count + " Most Valuable Stocks ==========");
+        List<OwnedStock> allStocks = user.getPortfolio().getAllStocks();
+
+        if (allStocks.isEmpty()) {
+            System.out.println("You don't own any stocks yet.");
+            return;
+        }
+
+        // Sort by total value (highest first)
+        allStocks.sort((s1, s2) -> Double.compare(s2.getTotalValue(), s1.getTotalValue()));
+
+        int displayCount = Math.min(count, allStocks.size());
+        for (int i = 0; i < displayCount; i++) {
+            OwnedStock stock = allStocks.get(i);
+            System.out.println((i + 1) + ". " + stock.getName() + " (" + stock.getSymbol() + ")" +
+                    " - $" + String.format("%.2f", stock.getTotalValue()) +
+                    " (" + stock.getQuantity() + " shares)");
+        }
+    }
+
+
 
 }
