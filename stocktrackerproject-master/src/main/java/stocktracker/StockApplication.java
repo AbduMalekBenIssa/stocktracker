@@ -333,6 +333,16 @@ public StockApplication(String initialDataFile) {
             return;
         }
 
+        // Add funds to balance
+        user.deposit(totalValue);
+
+        // Remove stock from portfolio
+        if (quantity == stock.getQuantity()) {
+            user.getPortfolio().removeStock(symbol);
+        } else {
+            stock.addShares(quantity);
+        }
+
 
 
 
