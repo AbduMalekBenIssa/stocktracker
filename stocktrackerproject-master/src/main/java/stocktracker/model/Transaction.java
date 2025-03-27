@@ -61,4 +61,13 @@ public abstract class Transaction {
         return timestamp;
     }
 
+    /**
+     * Gets the total value of the transaction
+     *
+     * @return The total value
+     */
+    public double getTotalValue() {
+        return quantity * price;
+    }
+
 }
