@@ -156,5 +156,14 @@ public class User {
             this.portfolio = portfolio;
         }
 
+        /**
+         * Sets the user's watchlist
+         *
+         * @param watchlist The watchlist to set
+         */
+        public void setWatchlist(Watchlist watchlist) {
+            this.watchlist = watchlist;
+        }
+
 
     }
