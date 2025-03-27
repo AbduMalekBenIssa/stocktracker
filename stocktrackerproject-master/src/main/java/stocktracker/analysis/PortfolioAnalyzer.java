@@ -150,6 +150,55 @@ public class PortfolioAnalyzer {
         }
     }
 
+    /**
+     * Displays the most traded stock based on transaction history
+     */
+    public void displayMostTradedStock() {
+        System.out.println("\n========== Most Traded Stock ==========");
+        List<Transaction> transactions = user.getTransactions();
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transaction history available.");
+            return;
+        }
+
+        // Count transactions by symbol
+        Map<String, Integer> transactionCounts = new HashMap<>();
+        Map<String, Double> transactionVolumes = new HashMap<>();
+
+        for (Transaction transaction : transactions) {
+            String symbol = transaction.getSymbol();
+            transactionCounts.put(symbol, transactionCounts.getOrDefault(symbol, 0) + 1);
+            transactionVolumes.put(symbol, transactionVolumes.getOrDefault(symbol, 0.0) +
+                    transaction.getQuantity() * transaction.getPrice());
+        }
+
+        // Find the most traded stock by count
+        String mostTradedSymbol = null;
+        int maxCount = 0;
+        for (Map.Entry<String, Integer> entry : transactionCounts.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                mostTradedSymbol = entry.getKey();
+            }
+        }
+
+        if (mostTradedSymbol != null) {
+            try {
+                String name = stockMarket.getCompanyName(mostTradedSymbol);
+                System.out.println("Most Traded Stock: " + name + " (" + mostTradedSymbol + ")");
+                System.out.println("Number of Transactions: " + maxCount);
+                System.out.println("Total Trading Volume: $" +
+                        String.format("%.2f", transactionVolumes.get(mostTradedSymbol)));
+            } catch (IOException e) {
+                System.out.println("Most Traded Stock: " + mostTradedSymbol);
+                System.out.println("Number of Transactions: " + maxCount);
+                System.out.println("Error fetching additional details: " + e.getMessage());
+            }
+        }
+    }
+
+
 
 
 }
