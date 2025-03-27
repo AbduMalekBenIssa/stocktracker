@@ -62,6 +62,25 @@ public class WatchlistStock extends Stock {
         this.lastChecked = LocalDateTime.now();
     }
 
+    /**
+     * Returns a string representation of the watchlist stock
+     */
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String changeStr = String.format("%.2f", changePercentage) + "%";
+        if (changePercentage > 0) {
+            changeStr = "+" + changeStr;
+        }
+
+        return "WatchlistStock [Symbol=" + symbol +
+                ", Name=" + name +
+                ", Price=$" + String.format("%.2f", currentPrice) +
+                ", Change=" + changeStr +
+                ", Last Checked=" + lastChecked.format(formatter) + "]";
+    }
+
+
 
 
 
