@@ -16,5 +16,19 @@ public class Portfolio {
     public Portfolio() {
         this.stocks = new HashMap<>();
     }
+    /**
+     * Adds a stock to the portfolio
+     *
+     * @param stock The stock to add
+     */
+    public void addStock(OwnedStock stock) {
+        if (stocks.containsKey(stock.getSymbol())) {
+            OwnedStock existingStock = stocks.get(stock.getSymbol());
+            existingStock.addShares(stock.getQuantity(), stock.getPurchasePrice());
+        } else {
+            stocks.put(stock.getSymbol(), stock);
+        }
+    }
+
 }
 
