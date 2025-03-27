@@ -34,5 +34,15 @@ public class OwnedStock extends Stock {
     public int getQuantity() {
         return quantity;
     }
+    
+    /**
+     * Gets the average purchase price
+     *
+     * @return The purchase price
+     */
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
 
 }
