@@ -58,6 +58,18 @@ public class Portfolio {
     public OwnedStock removeStock(String symbol) {
         return stocks.remove(symbol);
     }
-    
+
+    /**
+     * Gets all stocks in the portfolio
+     *
+     * @return A list of all owned stocks
+     */
+    public List<OwnedStock> getAllStocks() {
+        List<OwnedStock> stockList = new ArrayList<>(stocks.values());
+        Collections.sort(stockList);
+        return stockList;
+    }
+
+
 }
 
