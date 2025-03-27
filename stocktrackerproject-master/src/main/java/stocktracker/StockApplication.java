@@ -492,9 +492,35 @@ public StockApplication(String initialDataFile) {
             }
         }
 
-
     }
 
+    /**
+     * Displays the "Cool Stuff" menu with advanced insights
+     */
+    private void showCoolStuffMenu() throws IOException {
+        PortfolioAnalyzer analyzer = new PortfolioAnalyzer(user, stockMarket);
+        MarketAnalyzer marketAnalyzer = new MarketAnalyzer(stockMarket);
+
+        boolean inCoolMenu = true;
+
+        while (inCoolMenu) {
+            System.out.println("\n======= Cool Stuff (Advanced Insights) =======");
+            System.out.println("1. View Total Portfolio Value");
+            System.out.println("2. View Top 5 Most Valuable Stocks");
+            System.out.println("3. View Best Performing Stocks (Highest Gain)");
+            System.out.println("4. View Worst Performing Stocks (Biggest Loss)");
+            System.out.println("5. View Most Traded Stock");
+            System.out.println("6. View Portfolio Diversification");
+            System.out.println("7. View Recent Transactions");
+            System.out.println("8. Check for Unusual Market Movements");
+            System.out.println("9. View Top 5 Market Gainers 🚀");
+            System.out.println("10. View Top 5 Market Losers 📉");
+            System.out.println("11. View Most Actively Traded Stocks 🔥");
+            System.out.println("12. Go Back");
+            System.out.println("=============================================");
+
+            System.out.print("Enter your choice: ");
+            int choice;
 
 
 
@@ -512,4 +538,6 @@ public StockApplication(String initialDataFile) {
 
 
 
-            }
+
+
+        }
