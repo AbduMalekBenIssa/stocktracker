@@ -86,9 +86,13 @@ public class FileManager {
                 }
             }
             writer.println("TRANSACTIONS_END");
-
-
-
-
+            System.out.println("Data saved to " + filename);
         }
+    }
+
+
+
+
+
+}
 }
