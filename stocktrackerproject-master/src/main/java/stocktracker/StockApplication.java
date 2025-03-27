@@ -264,6 +264,21 @@ public StockApplication(String initialDataFile) {
         // Withdraw funds from balance
         user.withdraw(totalCost);
 
+// Add stock to portfolio
+        OwnedStock newStock = new OwnedStock(symbol, name, price, quantity, price);
+        if (user.getPortfolio().containsStock(symbol)) {
+            OwnedStock existingStock = user.getPortfolio().getStock(symbol);
+            existingStock.addShares(quantity, price);
+        } else {
+            user.getPortfolio().addStock(newStock);
+        }
+
+        // Add transaction to history
+        Transaction transaction = new BuyTransaction(symbol, quantity, price);
+        user.addTransaction(transaction);
+
+        System.out.println("Purchase completed.");
+    }
 
 
 
