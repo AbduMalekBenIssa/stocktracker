@@ -53,6 +53,16 @@ public class OwnedStock extends Stock {
         return quantity * currentPrice;
     }
 
+    /**
+     * Gets the profit/loss on the stock
+     *
+     * @return The profit/loss
+     */
+    public double getProfitLoss() {
+        return (currentPrice - purchasePrice) * quantity;
+    }
+
+
 
 
 }
