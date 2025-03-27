@@ -57,6 +57,17 @@ public class SellTransaction extends Transaction {
         return "Sell";
     }
 
+    /**
+     * Returns a string representation of the sell transaction
+     */
+    @Override
+    public String toString() {
+        String baseString = super.toString();
+        String plString = ", P/L=$" + String.format("%.2f", profitLoss);
+        return baseString.substring(0, baseString.length() - 1) + plString + "]";
+    }
+
+
 
 }
 
