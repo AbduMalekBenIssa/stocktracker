@@ -43,7 +43,7 @@ public class FileManager {
         if (file.exists()) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("File already exists. Do you want to overwrite it? (y/n): ");
-            String response = scanner.nextLine().toUpperCase();
+            String response = scanner.nextLine().toLowerCase();
 
             if (!response.equals("y")) {
                 System.out.println("Save operation cancelled.");
