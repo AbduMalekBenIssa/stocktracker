@@ -112,6 +112,17 @@ public class OwnedStock extends Stock {
                 " (" + String.format("%.2f", getProfitLossPercentage()) + "%)]";
     }
 
+    /**
+     * Converts the owned stock to CSV format
+     *
+     * @return The CSV representation
+     */
+    public String toCSV() {
+        return "owned," + symbol + "," + name + "," + currentPrice + "," + quantity + "," + purchasePrice;
+    }
+}
+
+
 
 
 
