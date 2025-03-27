@@ -111,7 +111,10 @@ public class PortfolioTest {
         assertEquals(0, portfolio.getAllStocks().size(), "Portfolio should be empty after removal");
         assertEquals(stock, removed, "Removed stock should match the original stock");
     }
-
+    @Test
+    public void testRemoveStock_nonExistentStock() {
+        // Try to remove a stock that doesn't exist
+        OwnedStock removed = portfolio.removeStock("AAPL");
 
 
 
