@@ -64,6 +64,14 @@ public class FileManager {
             }
             writer.println("PORTFOLIO_END");
 
+            // Write watchlist stocks
+            writer.println("WATCHLIST_START");
+            for (WatchlistStock stock : user.getWatchlist().getAllStocks()) {
+                writer.println("WATCH|" + stock.getSymbol() + "|" + stock.getName() + "|"
+                        + stock.getCurrentPrice() + "|" + stock.getChangePercentage());
+            }
+            writer.println("WATCHLIST_END");
+
 
 
 
