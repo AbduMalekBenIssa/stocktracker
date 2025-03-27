@@ -80,7 +80,14 @@ public class WatchlistStock extends Stock {
                 ", Last Checked=" + lastChecked.format(formatter) + "]";
     }
 
-
+    /**
+     * Converts the watchlist stock to CSV format
+     *
+     * @return The CSV representation
+     */
+    public String toCSV() {
+        return "watchlist," + symbol + "," + name + "," + currentPrice + "," + changePercentage;
+    }
 
 
 
