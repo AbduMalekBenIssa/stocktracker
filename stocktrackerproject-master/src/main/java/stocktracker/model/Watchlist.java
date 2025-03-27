@@ -27,4 +27,14 @@ public class Watchlist {
         this.stocks = new HashMap<>();
     }
 
+    /**
+     * Adds a stock to the watchlist
+     *
+     * @param stock The stock to add
+     */
+    public void addStock(WatchlistStock stock) {
+        stocks.put(stock.getSymbol(), stock);
+    }
+
+
 }
