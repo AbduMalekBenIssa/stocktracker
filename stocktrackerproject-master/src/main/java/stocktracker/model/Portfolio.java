@@ -29,6 +29,16 @@ public class Portfolio {
             stocks.put(stock.getSymbol(), stock);
         }
     }
+    /**
+     * Checks if a stock is in the portfolio
+     *
+     * @param symbol The stock symbol to check
+     * @return True if the stock is in the portfolio
+     */
+    public boolean containsStock(String symbol) {
+        return stocks.containsKey(symbol);
+    }
+
 
 }
 
