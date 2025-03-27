@@ -77,4 +77,18 @@ public abstract class Transaction {
      */
     public abstract String getType();
 
+    /**
+     * Returns a string representation of the transaction
+     */
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return getType() + " [Symbol=" + symbol +
+                ", Quantity=" + quantity +
+                ", Price=$" + String.format("%.2f", price) +
+                ", Total=$" + String.format("%.2f", getTotalValue()) +
+                ", Time=" + timestamp.format(formatter) + "]";
+    }
+
+
 }
