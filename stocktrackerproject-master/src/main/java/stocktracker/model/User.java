@@ -21,7 +21,7 @@ public class User {
         /**
          * Constructor for the User class
          *
-         * @param name The user's name
+         * @param name           The user's name
          * @param initialBalance The user's initial balance
          */
         public User(String name, double initialBalance) {
@@ -165,5 +165,13 @@ public class User {
             this.watchlist = watchlist;
         }
 
-
+        /**
+         * Sets the user's transaction history
+         *
+         * @param transactions The transactions to set
+         */
+        public void setTransactions(List<Transaction> transactions) {
+            this.transactions = new ArrayList<>(transactions);
+        }
     }
+}
