@@ -116,6 +116,40 @@ public class PortfolioAnalyzer {
         }
     }
 
+    /**
+     * Shows the worst performing stocks (biggest loss)
+     *
+     * @param count The number of stocks to display
+     */
+    public void displayWorstPerformingStocks(int count) {
+        System.out.println("\n========== Worst Performing Stocks ==========");
+        List<OwnedStock> allStocks = user.getPortfolio().getAllStocks();
+
+        if (allStocks.isEmpty()) {
+            System.out.println("You don't own any stocks yet.");
+            return;
+        }
+
+        // Sort by profit/loss percentage (lowest first)
+        allStocks.sort((s1, s2) -> Double.compare(s1.getProfitLossPercentage(), s2.getProfitLossPercentage()));
+
+        int displayCount = 0;
+        for (int i = 0; i < allStocks.size() && displayCount < count; i++) {
+            OwnedStock stock = allStocks.get(i);
+            if (stock.getProfitLoss() >= 0) {
+                continue; // Skip stocks with no loss
+            }
+            displayCount++;
+            System.out.println(displayCount + ". " + stock.getName() + " (" + stock.getSymbol() + ")" +
+                    " - Loss: $" + String.format("%.2f", stock.getProfitLoss()) +
+                    " (" + String.format("%.2f", stock.getProfitLossPercentage()) + "%)");
+        }
+
+        if (displayCount == 0) {
+            System.out.println("No stocks showing loss in your portfolio.");
+        }
+    }
+
 
 
 }
