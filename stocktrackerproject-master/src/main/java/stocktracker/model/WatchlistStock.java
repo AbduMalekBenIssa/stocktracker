@@ -32,4 +32,14 @@ public class WatchlistStock extends Stock {
         this.changePercentage = changePercentage;
     }
 
+    /**
+     * Gets the last time the stock was checked
+     *
+     * @return The last checked time
+     */
+    public LocalDateTime getLastChecked() {
+        return lastChecked;
+    }
+
+
 }
