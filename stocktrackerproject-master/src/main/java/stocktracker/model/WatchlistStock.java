@@ -50,6 +50,19 @@ public class WatchlistStock extends Stock {
         return changePercentage;
     }
 
+    /**
+     * Updates the stock information
+     *
+     * @param price The new price
+     * @param changePercentage The new change percentage
+     */
+    public void update(double price, double changePercentage) {
+        this.currentPrice = price;
+        this.changePercentage = changePercentage;
+        this.lastChecked = LocalDateTime.now();
+    }
+
+
 
 
 }
