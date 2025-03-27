@@ -1,0 +1,143 @@
+[33m6200882[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;32mmain[m[33m)[m fix logic runtime errors
+[33m47fd597[m fix error savedata + loaddata from file
+[33m9ce3ca1[m main method fix w/ run call
+[33mb7b8f10[m exiting aplication
+[33m96afb03[m switch cases for user selection w/ error handling
+[33md7fe5e2[m cool stuff menu created
+[33mdbb1121[m call the save data function
+[33mbd45cce[m call the load data function
+[33m2e6751c[m withdraw error handling fix
+[33m7e70b70[m logic to withdraw and deposit for managefunds
+[33m25bce89[m managefunds operation
+[33m6249794[m formatting of market info display feature
+[33ma3f7c66[m add + view recent transactions
+[33m4c49892[m fixed error remove share logic error
+[33m2b5e107[m add funds + remove from portfolio logic
+[33mff1eb0d[m add to portfolio operation
+[33me2614aa[m add to portfolio operation
+[33m7a6192f[m encapsulated withdraw
+[33m00bf408[m error number handling for balance fixed
+[33m6d312ff[m buystock function created
+[33m13b5044[m remove  to watchlist function calling external packages
+[33mb751bff[m add to watchlist function calling external packages
+[33m4e2ce0b[m view portolio & watchlist created
+[33mc713e0b[m switch cases to run the operator functions w/ error checking
+[33m67a949c[m getuserchoice prompt function
+[33mdeb93d5[m same display menu setup as before
+[33mda2fec0[m run function to loop the application
+[33m65370fe[m createnewuser function
+[33mc46c332[m stocktracker constructer
+[33m763d0cd[m initializing and importing StockApplication calss
+[33me428da2[m throws IO if invalid/null, and loads the process to the user via the helper functions
+[33maaabea7[m complete error handling + processing file
+[33m9ab5407[m processing based on waht we get from the file (valid or not)
+[33m2c95302[m attempt to read from our formatted file (not using switch for simplicity)
+[33m752c95b[m attempt to read from our formatted file
+[33md7d785b[m loadfromfile initialized
+[33m26e38be[m error handling + savefile finalized
+[33m73d1838[m writing transactions from the users current file.
+[33mcbe7247[m writing watchlist stocks from the users current file.
+[33m40f6c18[m fixed logic handling in  format error
+[33m4a26e96[m error handling and writing user info to system.out
+[33m5ccfd54[m add.txt, overwrite old save, and file creation
+[33m9acaec3[m save file method in manager object created
+[33md059411[m initialized filemanager class
+[33m27e05d0[m checks valid symbol w/ error handling
+[33md979540[m mostactive w/ error handling
+[33m875b058[m getToplosers w/ error hamdling
+[33m01f4d39[m getTopGainers w/ error hamdling
+[33mc58e01b[m company name with error handling
+[33m30eab93[m dailypercentage w/ error handling
+[33mda629c4[m initialize stockmarket interface
+[33mfb8f4d3[m error checking for valid symbol
+[33m37e6fed[m  mostraded function initalized
+[33m771e9cb[m  toploser function initalized
+[33m98f4482[m  topgainer function initalized
+[33m4aff389[m  name function finalized
+[33m5bf980c[m getcompanyname helper function
+[33mf0f426d[m api logic call fix
+[33ma15ad8d[m fetches via request current daily price price function
+[33mc38627e[m fetches via request current stock price function
+[33med39b85[m creating constructiong for FMP api
+[33me046a79[m implementing FMP api base on demo 1 functionality
+[33m34bc45b[m csv conversion (for js users in future)
+[33m5578b3e[m string format function
+[33mbe31161[m update stock information via api request
+[33m913c752[m get change percentage in watchlist function
+[33m20d38ad[m get last time the stock was checke
+[33m96e27af[m watchliststock constructor using including localdatetime
+[33mad77328[m watchliststock extending stock
+[33me6b300a[m string formatting
+[33m98ead02[m get size of watchlist
+[33m5b43b24[m returning full watchlist stock in a list
+[33m649f3d0[m getting stock from the watchlist returning the type watchlsitstock
+[33m151c6e2[m error checking for containgin in watchlist
+[33mba8203e[m remvoe stock function
+[33m0239529[m add stock to watchlist function
+[33mebce874[m imports and watchlist constructor using map/hashmap (
+[33mf085aa6[m settranasaction construct
+[33me9a5051[m setwatchlist construct
+[33m874b12b[m setportfolio constructing
+[33ma54add6[m another string formatting helper function
+[33m686b72b[m gettotalvalue funcion returns balance + encapspualted value
+[33m5e4009a[m withdraw method
+[33mdf33694[m deposit function
+[33m93e2ed5[m Merge remote-tracking branch 'origin/master'
+[33ma443343[m[33m ([m[1;31morigin/master[m[33m)[m completed these 2 files
+[33me888d4d[m fixed error  handling recent
+[33mdc59b06[m add transaction function
+[33ma96a3e3[m 10 again lol
+[33m6d83217[m made sure its 10
+[33mf061ee0[m getrecenttrasactions method calling get function
+[33maabdbe0[m only 5 since we are testing with 5 only right now
+[33mf2fe536[m should be 10 not 3
+[33m7ebcd6e[m getransactions return list method
+[33ma9214e3[m made this fix since it was failing becuase the index was incorrect and the symbol was wrong
+[33m0d29cdd[m watchlist get encaspulate create
+[33m30f6c00[m getportfolio method
+[33m51c7763[m getbalance encapsulate
+[33m8ff0887[m checking that nothing happened
+[33m504590e[m test case for removing non existrent stock
+[33m43edc7d[m getName functions
+[33m6af1bc4[m remove stop stock test cases
+[33m82cb325[m constructor for user class
+[33mc9af9fc[m profitlosss test cases added in for testing portfolio
+[33mdf7c0cd[m initializing user class
+[33mbfc3b48[m get total value test cases added
+[33mdbd7eac[m test case for checking multiple stocks
+[33m93162d4[m second test cases for seeing existing stock
+[33m26403c2[m added in before each to create empty portfolio for every test thats called  and added in first test case for newstock
+[33m5c058f7[m fix formatting error
+[33m4adca44[m csv method (for js users in futre)
+[33mec48e8b[m added in imports and java doc for into, tutorial name and such etc
+[33mef2d3a8[m string tostring method
+[33m2b922f1[m added in last test cases to run for more than requested
+[33m626b597[m 2 test cases for empty list recent transction, and recenent tractions for fewer than requested
+[33m5c55310[m get gettype encapsulated function
+[33m57fc738[m get totalvalue encapsulated function
+[33m79be3d0[m 2 test cases for adding transaction, and getting total value for stocks
+[33m6c46b0c[m get timestamp encapsulated function
+[33m5a0f333[m get price encapsulated function
+[33m724d394[m 2 test cases for invlaid withdraw amount and empty port
+[33ma8d3eea[m get quantity encapsulated function
+[33mf489035[m get symbol function
+[33m121c85f[m 2 test cases for withdrawing valid amounts and withdrawing too much
+[33m494ee21[m constructor for transaction class w/ timestamp (will remove other if other suffice)
+[33m9c498ee[m test case for invalid amount deposit
+[33m2f010dc[m added next 2 tests for balance and deposting a valid amount
+[33m2f9bee8[m adding imports java docs and first testcase for usertesting
+[33m27274c0[m constructor for transaction class
+[33m074f2f1[m abstract transaction class
+[33md3ca2a3[m added in test files and changed formatin on some files
+[33mf8156ce[m shows most recent transactions, and such.
+[33m3877fa0[m this is to show diversification of stocks by sector
+[33m2b662c4[m added this to show most traded stocks based on transaction history and such. counts by symbol etc...
+[33mfcf0778[m added in section to show worst perforkming stocks, ones with biggest loss, and sorted by percent
+[33ma67a101[m added in section to show best performing stocks from highest to lowest etc, everyrthing compelte with checks and such
+[33md3dc31a[m thsi will display top most valuable stocks that are in the port, sorting by highest first etc...
+[33m028579c[m detailed breakdown for whole port added in
+[33m5a47e2d[m constructer for portanalyszer
+[33m11c7b87[m added in info for class
+[33mbb21430[m added in info section and imports for port
+[33m2353451[m adding in functionaly for most traded stocks class
+[33m4621c6
