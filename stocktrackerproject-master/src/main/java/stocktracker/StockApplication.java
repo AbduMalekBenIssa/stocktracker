@@ -196,6 +196,23 @@ public StockApplication(String initialDataFile) {
         System.out.println("Added " + name + " (" + symbol + ") to watchlist.");
     }
 
+    /**
+     * Removes a stock from the watchlist
+     */
+    private void removeFromWatchlist() {
+        System.out.print("Enter stock symbol: ");
+        String symbol = scanner.nextLine().toUpperCase();
+
+        if (!user.getWatchlist().containsStock(symbol)) {
+            System.out.println("Stock is not in watchlist.");
+            return;
+        }
+
+        WatchlistStock stock = user.getWatchlist().removeStock(symbol);
+        System.out.println("Removed " + stock.getName() + " (" + symbol + ") from watchlist.");
+    }
+
+
 
 
 
