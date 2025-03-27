@@ -212,6 +212,54 @@ public StockApplication(String initialDataFile) {
         System.out.println("Removed " + stock.getName() + " (" + symbol + ") from watchlist.");
     }
 
+    /**
+     * Buys a stock
+     */
+    private void buyStock() throws IOException {
+        System.out.print("Enter stock symbol: ");
+        String symbol = scanner.nextLine().toUpperCase();
+
+        if (!stockMarket.isValidSymbol(symbol)) {
+            System.out.println("Invalid stock symbol.");
+            return;
+        }
+
+        System.out.print("Enter number of shares: ");
+        int quantity;
+        try {
+            quantity = Integer.parseInt(scanner.nextLine());
+            if (quantity <= 0) {
+                System.out.println("Quantity must be positive.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid quantity.");
+            return;
+        }
+
+        String name = stockMarket.getCompanyName(symbol);
+        double price = stockMarket.getStockPrice(symbol);
+        double totalCost = price * quantity;
+
+        System.out.println("\n========== Buy Order ==========");
+        System.out.println("Stock: " + name + " (" + symbol + ")");
+        System.out.println("Price: $" + String.format("%.2f", price) + " per share");
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total Cost: $" + String.format("%.2f", totalCost));
+        System.out.println("Your Balance: $" + String.format("%.2f", user.getBalance()));
+
+        if (totalCost < user.getBalance()) {
+            System.out.println("Insufficient funds.");
+            return;
+        }
+
+        System.out.print("Confirm purchase (y/n): ");
+        String confirm = scanner.nextLine().toLowerCase();
+
+        if (!confirm.equals("y")) {
+            System.out.println("Purchase cancelled.");
+            return;
+        }
 
 
 
@@ -223,4 +271,6 @@ public StockApplication(String initialDataFile) {
 
 
 
-}
+
+
+    }
