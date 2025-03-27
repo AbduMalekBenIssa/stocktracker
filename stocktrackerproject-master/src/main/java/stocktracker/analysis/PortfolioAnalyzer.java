@@ -17,4 +17,5 @@ import java.util.*;
  * @Tutorial T04
  */
 public class PortfolioAnalyzer {
-}
+    private User user;
+    private StockMarket stockMarket;
