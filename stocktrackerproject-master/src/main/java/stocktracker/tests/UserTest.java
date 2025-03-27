@@ -142,5 +142,3 @@ public class UserTest {
     }
 }
 
-
-}
