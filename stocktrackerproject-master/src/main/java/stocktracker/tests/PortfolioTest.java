@@ -53,5 +53,23 @@ public class PortfolioTest {
         // Average price calculation: (10*145 + 5*155) / 15 = 148.33...
         assertEquals(148.33, combinedStock.getPurchasePrice(), 0.01, "Purchase price should be averaged");
     }
+    @Test
+    public void testAddStock_multipleStocks() {
+        // Add multiple different stocks
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        OwnedStock stock2 = new OwnedStock("MSFT", "Microsoft Corp.", 300.0, 5, 295.0);
+        OwnedStock stock3 = new OwnedStock("GOOGL", "Alphabet Inc.", 2500.0, 1, 2450.0);
+
+        portfolio.addStock(stock1);
+        portfolio.addStock(stock2);
+        portfolio.addStock(stock3);
+
+        // Check that all stocks were added
+        assertEquals(3, portfolio.getAllStocks().size(), "Portfolio should have three stocks");
+        assertTrue(portfolio.containsStock("AAPL"), "Portfolio should contain AAPL");
+        assertTrue(portfolio.containsStock("MSFT"), "Portfolio should contain MSFT");
+        assertTrue(portfolio.containsStock("GOOGL"), "Portfolio should contain GOOGL");
+    }
+
 
 }
