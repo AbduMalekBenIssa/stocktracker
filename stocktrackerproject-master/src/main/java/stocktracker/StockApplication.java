@@ -457,6 +457,11 @@ public StockApplication(String initialDataFile) {
                 }
                 user.withdraw(amount);
                 System.out.println("Withdrew $" + String.format("%.2f", amount));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount.");
+            }
+        }
+    }
 
 
 
