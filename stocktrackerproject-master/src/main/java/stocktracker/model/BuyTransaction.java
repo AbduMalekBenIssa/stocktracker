@@ -1,5 +1,7 @@
 package stocktracker.model;
 
+import java.time.LocalDateTime;
+
 /**
  * Class representing a buy transaction
  *
