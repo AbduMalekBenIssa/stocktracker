@@ -50,4 +50,13 @@ public class User {
             return balance;
         }
 
+        /**
+         * Gets the user's portfolio
+         *
+         * @return The portfolio
+         */
+        public Portfolio getPortfolio() {
+            return portfolio;
+        }
+
     }
