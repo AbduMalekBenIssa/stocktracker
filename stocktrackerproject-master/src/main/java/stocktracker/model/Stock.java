@@ -29,4 +29,14 @@ public abstract class Stock implements Comparable<Stock> {
         this.name = name;
         this.currentPrice = currentPrice;
     }
+    
+    /**
+     * Gets the stock symbol
+     *
+     * @return The stock symbol
+     */
+    public String getSymbol() {
+        return symbol;
+    }
+
 }
