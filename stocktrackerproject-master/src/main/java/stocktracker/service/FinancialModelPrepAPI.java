@@ -49,7 +49,7 @@ public class FinancialModelPrepAPI implements StockMarket {
 
 
             JsonObject stockObject = jsonArray.get(0).getAsJsonObject();
-            return stockObject.get("crice").getAsDouble(); // Extracts price from API response
+            return stockObject.get("price").getAsDouble(); // Extracts price from API response
         }
     }
 
