@@ -261,6 +261,10 @@ public StockApplication(String initialDataFile) {
             return;
         }
 
+        // Withdraw funds from balance
+        user.withdraw(totalCost);
+
+
 
 
 
