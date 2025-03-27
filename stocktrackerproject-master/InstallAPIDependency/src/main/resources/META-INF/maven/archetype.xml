@@ -1,0 +1,9 @@
+<archetype>
+  <id>InstallAPIDependency</id>
+  <sources>
+    <source>src/com.stocktracker.main/java/App.java</source>
+  </sources>
+  <testSources>
+    <source>src/test/java/AppTest.java</source>
+  </testSources>
+</archetype>
