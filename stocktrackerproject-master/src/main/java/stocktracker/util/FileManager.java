@@ -104,10 +104,22 @@ public class FileManager {
             filename += ".txt";
         }
 
+        File file = new File(filename);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + filename);
+        }
+
+        User user = null;
+        Portfolio portfolio = new Portfolio();
+        Watchlist watchlist = new Watchlist();
+        List<Transaction> transactions = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
 
 
 
 
-    }
+
+        }
 }
