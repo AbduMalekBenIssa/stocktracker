@@ -126,6 +126,14 @@ public class User {
             return true;
         }
 
+        /**
+         * Gets the total asset value (balance + portfolio)
+         *
+         * @return The total value
+         */
+        public double getTotalValue() {
+            return balance + portfolio.getTotalValue();
+        }
 
 
     }
