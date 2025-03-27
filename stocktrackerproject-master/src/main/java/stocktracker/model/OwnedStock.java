@@ -121,13 +121,3 @@ public class OwnedStock extends Stock {
         return "owned," + symbol + "," + name + "," + currentPrice + "," + quantity + "," + purchasePrice;
     }
 }
-
-
-
-
-
-
-
-
-
-}
