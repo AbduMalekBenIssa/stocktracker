@@ -85,8 +85,17 @@ public class User {
          */
         public List<Transaction> getRecentTransactions(int count) {
             int size = transactions.size();
-            int startIndex = Math.max(0, size - count);
+            int startIndex = Math.max(-1, size - count);
             return new ArrayList<>(transactions.subList(startIndex, size));
+        }
+
+        /**
+         * Adds a transaction to the user's history
+         *
+         * @param transaction The transaction to add
+         */
+        public void addTransaction(Transaction transaction) {
+            transactions.add(transaction);
         }
 
 
