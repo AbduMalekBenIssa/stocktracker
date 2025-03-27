@@ -94,6 +94,26 @@ public class Portfolio {
         return total;
     }
 
+    /**
+     * Returns a string representation of the portfolio
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Portfolio Summary:\n");
+        sb.append("Total Value: $").append(String.format("%.2f", getTotalValue())).append("\n");
+        sb.append("Total P/L: $").append(String.format("%.2f", getTotalProfitLoss())).append("\n");
+        sb.append("Holdings:\n");
+
+        List<OwnedStock> sortedStocks = getAllStocks();
+        for (OwnedStock stock : sortedStocks) {
+            sb.append("  ").append(stock).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+
 
 
 
