@@ -47,5 +47,16 @@ public class SellTransaction extends Transaction {
         return profitLoss;
     }
 
+    /**
+     * Gets the transaction type
+     *
+     * @return "Sell"
+     */
+    @Override
+    public String getType() {
+        return "Sell";
+    }
+
+
 }
 
