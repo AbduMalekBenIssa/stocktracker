@@ -49,4 +49,37 @@ public class MarketAnalyzer {
                     extremeMovers.put(symbol, change);
                 }
             } catch (IOException e) {
+                // Skip if there's an error
             }
+        }
+
+        for (String symbol : losers) {
+            try {
+                double change = stockMarket.getDailyChangePercentage(symbol);
+                if (change < -10.0) { // Consider over 10% loss as extreme
+                    extremeMovers.put(symbol, change);
+                }
+            } catch (IOException e) {
+                // Skip if there's an error
+            }
+        }
+
+        // Display findings
+        if (extremeMovers.isEmpty()) {
+            System.out.println("No unusual market movements detected today.");
+        } else {
+            System.out.println("The following stocks are showing unusual price movements:");
+            for (Map.Entry<String, Double> entry : extremeMovers.entrySet()) {
+                try {
+                    String name = stockMarket.getCompanyName(entry.getKey());
+                    double price = stockMarket.getStockPrice(entry.getKey());
+                    System.out.println(name + " (" + entry.getKey() + "): " +
+                            String.format("%.2f", entry.getValue()) + "% | $" +
+                            String.format("%.2f", price));
+                } catch (IOException e) {
+                    System.out.println(entry.getKey() + ": " +
+                            String.format("%.2f", entry.getValue()) + "%");
+                }
+            }
+        }
+    }
