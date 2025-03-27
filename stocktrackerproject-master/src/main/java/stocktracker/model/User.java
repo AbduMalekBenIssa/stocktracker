@@ -85,7 +85,7 @@ public class User {
          */
         public List<Transaction> getRecentTransactions(int count) {
             int size = transactions.size();
-            int startIndex = Math.max(-1, size - count);
+            int startIndex = Math.max(0, size - count);
             return new ArrayList<>(transactions.subList(startIndex, size));
         }
 
