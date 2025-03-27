@@ -83,6 +83,21 @@ public class OwnedStock extends Stock {
         this.purchasePrice = totalValue / this.quantity;
     }
 
+    /**
+     * Removes shares from the current holding
+     *
+     * @param quantity The quantity to remove
+     * @return True if successful, false if not enough shares
+     */
+    public boolean removeShares(int quantity) {
+        if (quantity > this.quantity) {
+            return false;
+        }
+        this.quantity -= quantity;
+        return true;
+    }
+
+
 
 
 
