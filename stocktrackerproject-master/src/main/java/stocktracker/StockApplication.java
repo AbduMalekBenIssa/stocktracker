@@ -461,6 +461,21 @@ public StockApplication(String initialDataFile) {
                 System.out.println("Invalid amount.");
             }
         }
+
+        /**
+         * Saves data to a text file
+         */
+        private void saveData() {
+            System.out.print("Enter filename: ");
+            String filename = scanner.nextLine();
+
+            try {
+                FileManager.saveToFile(user, filename);
+            } catch (IOException e) {
+                System.out.println("Error saving data: " + e.getMessage());
+            }
+        }
+
     }
 
 
