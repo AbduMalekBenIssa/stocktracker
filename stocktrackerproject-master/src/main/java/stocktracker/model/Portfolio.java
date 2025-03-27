@@ -69,6 +69,19 @@ public class Portfolio {
         Collections.sort(stockList);
         return stockList;
     }
+    /**
+     * Gets the total value of the portfolio
+     *
+     * @return The total value
+     */
+    public double getTotalValue() {
+        double total = 0;
+        for (OwnedStock stock : stocks.values()) {
+            total += stock.getTotalValue();
+        }
+        return total;
+    }
+
 
 
 }
