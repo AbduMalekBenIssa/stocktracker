@@ -81,6 +81,19 @@ public class Portfolio {
         }
         return total;
     }
+    /**
+     * Gets the total profit/loss of the portfolio
+     *
+     * @return The total profit/loss
+     */
+    public double getTotalProfitLoss() {
+        double total = 0;
+        for (OwnedStock stock : stocks.values()) {
+            total += stock.getProfitLoss();
+        }
+        return total;
+    }
+
 
 
 
