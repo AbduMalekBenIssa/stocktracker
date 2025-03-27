@@ -41,5 +41,13 @@ public interface StockMarket {
      */
     String getCompanyName(String symbol) throws IOException;
 
+    /**
+     * Gets the top gainers in the market
+     *
+     * @return A list of top gaining stock symbols
+     * @throws IOException If there's an error getting the data
+     */
+    List<String> getTopGainers() throws IOException;
+
 
 }
