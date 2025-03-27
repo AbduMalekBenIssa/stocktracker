@@ -78,4 +78,29 @@ public class UserTest {
         assertEquals(10000.0, user.getTotalValue(), 0.01, "Total value should equal balance with empty portfolio");
     }
 
+    @Test
+    public void testGetTotalValue_withStocks() {
+        // Add some stocks to the portfolio
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);  // Value: 1500
+        OwnedStock stock2 = new OwnedStock("MSFT", "Microsoft Corp.", 300.0, 5, 295.0);  // Value: 1500
+
+        user.getPortfolio().addStock(stock1);
+        user.getPortfolio().addStock(stock2);
+
+        // Total value should be balance + portfolio value
+        assertEquals(13000.0, user.getTotalValue(), 0.01, "Total value should equal balance + portfolio value");
+    }
+
+    @Test
+    public void testAddTransaction() {
+        // Add a transaction
+        Transaction transaction = new BuyTransaction("AAPL", 10, 150.0);
+        user.addTransaction(transaction);
+
+        // Check that the transaction was added
+        List<Transaction> transactions = user.getTransactions();
+        assertEquals(1, transactions.size(), "Should have one transaction");
+        assertEquals(transaction, transactions.get(0), "Transaction should match the added one");
+    }
+
 }
