@@ -41,4 +41,13 @@ public class User {
             return name;
         }
 
+        /**
+         * Gets the user's balance
+         *
+         * @return The balance
+         */
+        public double getBalance() {
+            return balance;
+        }
+
     }
