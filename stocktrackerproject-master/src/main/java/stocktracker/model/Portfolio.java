@@ -49,7 +49,15 @@ public class Portfolio {
         return stocks.get(symbol);
     }
 
-
-
+    /**
+     * Removes a stock from the portfolio
+     *
+     * @param symbol The stock symbol
+     * @return The removed stock, or null if not found
+     */
+    public OwnedStock removeStock(String symbol) {
+        return stocks.remove(symbol);
+    }
+    
 }
 
