@@ -116,6 +116,8 @@ public class PortfolioTest {
         // Try to remove a stock that doesn't exist
         OwnedStock removed = portfolio.removeStock("AAPL");
 
-
-
+        // Check that nothing happened
+        assertNull(removed, "Removing non-existent stock should return null");
+        assertEquals(0, portfolio.getAllStocks().size(), "Portfolio should still be empty");
+    }
 }
