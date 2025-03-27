@@ -11,4 +11,11 @@ public abstract class Transaction {
     protected double price;
     protected LocalDateTime timestamp;
 
+    public Transaction(String symbol, int quantity, double price) {
+        this.symbol = symbol;
+        this.quantity = quantity;
+        this.price = price;
+        this.timestamp = LocalDateTime.now();
+    }
+
 }
