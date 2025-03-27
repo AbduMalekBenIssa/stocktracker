@@ -38,5 +38,14 @@ public class SellTransaction extends Transaction {
         this.profitLoss = profitLoss;
     }
 
+    /**
+     * Gets the profit/loss on the transaction
+     *
+     * @return The profit/loss
+     */
+    public double getProfitLoss() {
+        return profitLoss;
+    }
+
 }
 
