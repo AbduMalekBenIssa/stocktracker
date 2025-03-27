@@ -36,3 +36,22 @@ public class PortfolioTest {
         assertEquals(1, portfolio.getAllStocks().size(), "Portfolio should have one stock");
         assertEquals(stock, portfolio.getStock("AAPL"), "Retrieved stock should match added stock");
     }
+
+    @Test
+    public void testAddStock_existingStock() {
+        // Add a stock to the portfolio
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        portfolio.addStock(stock1);
+
+        // Add the same stock again with different quantity and price
+        OwnedStock stock2 = new OwnedStock("AAPL", "Apple Inc.", 155.0, 5, 155.0);
+        portfolio.addStock(stock2);
+
+        // Check that the quantities and prices were combined correctly
+        OwnedStock combinedStock = portfolio.getStock("AAPL");
+        assertEquals(15, combinedStock.getQuantity(), "Quantity should be combined");
+        // Average price calculation: (10*145 + 5*155) / 15 = 148.33...
+        assertEquals(148.33, combinedStock.getPurchasePrice(), 0.01, "Purchase price should be averaged");
+    }
+
+}
