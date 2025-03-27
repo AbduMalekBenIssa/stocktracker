@@ -112,6 +112,35 @@ public StockApplication(String initialDataFile) {
         }
     }
 
+    /**
+     * Processes the user's menu choice
+     *
+     * @param choice The user's choice
+     */
+    private void processChoice(int choice) {
+        try {
+            switch (choice) {
+                case 1: viewPortfolio(); break;
+                case 2: viewWatchlist(); break;
+                case 3: addToWatchlist(); break;
+                case 4: removeFromWatchlist(); break;
+                case 5: buyStock(); break;
+                case 6: sellStock(); break;
+                case 7: viewRecentTransactions(); break;
+                case 8: showMarketInfo(); break;
+                case 9: manageFunds(); break;
+                case 10: saveData(); break;
+                case 11: loadData(); break;
+                case 12: showCoolStuffMenu(); break;
+                case 13: exit(); break;
+                default: System.out.println("Invalid choice. Please try again.");
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
 
 
 
