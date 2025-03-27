@@ -8,5 +8,18 @@ package stocktracker.model;
  * @Tutorial T04
  */
 
-public class BuyTransaction {
+public class BuyTransaction extends Transaction {
+
+    /**
+     * Constructor for the BuyTransaction class
+     *
+     * @param symbol   The stock symbol
+     * @param quantity The number of shares
+     * @param price    The price per share
+     */
+
+    public BuyTransaction(String symbol, int quantity, double price) {
+        super(symbol, quantity, price);
+
+    }
 }
