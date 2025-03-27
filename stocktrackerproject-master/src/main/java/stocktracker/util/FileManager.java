@@ -90,9 +90,24 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads user data from a text file
+     *
+     * @param filename The filename to load from
+     * @param stockMarket The stock market service
+     * @return The loaded user
+     * @throws IOException If there's an error reading the file
+     */
+    public static User loadFromFile(String filename) throws IOException {
+        // Add .txt extension if not already present
+        if (!filename.toLowerCase().endsWith(".txt")) {
+            filename += ".txt";
+        }
 
 
 
 
-}
+
+
+    }
 }
