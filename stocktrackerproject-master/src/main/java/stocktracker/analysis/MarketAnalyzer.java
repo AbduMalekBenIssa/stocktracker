@@ -110,4 +110,31 @@ public class MarketAnalyzer {
             }
         }
     }
+    /**
+     * Displays the top market losers
+     */
+    public void displayTopLosers() throws IOException {
+        System.out.println("\n========== Top Market Losers 📉 ==========");
+        List<String> losers = stockMarket.getTopLosers();
+
+        if (losers.isEmpty()) {
+            System.out.println("No data available for top losers.");
+            return;
+        }
+
+        for (int i = 0; i < losers.size(); i++) {
+            String symbol = losers.get(i);
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+                System.out.println((i + 1) + ". " + name + " (" + symbol + "): $" +
+                        String.format("%.2f", price) + " (" +
+                        String.format("%.2f", change) + "%)");
+            } catch (IOException e) {
+                System.out.println((i + 1) + ". " + symbol + ": Error getting data");
+            }
+        }
+    }
+
 }
