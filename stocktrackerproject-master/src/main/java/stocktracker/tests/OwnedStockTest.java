@@ -47,4 +47,16 @@ public class OwnedStockTest {
         assertEquals(-10.0, stock2.getProfitLossPercentage(), 0.01, "Loss percentage should be calculated correctly");
     }
 
+    Run program, show menu still lets you enter data, and that complex options still work
+    Show you can save/load data from files
+    Show image of UML structure to TA
+    TA will ask to see your gitlab
+    history should show both partners
+    all partners committing regularly (more than 5 times is a good target)
+    all partners have commits with code changes beyond comments/ layout in them
+    TA will ask to see your code where you should show where your OO is
+    Be prepared to show TA where you use at least two of equals/hashCode/compareTo with your objects
+    Show TA your unit tests that now have to work with objects still work
+*TA will judge style and partnership penalties while doing the above
+
 }
