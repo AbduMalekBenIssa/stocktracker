@@ -51,6 +51,19 @@ public StockApplication(String initialDataFile) {
 }
 
 
+    /**
+     * Creates a new user
+     */
+    private void createNewUser() {
+        System.out.println("Welcome to Stock Tracker!");
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        user = new User(name, 10000.0); // Default starting balance
+        System.out.println("New user created with $10,000 starting balance.");
+    }
+
+
+
 
 
 }
