@@ -1,4 +1,29 @@
 package stocktracker.model;
 
-public class OwnedStock {
+/**
+ * Class representing a stock owned by the user
+ *
+ * @author Omar Almishri, AbduMalek Ben Issa
+ * @version 2.0
+ * @Tutorial T04
+ */
+public class OwnedStock extends Stock {
+    private int quantity;
+    private double purchasePrice;
+
+
+    /**
+     * Constructor for the OwnedStock class
+     *
+     * @param symbol The stock ticker symbol
+     * @param name The company name
+     * @param currentPrice The current price of the stock
+     * @param quantity The number of shares owned
+     * @param purchasePrice The average purchase price
+     */
+    public OwnedStock(String symbol, String name, double currentPrice, int quantity, double purchasePrice) {
+        super(symbol, name, currentPrice);
+        this.quantity = quantity;
+        this.purchasePrice = purchasePrice;
+    }
 }
