@@ -61,4 +61,18 @@ public class OwnedStockTest {
         assertEquals(106.67, stock.getPurchasePrice(), 0.01, "Purchase price should be averaged correctly");
     }
 
+    @Test
+    public void testRemoveShares_success() {
+        // Create a stock with 10 shares
+        OwnedStock stock = new OwnedStock("AAPL", "Apple Inc.", 110.0, 10, 100.0);
+
+        // Remove 4 shares
+        boolean result = stock.removeShares(4);
+
+        // Check that shares were removed
+        assertTrue(result, "Should return true when shares are successfully removed");
+        assertEquals(6, stock.getQuantity(), "Quantity should be decreased");
+        assertEquals(100.0, stock.getPurchasePrice(), 0.01, "Purchase price should remain unchanged");
+    }
+
 }
