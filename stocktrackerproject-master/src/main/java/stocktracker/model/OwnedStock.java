@@ -61,7 +61,7 @@ public class OwnedStock extends Stock {
     public double getProfitLoss() {
         return (currentPrice - purchasePrice) * quantity;
     }
-    
+
     /**
      * Gets the profit/loss percentage on the stock
      *
@@ -70,6 +70,19 @@ public class OwnedStock extends Stock {
     public double getProfitLossPercentage() {
         return ((currentPrice - purchasePrice) / purchasePrice) * 100;
     }
+
+    /**
+     * Adds shares to the current holding
+     *
+     * @param quantity The quantity to add
+     * @param price The price of the new shares
+     */
+    public void addShares(int quantity, double price) {
+        double totalValue = (this.quantity * this.purchasePrice) + (quantity * price);
+        this.quantity += quantity;
+        this.purchasePrice = totalValue / this.quantity;
+    }
+
 
 
 
