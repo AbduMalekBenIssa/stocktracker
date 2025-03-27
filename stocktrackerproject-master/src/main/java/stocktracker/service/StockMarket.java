@@ -49,5 +49,12 @@ public interface StockMarket {
      */
     List<String> getTopGainers() throws IOException;
 
+    /**
+     * Gets the top losers in the market
+     *
+     * @return A list of top losing stock symbols
+     * @throws IOException If there's an error getting the data
+     */
+    List<String> getTopLosers() throws IOException;
 
 }
