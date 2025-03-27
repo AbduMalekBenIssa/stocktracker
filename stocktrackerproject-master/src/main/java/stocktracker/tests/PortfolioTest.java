@@ -70,6 +70,18 @@ public class PortfolioTest {
         assertTrue(portfolio.containsStock("MSFT"), "Portfolio should contain MSFT");
         assertTrue(portfolio.containsStock("GOOGL"), "Portfolio should contain GOOGL");
     }
+    @Test
+    public void testGetTotalValue() {
+        // Add stocks with known values
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);  // Value: 1500
+        OwnedStock stock2 = new OwnedStock("MSFT", "Microsoft Corp.", 300.0, 5, 295.0);  // Value: 1500
+
+        portfolio.addStock(stock1);
+        portfolio.addStock(stock2);
+
+        // Check total value
+        assertEquals(3000.0, portfolio.getTotalValue(), 0.01, "Total value should be sum of all stock values");
+    }
 
 
 }
