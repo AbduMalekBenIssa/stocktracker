@@ -82,7 +82,30 @@ public class FinancialModelPrepAPI implements StockMarket {
         if (companyNameCache.containsKey(symbol)) {
             return companyNameCache.get(symbol);
         }
+        String url = API_URL + "profile/" + symbol + "?apikey=" + API_KEY;
+        Request request = new Request.Builder().url(url).build();
 
 
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected API response: " + response);
 
+
+            String jsonData = response.body().string();
+            JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
+            if (jsonArray.isEmpty()) throw new IOException("Stock symbol not found: " + symbol);
+
+
+            JsonObject profileData = jsonArray.get(0).getAsJsonObject();
+            String name = profileData.get("companyName").getAsString();
+
+            // Cache the result
+            companyNameCache.put(symbol, name);
+
+            return name;
+        }
     }
+
+
+
+
+}
