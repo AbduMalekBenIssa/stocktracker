@@ -13,4 +13,23 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class WatchlistStock extends Stock {
+
+    private LocalDateTime lastChecked;
+    private double changePercentage;
+
+
+    /**
+     * Constructor for the WatchlistStock class
+     *
+     * @param symbol The stock ticker symbol
+     * @param name The company name
+     * @param currentPrice The current price of the stock
+     * @param changePercentage The daily change percentage
+     */
+    public WatchlistStock(String symbol, String name, double currentPrice, double changePercentage) {
+        super(symbol, name, currentPrice);
+        this.lastChecked = LocalDateTime.now();
+        this.changePercentage = changePercentage;
+    }
+
 }
