@@ -521,6 +521,34 @@ public StockApplication(String initialDataFile) {
 
             System.out.print("Enter your choice: ");
             int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please try again.");
+                continue;
+            }
+
+            try {
+                switch (choice) {
+                    case 1: analyzer.displayTotalPortfolioValue(); break;
+                    case 2: analyzer.displayTopValuableStocks(5); break;
+                    case 3: analyzer.displayBestPerformingStocks(5); break;
+                    case 4: analyzer.displayWorstPerformingStocks(5); break;
+                    case 5: analyzer.displayMostTradedStock(); break;
+                    case 6: analyzer.displayPortfolioDiversification(); break;
+                    case 7: analyzer.displayRecentTransactions(10); break;
+                    case 8: marketAnalyzer.checkUnusualMarketMovements(); break;
+                    case 9: marketAnalyzer.displayTopGainers(); break;
+                    case 10: marketAnalyzer.displayTopLosers(); break;
+                    case 11: marketAnalyzer.displayMostActivelyTradedStocks(); break;
+                    case 12: inCoolMenu = false; break;
+                    default: System.out.println("Invalid choice. Please try again.");
+                }
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
 
 
 
