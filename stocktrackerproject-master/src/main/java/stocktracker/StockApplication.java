@@ -280,6 +280,60 @@ public StockApplication(String initialDataFile) {
         System.out.println("Purchase completed.");
     }
 
+    /**
+     * Sells a stock
+     */
+    private void sellStock() throws IOException {
+        System.out.print("Enter stock symbol: ");
+        String symbol = scanner.nextLine().toUpperCase();
+
+        if (!user.getPortfolio().containsStock(symbol)) {
+            System.out.println("You don't own this stock.");
+            return;
+        }
+
+        OwnedStock stock = user.getPortfolio().getStock(symbol);
+
+        System.out.print("Enter number of shares (max " + stock.getQuantity() + "): ");
+        int quantity;
+        try {
+            quantity = Integer.parseInt(scanner.nextLine());
+            if (quantity <= 0) {
+                System.out.println("Quantity must be positive.");
+                return;
+            }
+            if (quantity > stock.getQuantity()) {
+                System.out.println("You don't own that many shares.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid quantity.");
+            return;
+        }
+
+        double currentPrice = stockMarket.getStockPrice(symbol);
+        stock.updatePrice(currentPrice);
+
+        double totalValue = currentPrice * quantity;
+        double purchasePrice = stock.getPurchasePrice();
+        double profitLoss = (currentPrice - purchasePrice) * quantity;
+
+        System.out.println("\n========== Sell Order ==========");
+        System.out.println("Stock: " + stock.getName() + " (" + symbol + ")");
+        System.out.println("Price: $" + String.format("%.2f", currentPrice) + " per share");
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total Value: $" + String.format("%.2f", totalValue));
+        System.out.println("Profit/Loss: $" + String.format("%.2f", profitLoss));
+
+        System.out.print("Confirm sale (y/n): ");
+        String confirm = scanner.nextLine().toLowerCase();
+
+        if (!confirm.equals("y")) {
+            System.out.println("Sale cancelled.");
+            return;
+        }
+
+
 
 
 
