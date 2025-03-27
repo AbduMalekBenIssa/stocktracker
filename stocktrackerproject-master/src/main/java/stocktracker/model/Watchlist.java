@@ -36,5 +36,16 @@ public class Watchlist {
         stocks.put(stock.getSymbol(), stock);
     }
 
+    /**
+     * Removes a stock from the watchlist
+     *
+     * @param symbol The stock symbol
+     * @return The removed stock, or null if not found
+     */
+    public WatchlistStock removeStock(String symbol) {
+        return stocks.remove(symbol);
+    }
+
+
 
 }
