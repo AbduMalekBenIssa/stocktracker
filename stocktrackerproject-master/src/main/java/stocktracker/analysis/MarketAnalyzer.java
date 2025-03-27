@@ -18,4 +18,13 @@ import java.util.Map;
  * @Tutorial T04
  */
 public class MarketAnalyzer {
-}
+    private StockMarket stockMarket;
+
+    /**
+     * Constructor for the MarketAnalyzer class
+     *
+     * @param stockMarket The stock market service for fetching data
+     */
+    public MarketAnalyzer(StockMarket stockMarket) {
+        this.stockMarket = stockMarket;
+    }
