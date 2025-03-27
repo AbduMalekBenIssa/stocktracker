@@ -89,6 +89,4 @@ public class WatchlistStock extends Stock {
         return "watchlist," + symbol + "," + name + "," + currentPrice + "," + changePercentage;
     }
 
-
-
 }
