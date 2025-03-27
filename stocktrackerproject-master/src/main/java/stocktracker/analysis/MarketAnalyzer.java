@@ -28,3 +28,25 @@ public class MarketAnalyzer {
     public MarketAnalyzer(StockMarket stockMarket) {
         this.stockMarket = stockMarket;
     }
+
+    /**
+     * Checks for unusual market movements
+     */
+    public void checkUnusualMarketMovements() throws IOException {
+        System.out.println("\n========== Unusual Market Movements ==========");
+
+        // Get top gainers and losers
+        List<String> gainers = stockMarket.getTopGainers();
+        List<String> losers = stockMarket.getTopLosers();
+
+        // Check for extreme movements
+        Map<String, Double> extremeMovers = new HashMap<>();
+
+        for (String symbol : gainers) {
+            try {
+                double change = stockMarket.getDailyChangePercentage(symbol);
+                if (change > 10.0) { // Consider over 10% daily change as extreme
+                    extremeMovers.put(symbol, change);
+                }
+            } catch (IOException e) {
+            }
