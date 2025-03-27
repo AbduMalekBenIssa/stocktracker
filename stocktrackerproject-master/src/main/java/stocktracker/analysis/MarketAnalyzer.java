@@ -136,5 +136,11 @@ public class MarketAnalyzer {
             }
         }
     }
+    /**
+     * Displays the most actively traded stocks
+     */
+    public void displayMostActivelyTradedStocks() throws IOException {
+        System.out.println("\n========== Most Actively Traded Stocks 🔥 ==========");
+        List<String> active = stockMarket.getMostActivelyTraded();
 
 }
