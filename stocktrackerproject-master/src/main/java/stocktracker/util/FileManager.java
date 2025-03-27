@@ -186,7 +186,16 @@ public class FileManager {
                     }
                 }
             }
+            if (user == null) {
+                throw new IOException("Invalid file format or no user data found");
+            }
 
+            // Set the loaded data to the user
+            user.setPortfolio(portfolio);
+            user.setWatchlist(watchlist);
+            user.setTransactions(transactions);
+
+            return user;
         }
     }
 }
