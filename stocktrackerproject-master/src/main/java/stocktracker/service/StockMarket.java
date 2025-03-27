@@ -57,4 +57,10 @@ public interface StockMarket {
      */
     List<String> getTopLosers() throws IOException;
 
+    /**
+     * Gets the most actively traded stocks
+     *      * @return A list of the most actively traded stock symbols
+     * @throws IOException If there's an error getting the data
+     */
+    List<String> getMostActivelyTraded() throws IOException;
 }
