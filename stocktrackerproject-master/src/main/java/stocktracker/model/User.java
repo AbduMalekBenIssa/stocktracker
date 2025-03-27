@@ -112,6 +112,20 @@ public class User {
             return true;
         }
 
+        /**
+         * Withdraws funds from the user's account
+         *
+         * @param amount The amount to withdraw
+         * @return True if successful
+         */
+        public boolean withdraw(double amount) {
+            if (amount <= 0 || amount > balance) {
+                return false;
+            }
+            balance -= amount;
+            return true;
+        }
+
 
 
     }
