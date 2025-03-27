@@ -97,6 +97,22 @@ public class OwnedStock extends Stock {
         return true;
     }
 
+    /**
+     * Returns a string representation of the owned stock
+     */
+    @Override
+    public String toString() {
+        return "OwnedStock [Symbol=" + symbol +
+                ", Name=" + name +
+                ", Price=$" + String.format("%.2f", currentPrice) +
+                ", Quantity=" + quantity +
+                ", Avg. Purchase Price=$" + String.format("%.2f", purchasePrice) +
+                ", Total Value=$" + String.format("%.2f", getTotalValue()) +
+                ", P/L=$" + String.format("%.2f", getProfitLoss()) +
+                " (" + String.format("%.2f", getProfitLossPercentage()) + "%)]";
+    }
+
+
 
 
 
