@@ -62,6 +62,19 @@ public StockApplication(String initialDataFile) {
         System.out.println("New user created with $10,000 starting balance.");
     }
 
+    /**
+     * Runs the application
+     */
+    public void run() {
+        while (running) {
+            displayMenu();
+            int choice = getUserChoice();
+            processChoice(choice);
+        }
+        scanner.close();
+    }
+
+
 
 
 
