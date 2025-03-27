@@ -25,5 +25,13 @@ public abstract class Transaction {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Gets the stock symbol
+     *
+     * @return The stock symbol
+     */
+    public String getSymbol() {
+        return symbol;
+    }
 
 }
