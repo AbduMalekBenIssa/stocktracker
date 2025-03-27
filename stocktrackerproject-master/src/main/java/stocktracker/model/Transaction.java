@@ -97,7 +97,7 @@ public abstract class Transaction {
      */
     public String toCSV() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        return "transactiond," + getType() + "," + symbol + "," + quantity + "," + price + "," + timestamp.format(formatter);
+        return "transaction," + getType() + "," + symbol + "," + quantity + "," + price + "," + timestamp.format(formatter);
     }
 
 
