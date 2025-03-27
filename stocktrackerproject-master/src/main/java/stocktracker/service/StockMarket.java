@@ -32,4 +32,14 @@ public interface StockMarket {
      */
     double getDailyChangePercentage(String symbol) throws IOException;
 
+    /**
+     * Gets the name of a company by its stock symbol
+     *
+     * @param symbol The stock symbol
+     * @return The company name
+     * @throws IOException If there's an error getting the data
+     */
+    String getCompanyName(String symbol) throws IOException;
+
+
 }
