@@ -23,4 +23,12 @@ public class FinancialModelPrepAPI implements StockMarket {
     // Cache for company names to reduce API calls
     private final Map<String, String> companyNameCache;
 
+    /**
+     * Constructor for the FinancialModelPrepAPI class
+     */
+    public FinancialModelPrepAPI() {
+        this.companyNameCache = new HashMap<>();
+    }
+
+
 }
