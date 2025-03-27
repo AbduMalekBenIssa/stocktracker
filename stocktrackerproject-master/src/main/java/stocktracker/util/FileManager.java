@@ -22,4 +22,16 @@ import java.util.Scanner;
 public class FileManager {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
+
+
+    /**
+     * Saves user data to a text file
+     *
+     * @param user The user to save
+     * @param filename The filename to save to
+     * @throws IOException If there's an error writing to the file
+     */
+    public static void saveToFile(User user, String filename) throws IOException{
+
+    }
 }
