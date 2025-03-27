@@ -8,4 +8,13 @@ package stocktracker.model;
  * @Tutorial T04
  */
 public class Portfolio {
+    private Map<String, OwnedStock> stocks;
+
+    /**
+     * Constructor for the Portfolio class
+     */
+    public Portfolio() {
+        this.stocks = new HashMap<>();
+    }
 }
+
