@@ -102,5 +102,24 @@ public class UserTest {
         assertEquals(1, transactions.size(), "Should have one transaction");
         assertEquals(transaction, transactions.get(0), "Transaction should match the added one");
     }
+    @Test
+    public void testGetRecentTransactions_emptyList() {
+        List<Transaction> recentTransactions = user.getRecentTransactions(5);
+
+        assertTrue(recentTransactions.isEmpty(), "Recent transactions should be empty");
+    }
+
+    @Test
+    public void testGetRecentTransactions_fewerThanRequested() {
+        // Add 3 transactions
+        user.addTransaction(new BuyTransaction("AAPL", 10, 150.0));
+        user.addTransaction(new BuyTransaction("MSFT", 5, 300.0));
+        user.addTransaction(new SellTransaction("AAPL", 5, 160.0, 150.0));
+
+        // Get the 5 most recent transactions
+        List<Transaction> recentTransactions = user.getRecentTransactions(5);
+
+        assertEquals(3, recentTransactions.size(), "Should return all 3 transactions");
+    }
 
 }
