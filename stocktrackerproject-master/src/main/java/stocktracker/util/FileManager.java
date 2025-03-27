@@ -43,8 +43,29 @@ public class FileManager {
         if (file.exists()) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("File already exists. Do you want to overwrite it? (y/n): ");
-            String response = scanner.nextLine().toLowerCase();
+            String response = scanner.nextLine().toUpperCase();
+
+            if (!response.equals("y")) {
+                System.out.println("Save operation cancelled.");
+                return; // Exit without saving
+            }
+        }
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+            // Write user info
+            writer.println("USER|" + user.getName() + "|" + user.getBalance());
+
+            // Write portfolio stocks
+            writer.println("PORTFOLIO_START");
+            for (OwnedStock stock : user.getPortfolio().getAllStocks()) {
+                writer.println("OWNED|" + stock.getSymbol() + "|" + stock.getName() + "|"
+                        + stock.getCurrentPrice() + "|" + stock.getQuantity() + "|"
+                        + stock.getPurchasePrice());
+            }
+            writer.println("PORTFOLIO_END");
 
 
-    }
+
+
+        }
 }
