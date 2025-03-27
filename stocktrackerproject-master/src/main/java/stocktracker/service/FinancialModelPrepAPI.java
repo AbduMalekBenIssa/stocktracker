@@ -105,6 +105,31 @@ public class FinancialModelPrepAPI implements StockMarket {
         }
     }
 
+    /**
+     * Gets the top gainers in the market
+     */
+    @Override
+    public List<String> getTopGainers() throws IOException {
+        String url = API_URL + "stock_market/gainers?apikey=" + API_KEY;
+        Request request = new Request.Builder().url(url).build();
+        List<String> symbols = new ArrayList<>();
+
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected API response: " + response);
+
+
+            String jsonData = response.body().string();
+            JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
+
+
+            for (int i = 0; i < Math.min(5, jsonArray.size()); i++) {
+                JsonObject stock = jsonArray.get(i).getAsJsonObject();
+                symbols.add(stock.get("symbol").getAsString());
+            }
+        }
+        return symbols;
+    }
 
 
 
