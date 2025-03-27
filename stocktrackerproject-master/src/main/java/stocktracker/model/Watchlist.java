@@ -86,8 +86,20 @@ public class Watchlist {
         return stocks.size();
     }
 
+    /**
+     * Returns a string representation of the watchlist
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Watchlist (").append(stocks.size()).append(" stocks):\n");
 
+        List<WatchlistStock> sortedStocks = getAllStocks();
+        for (WatchlistStock stock : sortedStocks) {
+            sb.append("  ").append(stock).append("\n");
+        }
 
-
+        return sb.toString();
+    }
 
 }
