@@ -140,6 +140,36 @@ public StockApplication(String initialDataFile) {
         }
     }
 
+    // Menu option methods
+
+    /**
+     * Displays the user's portfolio
+     */
+    private void viewPortfolio() {
+        System.out.println("\n========== Portfolio ==========");
+        System.out.println(user.getPortfolio());
+    }
+
+    /**
+     * Displays the user's watchlist
+     */
+    private void viewWatchlist() throws IOException {
+        System.out.println("\n========== Watchlist ==========");
+        // Update watchlist prices first
+        List<WatchlistStock> stocks = user.getWatchlist().getAllStocks();
+        for (WatchlistStock stock : stocks) {
+            try {
+                double price = stockMarket.getStockPrice(stock.getSymbol());
+                double change = stockMarket.getDailyChangePercentage(stock.getSymbol());
+                stock.update(price, change);
+            } catch (IOException e) {
+                System.out.println("Warning: Could not update price for " + stock.getSymbol());
+            }
+        }
+        System.out.println(user.getWatchlist());
+    }
+
+
 
 
 
