@@ -343,17 +343,43 @@ public StockApplication(String initialDataFile) {
             stock.removeShares(quantity);
         }
 
+        // Add transaction to history
+        Transaction transaction = new SellTransaction(symbol, quantity, currentPrice, purchasePrice);
+        user.addTransaction(transaction);
 
-
-
-
-
-
-
-
-
-
-
-
-
+        System.out.println("Sale completed.");
     }
+
+    /**
+     * Displays recent transactions
+     */
+    private void viewRecentTransactions() {
+        System.out.println("\n========== Recent Transactions ==========");
+        List<Transaction> transactions = user.getRecentTransactions(10);
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions to display.");
+            return;
+        }
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            System.out.println(transactions.get(i));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
