@@ -23,15 +23,14 @@ public class FileManager {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 
-
     /**
      * Saves user data to a text file
      *
-     * @param user The user to save
+     * @param user     The user to save
      * @param filename The filename to save to
      * @throws IOException If there's an error writing to the file
      */
-    public static void saveToFile(User user, String filename) throws IOException{
+    public static void saveToFile(User user, String filename) throws IOException {
         // Add .txt extension if not already present
         if (!filename.toLowerCase().endsWith(".txt")) {
             filename += ".txt";
@@ -93,7 +92,7 @@ public class FileManager {
     /**
      * Loads user data from a text file
      *
-     * @param filename The filename to load from
+     * @param filename    The filename to load from
      * @param stockMarket The stock market service
      * @return The loaded user
      * @throws IOException If there's an error reading the file
@@ -161,14 +160,38 @@ public class FileManager {
                         double currentPrice = Double.parseDouble(parts[3]);
                         double changePercentage = Double.parseDouble(parts[4]);
 
-                    }
+                        WatchlistStock stock = new WatchlistStock(symbol, name, currentPrice, changePercentage);
+                        watchlist.addStock(stock);
+                    } else if (section.equals("TRANSACTIONS")) {
+                        if (parts[0].equals("BUY")) {
+                            String symbol = parts[1];
+                            int quantity = Integer.parseInt(parts[2]);
+                            double price = Double.parseDouble(parts[3]);
+                            LocalDateTime timestamp = LocalDateTime.parse(parts[4], DATE_TIME_FORMATTER);
 
+                            BuyTransaction transaction = new BuyTransaction(symbol, quantity, price, timestamp);
+                            transactions.add(transaction);
+                        } else if (parts[0].equals("SELL")) {
+                            String symbol = parts[1];
+                            int quantity = Integer.parseInt(parts[2]);
+                            double price = Double.parseDouble(parts[3]);
+                            double profitLoss = Double.parseDouble(parts[4]);
+                            LocalDateTime timestamp = LocalDateTime.parse(parts[5], DATE_TIME_FORMATTER);
+
+                            SellTransaction transaction = new SellTransaction(symbol, quantity, price, profitLoss, timestamp);
+                            transactions.add(transaction);
+                        }
+
+
+                    }
+                }
             }
 
-
-
-
-
-
         }
+    }
 }
+
+
+
+
+
