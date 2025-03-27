@@ -340,7 +340,7 @@ public StockApplication(String initialDataFile) {
         if (quantity == stock.getQuantity()) {
             user.getPortfolio().removeStock(symbol);
         } else {
-            stock.addShares(quantity);
+            stock.removeShares(quantity);
         }
 
 
