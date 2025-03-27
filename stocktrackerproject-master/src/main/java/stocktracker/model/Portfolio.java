@@ -39,6 +39,17 @@ public class Portfolio {
         return stocks.containsKey(symbol);
     }
 
+    /**
+     * Gets a stock from the portfolio
+     *
+     * @param symbol The stock symbol
+     * @return The stock, or null if not found
+     */
+    public OwnedStock getStock(String symbol) {
+        return stocks.get(symbol);
+    }
+
+
 
 }
 
