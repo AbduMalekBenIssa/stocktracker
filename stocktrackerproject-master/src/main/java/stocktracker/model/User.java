@@ -147,4 +147,14 @@ public class User {
                     ", Total Value=$" + String.format("%.2f", getTotalValue()) + "]";
         }
 
+        /**
+         * Sets the user's portfolio
+         *
+         * @param portfolio The portfolio to set
+         */
+        public void setPortfolio(Portfolio portfolio) {
+            this.portfolio = portfolio;
+        }
+
+
     }
