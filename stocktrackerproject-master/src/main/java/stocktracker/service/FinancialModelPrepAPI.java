@@ -184,5 +184,18 @@ public class FinancialModelPrepAPI implements StockMarket {
         return symbols;
     }
 
+    /**
+     * Validates if a stock symbol exists
+     */
+    @Override
+    public boolean isValidSymbol(String symbol) throws IOException {
+        try {
+            getStockPrice(symbol);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
 
 }
