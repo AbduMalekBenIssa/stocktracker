@@ -98,6 +98,22 @@ public StockApplication(String initialDataFile) {
         System.out.println("=========================================");
     }
 
+    /**
+     * Gets the user's menu choice
+     *
+     * @return The user's choice
+     */
+    private int getUserChoice() {
+        System.out.print("Enter your choice: ");
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            return -1; // Invalid input
+        }
+    }
+
+
+
 
 
 
