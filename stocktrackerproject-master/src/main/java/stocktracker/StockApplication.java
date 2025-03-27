@@ -248,7 +248,7 @@ public StockApplication(String initialDataFile) {
         System.out.println("Total Cost: $" + String.format("%.2f", totalCost));
         System.out.println("Your Balance: $" + String.format("%.2f", user.getBalance()));
 
-        if (totalCost < user.getBalance()) {
+        if (totalCost > user.getBalance()) {
             System.out.println("Insufficient funds.");
             return;
         }
