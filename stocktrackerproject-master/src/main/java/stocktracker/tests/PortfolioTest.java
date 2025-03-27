@@ -18,4 +18,21 @@ import stocktracker.model.Portfolio;
  * @Tutorial T04
  */
 public class PortfolioTest {
-}
+    private Portfolio portfolio;
+
+    @BeforeEach
+    public void setUp() {
+        portfolio = new Portfolio();
+    }
+
+    @Test
+    public void testAddStock_newStock() {
+        // Add a new stock to the portfolio
+        OwnedStock stock = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        portfolio.addStock(stock);
+
+        // Check that the stock was added
+        assertTrue(portfolio.containsStock("AAPL"), "Portfolio should contain the stock");
+        assertEquals(1, portfolio.getAllStocks().size(), "Portfolio should have one stock");
+        assertEquals(stock, portfolio.getStock("AAPL"), "Retrieved stock should match added stock");
+    }
