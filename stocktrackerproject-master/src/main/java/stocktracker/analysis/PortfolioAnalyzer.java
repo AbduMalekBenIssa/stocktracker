@@ -198,6 +198,54 @@ public class PortfolioAnalyzer {
         }
     }
 
+    /**
+     * Displays the portfolio diversification by sector
+     */
+    public void displayPortfolioDiversification() {
+        System.out.println("\n========== Portfolio Diversification ==========");
+        List<OwnedStock> allStocks = user.getPortfolio().getAllStocks();
+
+        if (allStocks.isEmpty()) {
+            System.out.println("You don't own any stocks yet.");
+            return;
+        }
+
+        // For this demo, we'll just show diversification by stock
+        // In a real app, this would group by sector or industry
+        double totalValue = user.getPortfolio().getTotalValue();
+
+        System.out.println("Your portfolio diversification by holdings:");
+        for (OwnedStock stock : allStocks) {
+            double percentage = (stock.getTotalValue() / totalValue) * 100;
+            System.out.println(stock.getName() + " (" + stock.getSymbol() + "): " +
+                    String.format("%.2f", percentage) + "%");
+        }
+
+        // Analyze diversification quality
+        boolean wellDiversified = allStocks.size() >= 5;
+        boolean tooConcentrated = false;
+
+        for (OwnedStock stock : allStocks) {
+            double percentage = (stock.getTotalValue() / totalValue) * 100;
+            if (percentage > 30) {
+                tooConcentrated = true;
+                break;
+            }
+        }
+
+        System.out.println("\nDiversification Analysis:");
+        if (wellDiversified && !tooConcentrated) {
+            System.out.println("Your portfolio appears to be well diversified.");
+        } else if (tooConcentrated) {
+            System.out.println("Warning: Your portfolio is highly concentrated in one or more positions.");
+            System.out.println("Consider diversifying to reduce risk.");
+        } else {
+            System.out.println("Your portfolio has limited diversification.");
+            System.out.println("Consider adding more stocks to reduce risk.");
+        }
+    }
+
+
 
 
 
