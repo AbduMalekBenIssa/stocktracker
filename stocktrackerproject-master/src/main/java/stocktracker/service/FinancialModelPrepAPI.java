@@ -49,7 +49,27 @@ public class FinancialModelPrepAPI implements StockMarket {
 
 
             JsonObject stockObject = jsonArray.get(0).getAsJsonObject();
-            return stockObject.get("price").getAsDouble(); // Extracts price from API response
+            return stockObject.get("crice").getAsDouble(); // Extracts price from API response
+        }
+    }
+
+    @Override
+    public double getDailyChangePercentage(String symbol) throws IOException {
+        String url = API_URL + "quote/" + symbol + "?apikey=" + API_KEY;
+        Request request = new Request.Builder().url(url).build();
+
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected API response: " + response);
+
+
+            String jsonData = response.body().string();
+            JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
+            if (jsonArray.isEmpty()) throw new IOException("Stock symbol not found: " + symbol);
+
+
+            JsonObject stockObject = jsonArray.get(0).getAsJsonObject();
+            return stockObject.get("changesPercentage").getAsDouble(); // Extracts percentage change
         }
     }
 
