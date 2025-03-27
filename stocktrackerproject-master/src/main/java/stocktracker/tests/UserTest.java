@@ -49,5 +49,20 @@ public class UserTest {
         assertFalse(result, "Deposit should return false for negative amount");
         assertEquals(10000.0, user.getBalance(), 0.01, "Balance should remain unchanged");
     }
+    @Test
+    public void testWithdraw_validAmount() {
+        boolean result = user.withdraw(500.0);
+
+        assertTrue(result, "Withdraw should return true for valid amount");
+        assertEquals(9500.0, user.getBalance(), 0.01, "Balance should decrease by withdrawal amount");
+    }
+
+    @Test
+    public void testWithdraw_tooMuch() {
+        boolean result = user.withdraw(15000.0);
+
+        assertFalse(result, "Withdraw should return false when amount exceeds balance");
+        assertEquals(10000.0, user.getBalance(), 0.01, "Balance should remain unchanged");
+    }
 
 }
