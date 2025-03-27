@@ -29,3 +29,17 @@ public class UserTest {
     public void testGetName() {
         assertEquals("Test User", user.getName(), "Name should match constructor value");
     }
+
+    @Test
+    public void testGetBalance() {
+        assertEquals(10000.0, user.getBalance(), 0.01, "Balance should match constructor value");
+    }
+
+    @Test
+    public void testDeposit_validAmount() {
+        boolean result = user.deposit(500.0);
+
+        assertTrue(result, "Deposit should return true for valid amount");
+        assertEquals(10500.0, user.getBalance(), 0.01, "Balance should increase by deposit amount");
+    }
+}
