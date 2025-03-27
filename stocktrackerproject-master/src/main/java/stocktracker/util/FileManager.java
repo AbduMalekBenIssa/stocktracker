@@ -72,6 +72,21 @@ public class FileManager {
             }
             writer.println("WATCHLIST_END");
 
+            // Write transactions
+            writer.println("TRANSACTIONS_START");
+            for (Transaction transaction : user.getTransactions()) {
+                if (transaction instanceof BuyTransaction) {
+                    writer.println("BUY|" + transaction.getSymbol() + "|" + transaction.getQuantity() + "|"
+                            + transaction.getPrice() + "|" + transaction.getTimestamp().format(DATE_TIME_FORMATTER));
+                } else if (transaction instanceof SellTransaction) {
+                    SellTransaction sellTransaction = (SellTransaction) transaction;
+                    writer.println("SELL|" + transaction.getSymbol() + "|" + transaction.getQuantity() + "|"
+                            + transaction.getPrice() + "|" + sellTransaction.getProfitLoss() + "|"
+                            + transaction.getTimestamp().format(DATE_TIME_FORMATTER));
+                }
+            }
+            writer.println("TRANSACTIONS_END");
+
 
 
 
