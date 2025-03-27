@@ -47,16 +47,18 @@ public class OwnedStockTest {
         assertEquals(-10.0, stock2.getProfitLossPercentage(), 0.01, "Loss percentage should be calculated correctly");
     }
 
-    Run program, show menu still lets you enter data, and that complex options still work
-    Show you can save/load data from files
-    Show image of UML structure to TA
-    TA will ask to see your gitlab
-    history should show both partners
-    all partners committing regularly (more than 5 times is a good target)
-    all partners have commits with code changes beyond comments/ layout in them
-    TA will ask to see your code where you should show where your OO is
-    Be prepared to show TA where you use at least two of equals/hashCode/compareTo with your objects
-    Show TA your unit tests that now have to work with objects still work
-*TA will judge style and partnership penalties while doing the above
+    @Test
+    public void testAddShares() {
+        // Create a stock with 10 shares at $100 each
+        OwnedStock stock = new OwnedStock("AAPL", "Apple Inc.", 110.0, 10, 100.0);
+
+        // Add 5 more shares at $120 each
+        stock.addShares(5, 120.0);
+
+        // Check that the quantity and average purchase price were updated correctly
+        assertEquals(15, stock.getQuantity(), "Quantity should be increased");
+        // Average price calculation: (10*100 + 5*120) / 15 = 106.67
+        assertEquals(106.67, stock.getPurchasePrice(), 0.01, "Purchase price should be averaged correctly");
+    }
 
 }
