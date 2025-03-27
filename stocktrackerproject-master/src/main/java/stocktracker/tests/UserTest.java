@@ -64,5 +64,18 @@ public class UserTest {
         assertFalse(result, "Withdraw should return false when amount exceeds balance");
         assertEquals(10000.0, user.getBalance(), 0.01, "Balance should remain unchanged");
     }
+    @Test
+    public void testWithdraw_invalidAmount() {
+        boolean result = user.withdraw(-100.0);
+
+        assertFalse(result, "Withdraw should return false for negative amount");
+        assertEquals(10000.0, user.getBalance(), 0.01, "Balance should remain unchanged");
+    }
+
+    @Test
+    public void testGetTotalValue_emptyPortfolio() {
+        // With an empty portfolio, total value should equal balance
+        assertEquals(10000.0, user.getTotalValue(), 0.01, "Total value should equal balance with empty portfolio");
+    }
 
 }
