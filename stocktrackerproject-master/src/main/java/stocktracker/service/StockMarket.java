@@ -22,4 +22,14 @@ public interface StockMarket {
      * @throws IOException If there's an error getting the data
      */
     double getStockPrice(String symbol) throws IOException;
+
+    /**
+     * Gets the daily change percentage of a stock
+     *
+     * @param symbol The stock symbol
+     * @return The daily change percentage
+     * @throws IOException If there's an error getting the data
+     */
+    double getDailyChangePercentage(String symbol) throws IOException;
+
 }
