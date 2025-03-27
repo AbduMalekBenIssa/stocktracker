@@ -42,4 +42,12 @@ public class UserTest {
         assertTrue(result, "Deposit should return true for valid amount");
         assertEquals(10500.0, user.getBalance(), 0.01, "Balance should increase by deposit amount");
     }
+    @Test
+    public void testDeposit_invalidAmount() {
+        boolean result = user.deposit(-100.0);
+
+        assertFalse(result, "Deposit should return false for negative amount");
+        assertEquals(10000.0, user.getBalance(), 0.01, "Balance should remain unchanged");
+    }
+
 }
