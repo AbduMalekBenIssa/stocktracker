@@ -550,6 +550,13 @@ public StockApplication(String initialDataFile) {
         }
     }
 
+    /**
+     * Exits the application
+     */
+    private void exit() {
+        System.out.println("Thank you for using Stock Tracker!");
+        running = false;
+    }
 
 
 
@@ -568,4 +575,7 @@ public StockApplication(String initialDataFile) {
 
 
 
-        }
+
+
+
+}
