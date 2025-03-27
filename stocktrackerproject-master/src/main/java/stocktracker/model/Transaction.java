@@ -34,4 +34,13 @@ public abstract class Transaction {
         return symbol;
     }
 
+    /**
+     * Gets the quantity
+     *
+     * @return The quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
 }
