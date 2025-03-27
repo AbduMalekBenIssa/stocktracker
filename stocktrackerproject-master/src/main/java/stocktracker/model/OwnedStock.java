@@ -34,7 +34,7 @@ public class OwnedStock extends Stock {
     public int getQuantity() {
         return quantity;
     }
-    
+
     /**
      * Gets the average purchase price
      *
@@ -43,6 +43,16 @@ public class OwnedStock extends Stock {
     public double getPurchasePrice() {
         return purchasePrice;
     }
+
+    /**
+     * Gets the total value of the owned stock
+     *
+     * @return The total value
+     */
+    public double getTotalValue() {
+        return quantity * currentPrice;
+    }
+
 
 
 }
