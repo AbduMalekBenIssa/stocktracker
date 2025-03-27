@@ -67,6 +67,19 @@ public class SellTransaction extends Transaction {
         return baseString.substring(0, baseString.length() - 1) + plString + "]";
     }
 
+    /**
+     * Converts the sell transaction to CSV format
+     *
+     * @return The CSV representation
+     */
+    @Override
+    public String toCSV() {
+        String baseCSV = super.toCSV();
+        return baseCSV + "," + profitLoss;
+    }
+}
+
+
 
 
 }
