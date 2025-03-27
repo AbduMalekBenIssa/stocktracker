@@ -88,5 +88,20 @@ public class OwnedStockTest {
         assertEquals(10, stock.getQuantity(), "Quantity should remain unchanged");
     }
 
+    @Test
+    public void testEquals() {
+        // Create two stocks with same symbol but different details
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        OwnedStock stock2 = new OwnedStock("AAPL", "Apple Corporation", 155.0, 5, 140.0);
+
+        // Create a stock with different symbol
+        OwnedStock stock3 = new OwnedStock("MSFT", "Microsoft Corp.", 300.0, 5, 295.0);
+
+        // Check equality
+        assertEquals(stock1, stock2, "Stocks with same symbol should be equal");
+        assertNotEquals(stock1, stock3, "Stocks with different symbols should not be equal");
+    }
+
+
 
 }
