@@ -32,4 +32,13 @@ public class User {
             this.transactions = new ArrayList<>();
         }
 
+        /**
+         * Gets the user's name
+         *
+         * @return The name
+         */
+        public String getName() {
+            return name;
+        }
+
     }
