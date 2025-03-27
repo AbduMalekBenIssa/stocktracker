@@ -82,6 +82,22 @@ public class PortfolioTest {
         // Check total value
         assertEquals(3000.0, portfolio.getTotalValue(), 0.01, "Total value should be sum of all stock values");
     }
+    @Test
+    public void testGetTotalProfitLoss() {
+        // Add stocks with known profit/loss
+        // Stock 1: Current 150, Purchase 145, Quantity 10 -> P/L = (150-145)*10 = 50
+        OwnedStock stock1 = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+
+        // Stock 2: Current 290, Purchase 300, Quantity 5 -> P/L = (290-300)*5 = -50
+        OwnedStock stock2 = new OwnedStock("MSFT", "Microsoft Corp.", 290.0, 5, 300.0);
+
+        portfolio.addStock(stock1);
+        portfolio.addStock(stock2);
+
+        // Check total profit/loss
+        assertEquals(0.0, portfolio.getTotalProfitLoss(), 0.01, "Total P/L should be sum of all stock P/L");
+    }
+
 
 
 }
