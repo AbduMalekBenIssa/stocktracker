@@ -59,4 +59,13 @@ public class User {
             return portfolio;
         }
 
+        /**
+         * Gets the user's watchlist
+         *
+         * @return The watchlist
+         */
+        public Watchlist getWatchlist() {
+            return watchlist;
+        }
+
     }
