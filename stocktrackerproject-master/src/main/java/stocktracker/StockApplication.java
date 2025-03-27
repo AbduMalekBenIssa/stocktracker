@@ -367,6 +367,51 @@ public StockApplication(String initialDataFile) {
         }
     }
 
+    private void showMarketInfo() throws IOException {
+        System.out.println("\n========== Market Information ==========");
+
+        System.out.println("\nTop Gainers:");
+        List<String> gainers = stockMarket.getTopGainers();
+        for (String symbol : gainers) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+                System.out.println(name + " (" + symbol + "): $" + String.format("%.2f", price) +
+                        " (" + String.format("+%.2f", change) + "%)");
+            } catch (IOException e) {
+                System.out.println(symbol + ": Error getting data");
+            }
+        }
+
+        System.out.println("\nTop Losers:");
+        List<String> losers = stockMarket.getTopLosers();
+        for (String symbol : losers) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+                System.out.println(name + " (" + symbol + "): $" + String.format("%.2f", price) +
+                        " (" + String.format("%.2f", change) + "%)");
+            } catch (IOException e) {
+                System.out.println(symbol + ": Error getting data");
+            }
+        }
+
+        System.out.println("\nMost Actively Traded:");
+        List<String> active = stockMarket.getMostActivelyTraded();
+        for (String symbol : active) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                System.out.println(name + " (" + symbol + "): $" + String.format("%.2f", price));
+            } catch (IOException e) {
+                System.out.println(symbol + ": Error getting data");
+            }
+        }
+    }
+
+
 
 
 
