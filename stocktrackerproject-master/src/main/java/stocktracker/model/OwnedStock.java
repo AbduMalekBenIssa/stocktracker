@@ -61,6 +61,16 @@ public class OwnedStock extends Stock {
     public double getProfitLoss() {
         return (currentPrice - purchasePrice) * quantity;
     }
+    
+    /**
+     * Gets the profit/loss percentage on the stock
+     *
+     * @return The profit/loss percentage
+     */
+    public double getProfitLossPercentage() {
+        return ((currentPrice - purchasePrice) / purchasePrice) * 100;
+    }
+
 
 
 
