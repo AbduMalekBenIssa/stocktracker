@@ -19,3 +19,16 @@ import java.util.*;
 public class PortfolioAnalyzer {
     private User user;
     private StockMarket stockMarket;
+
+    /**
+     * Constructor for the PortfolioAnalyzer class
+     *
+     * @param user The user whose portfolio will be analyzed
+     * @param stockMarket The stock market service for fetching data
+     */
+    public PortfolioAnalyzer(User user, StockMarket stockMarket) {
+        this.user = user;
+        this.stockMarket = stockMarket;
+    }
+
+}
