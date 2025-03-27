@@ -476,6 +476,23 @@ public StockApplication(String initialDataFile) {
             }
         }
 
+        /**
+         * Loads data from a text file
+         */
+        private void loadData() {
+            System.out.print("Enter filename: ");
+            String filename = scanner.nextLine();
+
+            try {
+                User newUser = FileManager.loadFromFile(filename);
+                this.user = newUser;
+                System.out.println("Data loaded from " + filename);
+            } catch (IOException e) {
+                System.out.println("Error loading data: " + e.getMessage());
+            }
+        }
+
+
     }
 
 
