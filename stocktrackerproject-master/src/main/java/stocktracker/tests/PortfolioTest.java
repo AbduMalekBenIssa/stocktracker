@@ -97,6 +97,21 @@ public class PortfolioTest {
         // Check total profit/loss
         assertEquals(0.0, portfolio.getTotalProfitLoss(), 0.01, "Total P/L should be sum of all stock P/L");
     }
+    @Test
+    public void testRemoveStock() {
+        // Add a stock
+        OwnedStock stock = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        portfolio.addStock(stock);
+
+        // Remove the stock
+        OwnedStock removed = portfolio.removeStock("AAPL");
+
+        // Check that the stock was removed
+        assertFalse(portfolio.containsStock("AAPL"), "Portfolio should not contain the stock after removal");
+        assertEquals(0, portfolio.getAllStocks().size(), "Portfolio should be empty after removal");
+        assertEquals(stock, removed, "Removed stock should match the original stock");
+    }
+
 
 
 
