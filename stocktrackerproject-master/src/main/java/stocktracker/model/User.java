@@ -17,4 +17,19 @@ public class User {
         private Portfolio portfolio;
         private Watchlist watchlist;
         private List<Transaction> transactions;
-}
+
+        /**
+         * Constructor for the User class
+         *
+         * @param name The user's name
+         * @param initialBalance The user's initial balance
+         */
+        public User(String name, double initialBalance) {
+            this.name = name;
+            this.balance = initialBalance;
+            this.portfolio = new Portfolio();
+            this.watchlist = new Watchlist();
+            this.transactions = new ArrayList<>();
+        }
+
+    }
