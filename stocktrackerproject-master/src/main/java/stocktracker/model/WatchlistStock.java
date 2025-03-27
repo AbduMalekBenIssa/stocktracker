@@ -41,5 +41,15 @@ public class WatchlistStock extends Stock {
         return lastChecked;
     }
 
+    /**
+     * Gets the daily change percentage
+     *
+     * @return The change percentage
+     */
+    public double getChangePercentage() {
+        return changePercentage;
+    }
+
+
 
 }
