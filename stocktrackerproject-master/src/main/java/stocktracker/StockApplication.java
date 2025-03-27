@@ -74,6 +74,31 @@ public StockApplication(String initialDataFile) {
         scanner.close();
     }
 
+    /**
+     * Displays the main menu
+     */
+    private void displayMenu() {
+        System.out.println("\n========== Stock Tracker Menu ==========");
+        System.out.println("1. View Portfolio");
+        System.out.println("2. View Watchlist");
+        System.out.println("3. Add Stock to Watchlist");
+        System.out.println("4. Remove Stock from Watchlist");
+        System.out.println("5. Buy Stock");
+        System.out.println("6. Sell Stock");
+        System.out.println("7. View Recent Transactions");
+        System.out.println("8. Show Market Information");
+        System.out.println("9. Deposit/Withdraw Funds");
+        System.out.println("10. Save Data to File");
+        System.out.println("11. Load Data from File");
+        System.out.println("12. Cool Stuff (Advanced Insights)");
+        System.out.println("13. Exit");
+        System.out.println("=========================================");
+        System.out.println("Current Balance: $" + String.format("%.2f", user.getBalance()));
+        System.out.println("Total Assets: $" + String.format("%.2f", user.getTotalValue()));
+        System.out.println("=========================================");
+    }
+
+
 
 
 
