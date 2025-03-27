@@ -57,6 +57,16 @@ public abstract class Stock implements Comparable<Stock> {
         return currentPrice;
     }
 
+    /**
+     * Updates the current price
+     *
+     * @param price The new price
+     */
+    public void updatePrice(double price) {
+        this.currentPrice = price;
+    }
+
+
 
 
 }
