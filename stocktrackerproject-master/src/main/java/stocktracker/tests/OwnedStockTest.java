@@ -102,6 +102,20 @@ public class OwnedStockTest {
         assertNotEquals(stock1, stock3, "Stocks with different symbols should not be equal");
     }
 
+    @Test
+    public void testCompareTo() {
+        // Create stocks with different symbols
+        OwnedStock stockA = new OwnedStock("AAPL", "Apple Inc.", 150.0, 10, 145.0);
+        OwnedStock stockM = new OwnedStock("MSFT", "Microsoft Corp.", 300.0, 5, 295.0);
+        OwnedStock stockG = new OwnedStock("GOOGL", "Alphabet Inc.", 2500.0, 1, 2450.0);
+
+        // Check ordering
+        assertTrue(stockA.compareTo(stockG) < 0, "AAPL should come before GOOGL");
+        assertTrue(stockG.compareTo(stockM) < 0, "GOOGL should come before MSFT");
+        assertTrue(stockA.compareTo(stockM) < 0, "AAPL should come before MSFT");
+        assertEquals(0, stockA.compareTo(stockA), "Comparing with itself should return 0");
+    }
+
 
 
 }
