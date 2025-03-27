@@ -122,4 +122,25 @@ public class UserTest {
         assertEquals(3, recentTransactions.size(), "Should return all 3 transactions");
     }
 
+    @Test
+    public void testGetRecentTransactions_moreThanRequested() {
+        // Add 5 transactions
+        user.addTransaction(new BuyTransaction("AAPL", 10, 150.0));
+        user.addTransaction(new BuyTransaction("MSFT", 5, 300.0));
+        user.addTransaction(new SellTransaction("AAPL", 5, 160.0, 150.0));
+        user.addTransaction(new BuyTransaction("GOOGL", 1, 2500.0));
+        user.addTransaction(new SellTransaction("MSFT", 2, 310.0, 300.0));
+
+        // Get the 3 most recent transactions
+        List<Transaction> recentTransactions = user.getRecentTransactions(3);
+
+        assertEquals(3, recentTransactions.size(), "Should return only 3 transactions");
+
+        // Check that they're the most recent ones
+        assertEquals("GOOGL", recentTransactions.get(0).getSymbol(), "Third most recent transaction");
+        assertEquals("MSFT", recentTransactions.get(2).getSymbol(), "Most recent transaction");
+    }
+}
+
+
 }
