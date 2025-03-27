@@ -43,4 +43,14 @@ public abstract class Transaction {
         return quantity;
     }
 
+    /**
+     * Gets the price
+     *
+     * @return The price
+     */
+    public double getPrice() {
+        return price;
+    }
+
+
 }
