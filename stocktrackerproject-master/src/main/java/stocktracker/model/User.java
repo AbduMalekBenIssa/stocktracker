@@ -77,4 +77,17 @@ public class User {
             return new ArrayList<>(transactions);
         }
 
+        /**
+         * Gets the most recent transactions
+         *
+         * @param count The number of transactions to get
+         * @return The recent transactions
+         */
+        public List<Transaction> getRecentTransactions(int count) {
+            int size = transactions.size();
+            int startIndex = Math.max(0, size - count);
+            return new ArrayList<>(transactions.subList(startIndex, size));
+        }
+
+
     }
