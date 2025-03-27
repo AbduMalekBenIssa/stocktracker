@@ -46,6 +46,15 @@ public class Watchlist {
         return stocks.remove(symbol);
     }
 
+    /**
+     * Checks if a stock is in the watchlist
+     *
+     * @param symbol The stock symbol
+     * @return True if the stock is in the watchlist
+     */
+    public boolean containsStock(String symbol) {
+        return stocks.containsKey(symbol);
+    }
 
 
 }
