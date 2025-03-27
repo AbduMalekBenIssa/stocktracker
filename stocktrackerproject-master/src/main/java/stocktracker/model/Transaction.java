@@ -90,5 +90,15 @@ public abstract class Transaction {
                 ", Time=" + timestamp.format(formatter) + "]";
     }
 
+    /**
+     * Converts the transaction to CSV format
+     *
+     * @return The CSV representation
+     */
+    public String toCSV() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        return "transactiond," + getType() + "," + symbol + "," + quantity + "," + price + "," + timestamp.format(formatter);
+    }
+
 
 }
