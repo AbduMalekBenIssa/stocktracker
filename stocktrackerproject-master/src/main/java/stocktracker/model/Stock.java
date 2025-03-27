@@ -85,6 +85,24 @@ public abstract class Stock implements Comparable<Stock> {
         return Objects.equals(symbol, stock.symbol);
     }
 
+    /**
+     * Generates a hash code for the stock based on its symbol
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(symbol);
+    }
+
+
+    /**
+     * Returns a string representation of the stock
+     */
+    @Override
+    public String toString() {
+        return "Stock [Symbol=" + symbol + ", Name=" + name + ", Price=$" + String.format("%.2f", currentPrice) + "]";
+    }
+
+
 
 
 
