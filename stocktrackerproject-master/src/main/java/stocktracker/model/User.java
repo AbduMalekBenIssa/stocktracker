@@ -136,4 +136,15 @@ public class User {
         }
 
 
+        /**
+         * Returns a string representation of the user
+         */
+        @Override
+        public String toString() {
+            return "User [Name=" + name +
+                    ", Balance=$" + String.format("%.2f", balance) +
+                    ", Portfolio Value=$" + String.format("%.2f", portfolio.getTotalValue()) +
+                    ", Total Value=$" + String.format("%.2f", getTotalValue()) + "]";
+        }
+
     }
