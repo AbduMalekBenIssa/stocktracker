@@ -63,4 +63,14 @@ public interface StockMarket {
      * @throws IOException If there's an error getting the data
      */
     List<String> getMostActivelyTraded() throws IOException;
+
+    /**
+     * Validates if a stock symbol exists
+     *
+     * @param symbol The stock symbol to validate
+     * @return True if the symbol is valid
+     * @throws IOException If there's an error validating the symbol
+     */
+    boolean isValidSymbol(String symbol) throws IOException;
+
 }
