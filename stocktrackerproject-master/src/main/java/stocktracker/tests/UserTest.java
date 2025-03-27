@@ -132,7 +132,7 @@ public class UserTest {
         user.addTransaction(new SellTransaction("MSFT", 2, 310.0, 300.0));
 
         // Get the 10 most recent transactions
-        List<Transaction> recentTransactions = user.getRecentTransactions(3);
+        List<Transaction> recentTransactions = user.getRecentTransactions(10);
 
         assertEquals(5, recentTransactions.size(), "Should return only 10 transactions");
 
