@@ -75,4 +75,18 @@ public class OwnedStockTest {
         assertEquals(100.0, stock.getPurchasePrice(), 0.01, "Purchase price should remain unchanged");
     }
 
+    @Test
+    public void testRemoveShares_tooMany() {
+        // Create a stock with 10 shares
+        OwnedStock stock = new OwnedStock("AAPL", "Apple Inc.", 110.0, 10, 100.0);
+
+        // Try to remove more shares than available
+        boolean result = stock.removeShares(15);
+
+        // Check that no shares were removed
+        assertFalse(result, "Should return false when trying to remove too many shares");
+        assertEquals(10, stock.getQuantity(), "Quantity should remain unchanged");
+    }
+
+
 }
