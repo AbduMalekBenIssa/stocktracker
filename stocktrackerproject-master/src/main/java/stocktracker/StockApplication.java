@@ -558,6 +558,23 @@ public StockApplication(String initialDataFile) {
         running = false;
     }
 
+    /**
+     * Main method
+     *
+     * @param args Command line arguments
+     */
+    public static void main(String[] args) {
+        String initialDataFile = null;
+
+        if (args.length > 0) {
+            initialDataFile = args[0];
+        }
+
+        StockApplication app = new StockApplication(initialDataFile);
+        app.run();
+    }
+
+
 
 
 
