@@ -430,6 +430,33 @@ public StockApplication(String initialDataFile) {
             return;
         }
 
+        if (choice == 1) {
+            System.out.print("Enter amount to deposit: $");
+            try {
+                double amount = Double.parseDouble(scanner.nextLine());
+                if (amount <= 0) {
+                    System.out.println("Amount must be positive.");
+                    return;
+                }
+                user.deposit(amount);
+                System.out.println("Deposited $" + String.format("%.2f", amount));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount.");
+            }
+        } else if (choice == 2) {
+            System.out.print("Enter amount to withdraw: $");
+            try {
+                double amount = Double.parseDouble(scanner.nextLine());
+                if (amount <= 0) {
+                    System.out.println("Amount must be positive.");
+                    return;
+                }
+                if (amount > user.getBalance()) {
+                    System.out.println("Insufficient funds.");
+                    return;
+                }
+                user.withdraw(amount);
+                System.out.println("Withdrew $" + String.format("%.2f", amount));
 
 
 
@@ -446,4 +473,6 @@ public StockApplication(String initialDataFile) {
 
 
 
-    }
+
+
+            }
