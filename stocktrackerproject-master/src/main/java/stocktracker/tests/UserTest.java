@@ -137,8 +137,8 @@ public class UserTest {
         assertEquals(3, recentTransactions.size(), "Should return only 3 transactions");
 
         // Check that they're the most recent ones
-        assertEquals("GOOGL", recentTransactions.get(0).getSymbol(), "Third most recent transaction");
-        assertEquals("MSFT", recentTransactions.get(2).getSymbol(), "Most recent transaction");
+        assertEquals("AAPL", recentTransactions.get(0).getSymbol(), "Third most recent transaction");
+        assertEquals("MSFT", recentTransactions.get(4).getSymbol(), "Most recent transaction");
     }
 }
 
