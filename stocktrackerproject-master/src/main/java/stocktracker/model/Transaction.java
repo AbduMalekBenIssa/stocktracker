@@ -70,4 +70,11 @@ public abstract class Transaction {
         return quantity * price;
     }
 
+    /**
+     * Gets the transaction type (Buy or Sell)
+     *
+     * @return The transaction type
+     */
+    public abstract String getType();
+
 }
