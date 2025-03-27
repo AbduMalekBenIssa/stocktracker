@@ -24,5 +24,19 @@ public class SellTransaction extends Transaction {
         super(symbol, quantity, price);
         this.profitLoss = (price - purchasePrice) * quantity;
     }
+    /**
+     * Constructor with timestamp parameter
+     *
+     * @param symbol The stock symbol
+     * @param quantity The number of shares
+     * @param price The price per share
+     * @param profitLoss The profit/loss on the transaction
+     * @param timestamp The transaction timestamp
+     */
+    public SellTransaction(String symbol, int quantity, double price, double profitLoss, LocalDateTime timestamp) {
+        super(symbol, quantity, price, timestamp);
+        this.profitLoss = profitLoss;
+    }
+
 }
 
