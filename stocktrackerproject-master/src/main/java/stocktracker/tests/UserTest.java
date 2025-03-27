@@ -134,7 +134,7 @@ public class UserTest {
         // Get the 3 most recent transactions
         List<Transaction> recentTransactions = user.getRecentTransactions(3);
 
-        assertEquals(3, recentTransactions.size(), "Should return only 3 transactions");
+        assertEquals(3, recentTransactions.size(), "Should return only 10 transactions");
 
         // Check that they're the most recent ones
         assertEquals("AAPL", recentTransactions.get(0).getSymbol(), "Third most recent transaction");
