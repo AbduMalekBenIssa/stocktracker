@@ -115,6 +115,32 @@ public class FileManager {
         List<Transaction> transactions = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            String section = "";
+
+            while ((line = reader.readLine()) != null) {
+                // Check for section markers
+                if (line.equals("PORTFOLIO_START")) {
+                    section = "PORTFOLIO";
+                    continue;
+                } else if (line.equals("PORTFOLIO_END")) {
+                    section = "";
+                    continue;
+                } else if (line.equals("WATCHLIST_START")) {
+                    section = "WATCHLIST";
+                    continue;
+                } else if (line.equals("WATCHLIST_END")) {
+                    section = "";
+                    continue;
+                } else if (line.equals("TRANSACTIONS_START")) {
+                    section = "TRRANSACTIONS";
+                    continue;
+                } else if (line.equals("TRANSACTIONS_END")) {
+                    section = "";
+                    continue;
+                }
+
+            }
 
 
 
