@@ -157,5 +157,32 @@ public class FinancialModelPrepAPI implements StockMarket {
         return symbols;
     }
 
+    /**
+     * Gets the most actively traded stocks
+     */
+    @Override
+    public List<String> getMostActivelyTraded() throws IOException {
+        // Note the URL is different from the others according to your original code
+        String url = "https://financialmodelingprep.com/stable/most-actives?apikey=" + API_KEY;
+        Request request = new Request.Builder().url(url).build();
+        List<String> symbols = new ArrayList<>();
+
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected API response: " + response);
+
+
+            String jsonData = response.body().string();
+            JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
+
+
+            for (int i = 0; i < Math.min(5, jsonArray.size()); i++) {
+                JsonObject stock = jsonArray.get(i).getAsJsonObject();
+                symbols.add(stock.get("symbol").getAsString());
+            }
+        }
+        return symbols;
+    }
+
 
 }
