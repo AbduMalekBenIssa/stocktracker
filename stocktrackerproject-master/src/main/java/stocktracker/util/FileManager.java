@@ -32,6 +32,19 @@ public class FileManager {
      * @throws IOException If there's an error writing to the file
      */
     public static void saveToFile(User user, String filename) throws IOException{
+        // Add .txt extension if not already present
+        if (!filename.toLowerCase().endsWith(".txt")) {
+            filename += ".txt";
+        }
+
+        File file = new File(filename);
+
+        // Check if file exists and prompt for overwrite if it does
+        if (file.exists()) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("File already exists. Do you want to overwrite it? (y/n): ");
+            String response = scanner.nextLine().toLowerCase();
+
 
     }
 }
