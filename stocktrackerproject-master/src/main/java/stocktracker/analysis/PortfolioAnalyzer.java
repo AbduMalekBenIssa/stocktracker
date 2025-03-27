@@ -245,6 +245,26 @@ public class PortfolioAnalyzer {
         }
     }
 
+    /**
+     * Displays the most recent transactions
+     *
+     * @param count The number of transactions to display
+     */
+    public void displayRecentTransactions(int count) {
+        System.out.println("\n========== Recent Transactions ==========");
+        List<Transaction> transactions = user.getRecentTransactions(count);
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions to display.");
+            return;
+        }
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            System.out.println(transactions.get(i));
+        }
+    }
+
+
 
 
 
