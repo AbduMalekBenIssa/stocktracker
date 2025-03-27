@@ -66,6 +66,18 @@ public class Watchlist {
         return stocks.get(symbol);
     }
 
+    /**
+     * Gets all stocks in the watchlist
+     *
+     * @return A list of all watchlist stocks
+     */
+    public List<WatchlistStock> getAllStocks() {
+        List<WatchlistStock> stockList = new ArrayList<>(stocks.values());
+        Collections.sort(stockList);
+        return stockList;
+    }
+
+
 
 
 }
