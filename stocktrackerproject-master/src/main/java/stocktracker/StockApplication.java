@@ -411,6 +411,24 @@ public StockApplication(String initialDataFile) {
         }
     }
 
+    /**
+     * Manages user funds
+     */
+    private void manageFunds() {
+        System.out.println("\n========== Manage Funds ==========");
+        System.out.println("Current Balance: $" + String.format("%.2f", user.getBalance()));
+        System.out.println("1. Deposit");
+        System.out.println("2. Withdraw");
+        System.out.println("3. Back to Main Menu");
+
+        System.out.print("Enter your choice: ");
+        int choice;
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice.");
+            return;
+        }
 
 
 
@@ -427,4 +445,5 @@ public StockApplication(String initialDataFile) {
 
 
 
-}
+
+    }
