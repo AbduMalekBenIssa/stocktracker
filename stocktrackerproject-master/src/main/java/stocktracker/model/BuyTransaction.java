@@ -22,7 +22,6 @@ public class BuyTransaction extends Transaction {
 
     public BuyTransaction(String symbol, int quantity, double price) {
         super(symbol, quantity, price);
-
     }
     /**
      * Constructor with timestamp parameter

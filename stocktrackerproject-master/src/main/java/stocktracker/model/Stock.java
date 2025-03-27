@@ -101,11 +101,4 @@ public abstract class Stock implements Comparable<Stock> {
     public String toString() {
         return "Stock [Symbol=" + symbol + ", Name=" + name + ", Price=$" + String.format("%.2f", currentPrice) + "]";
     }
-
-
-
-
-
-
-
 }
