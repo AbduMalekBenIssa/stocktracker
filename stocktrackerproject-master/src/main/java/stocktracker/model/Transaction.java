@@ -52,5 +52,13 @@ public abstract class Transaction {
         return price;
     }
 
+    /**
+     * Gets the timestamp
+     *
+     * @return The timestamp
+     */
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
 }
