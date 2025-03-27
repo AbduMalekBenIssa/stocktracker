@@ -56,5 +56,16 @@ public class Watchlist {
         return stocks.containsKey(symbol);
     }
 
+    /**
+     * Gets a stock from the watchlist
+     *
+     * @param symbol The stock symbol
+     * @return The stock, or null if not found
+     */
+    public WatchlistStock getStock(String symbol) {
+        return stocks.get(symbol);
+    }
+
+
 
 }
