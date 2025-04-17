@@ -168,4 +168,17 @@ public class TransactionController extends BaseController {
         transactionTable.getSortOrder().add(dateColumn);
         dateColumn.setSortType(TableColumn.SortType.DESCENDING);
     }
+    /**
+     * Sets up the filter combo box
+     */
+    private void setupFilter() {
+        // Add filter options
+        filterComboBox.getItems().addAll("All Transactions", "Buy Transactions", "Sell Transactions");
+        filterComboBox.getSelectionModel().selectFirst();
+
+        // Add listener for filter changes
+        filterComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            applyFilter(newValue);
+        });
+    }
 }
