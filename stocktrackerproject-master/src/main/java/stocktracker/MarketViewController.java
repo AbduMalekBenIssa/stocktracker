@@ -351,4 +351,24 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    /**
+     * Loads the most actively traded stocks
+     */
+    private void loadMostActive() throws IOException {
+        List<String> active = stockMarket.getMostActivelyTraded();
+
+        for (String symbol : active) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+
+                activeData.add(new MarketStock(symbol, name, price, change));
+            } catch (IOException e) {
+                // Skip this stock if there's an error
+                System.out.println("Error loading active stock: " + symbol + " - " + e.getMessage());
+            }
+        }
+    }
+
 }
