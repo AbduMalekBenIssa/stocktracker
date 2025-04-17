@@ -152,3 +152,19 @@ public class StockDetailController extends BaseController {
             // Calculate the change amount based on the percentage
             double changeAmount = price * changePercent / 100;
             System.out.println("*** Change amount: " + changeAmount);
+
+            // Create a stock object to store the data
+            Stock stock = new Stock(symbol, name, price) {
+                @Override
+                public int compareTo(Stock o) {
+                    return this.getSymbol().compareTo(o.getSymbol());
+                }
+            };
+            stock.setChange(changeAmount);
+            stock.setChangePercent(changePercent);
+
+            // Set mock values for other properties
+            stock.setMarketCap(price * 1000000000); // Mock market cap
+            stock.setPeRatio(30 + (Math.random() * 10)); // Mock P/E ratio
+            stock.setDividendYield(Math.random() * 3); // Mock dividend yield
+            stock.setVolume((int)(Math.random() * 10000000)); // Mock volume
