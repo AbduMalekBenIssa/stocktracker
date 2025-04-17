@@ -67,3 +67,19 @@
                                 </StackPane>
                             </children>
                         </VBox>
+
+                        <!-- Total Value Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="2">
+                            <children>
+                                <Label styleClass="card-header" text="Total Assets" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="totalValueLabel" styleClass="card-value" text="10,000.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
