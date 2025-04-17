@@ -76,4 +76,28 @@ public class DashboardController extends BaseController {
         updateRecentTransactions();
     }
 
+    /**
+     * Updates the summary values
+     */
+    private void updateSummaryValues() {
+        double balance = user.getBalance();
+        double portfolioValue = user.getPortfolio().getTotalValue();
+        double totalValue = balance + portfolioValue;
+        double profitLoss = user.getPortfolio().getTotalProfitLoss();
+
+        balanceLabel.setText(String.format("$%.2f", balance));
+        portfolioValueLabel.setText(String.format("$%.2f", portfolioValue));
+        totalValueLabel.setText(String.format("$%.2f", totalValue));
+
+        // Set profit/loss value and style
+        profitLossLabel.setText(String.format("$%.2f", profitLoss));
+        if (profitLoss > 0) {
+            profitLossLabel.getStyleClass().removeAll("text-danger");
+            profitLossLabel.getStyleClass().add("text-success");
+            profitLossLabel.setText("+" + profitLossLabel.getText());
+        } else if (profitLoss < 0) {
+            profitLossLabel.getStyleClass().removeAll("text-success");
+            profitLossLabel.getStyleClass().add("text-danger");
+        }
+    }
 }
