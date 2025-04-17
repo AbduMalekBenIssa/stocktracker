@@ -77,5 +77,55 @@ public class MainViewController {
             balanceLabel.setText(String.format("$%.2f", user.getBalance()));
             totalValueLabel.setText(String.format("$%.2f", user.getTotalValue()));
         }
+
+        /**
+         * Loads the dashboard view
+         */
+        @FXML
+        public void loadDashboardView() {
+            loadView("/stocktracker/views/DashboardView.fxml");
+        }
+
+        /**
+         * Loads the portfolio view
+         */
+        @FXML
+        private void loadPortfolioView() {
+            loadView("/stocktracker/views/PortfolioView.fxml");
+        }
+
+        /**
+         * Loads the watchlist view
+         */
+        @FXML
+        private void loadWatchlistView() {
+            loadView("/stocktracker/views/WatchlistView.fxml");
+        }
+
+        /**
+         * Loads the transaction view
+         */
+        @FXML
+        private void loadTransactionView() {
+            loadView("/stocktracker/views/TransactionView.fxml");
+        }
+
+        /**
+         * Loads the market view
+         */
+        @FXML
+        private void loadMarketView() {
+            loadView("/stocktracker/views/MarketView.fxml");
+        }
+
+        /**
+         * Loads the settings view
+         */
+        @FXML
+        private void loadSettingsView() {
+            loadView("/stocktracker/views/SettingsView.fxml");
+        }
+
+
     }
 }
