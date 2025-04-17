@@ -304,4 +304,33 @@ public class WatchlistController extends BaseController {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Buy Stock");
             dialog.setHeaderText("Buy " + stock.getName() + " (" + stock.getSymbol() + ")");
+
+            // Set the button types
+            ButtonType buyButtonType = new ButtonType("Buy", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(buyButtonType, ButtonType.CANCEL);
+
+            // Create the form fields
+            VBox content = new VBox(10);
+            content.getStyleClass().add("dialog-content");
+
+            Label priceLabel = new Label(String.format("Current Price: $%.2f", price));
+            Label balanceLabel = new Label(String.format("Available Balance: $%.2f", user.getBalance()));
+
+            TextField quantityField = new TextField();
+            quantityField.setPromptText("Number of Shares");
+
+            content.getChildren().addAll(
+                    priceLabel,
+                    new Label("Quantity:"),
+                    quantityField,
+                    balanceLabel
+            );
+
+            dialog.getDialogPane().setContent(content);
+
+            // Request focus on the quantity field by default
+            quantityField.requestFocus();
+
+            // Show the dialog and process the result
+            Optional<ButtonType> result = dialog.showAndWait();
 }
