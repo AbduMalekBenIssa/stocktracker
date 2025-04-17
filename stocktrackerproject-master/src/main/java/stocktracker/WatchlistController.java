@@ -9,3 +9,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import stocktracker.model.OwnedStock;
 import stocktracker.model.WatchlistStock;
+
+import java.io.IOException;
+import java.util.Optional;
+
+/**
+ * Controller for the Watchlist view
+ *
+ * @author Omar Almishri, AbduMalek Ben Issa
+ * @version 3.0
+ * @Tutorial T04
+ */
+public class WatchlistController extends BaseController {
