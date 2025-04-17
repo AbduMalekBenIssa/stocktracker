@@ -38,4 +38,16 @@ public class MainViewController {
 
     private User user;
     private StockMarket stockMarket;
+
+    /**
+     * Sets the current user for the application.
+     * Should be called when loading data.
+     *
+     * @param user The new User object.
+     */
+    public void setUser(User user) {
+        this.user = user;
+        // Optionally immediately refresh UI elements dependent on user
+        // refreshUserInfo(); // This will be called separately in SettingsController
+    }
 }
