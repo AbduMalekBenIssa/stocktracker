@@ -276,3 +276,30 @@ public class StockDetailController extends BaseController {
             return String.format("$%.2fK", marketCap / 1_000.0);
         }
     }
+    private void loadPriceHistory() {
+        System.out.println("*** loadPriceHistory called");
+
+        Platform.runLater(() -> {
+            try {
+                // Clear existing data
+                priceChart.getData().clear();
+
+                // Create a series for the price data
+                XYChart.Series<Number, Number> series = new XYChart.Series<>();
+
+                // Generate random price data for demonstration
+                // In a real app, this would come from an API
+                generateRandomPriceData(series);
+
+                // Add the series to the chart
+                priceChart.getData().add(series);
+
+                System.out.println("*** Price history chart updated successfully");
+
+            } catch (Exception e) {
+                System.out.println("*** ERROR loading price history: " + e.getMessage());
+                e.printStackTrace();
+                showErrorDialog("Error", "Failed to load price history", e.getMessage());
+            }
+        });
+    }
