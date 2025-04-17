@@ -260,4 +260,136 @@ public class PortfolioController extends BaseController {
         }
     }
 
+    /**
+     * Shows a dialog to add a new stock to the portfolio
+     */
+    @FXML
+    private void addNewStock() {
+        // Create the dialog
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Buy Stock");
+        dialog.setHeaderText("Add a New Stock to Your Portfolio");
+
+        // Set the button types
+        ButtonType buyButtonType = new ButtonType("Buy", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(buyButtonType, ButtonType.CANCEL);
+
+        // Create the form fields
+        VBox content = new VBox(10);
+        content.getStyleClass().add("dialog-content");
+
+        TextField symbolField = new TextField();
+        symbolField.setPromptText("Stock Symbol (e.g., AAPL)");
+
+        TextField quantityField = new TextField();
+        quantityField.setPromptText("Number of Shares");
+
+        Label balanceLabel = new Label(String.format("Available Balance: $%.2f", user.getBalance()));
+        Label symbolInfoLabel = new Label("Enter a valid stock symbol");
+
+        content.getChildren().addAll(
+                new Label("Stock Symbol:"),
+                symbolField,
+                symbolInfoLabel,
+                new Label("Quantity:"),
+                quantityField,
+                balanceLabel
+        );
+
+        // Add validation for the symbol
+        symbolField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                try {
+                    String symbol = newValue.toUpperCase();
+                    if (stockMarket.isValidSymbol(symbol)) {
+                        String name = stockMarket.getCompanyName(symbol);
+                        double price = stockMarket.getStockPrice(symbol);
+                        symbolInfoLabel.setText(String.format("%s - Current Price: $%.2f", name, price));
+                        symbolInfoLabel.getStyleClass().removeAll("text-danger");
+                        symbolInfoLabel.getStyleClass().add("text-info");
+                    } else {
+                        symbolInfoLabel.setText("Invalid stock symbol");
+                        symbolInfoLabel.getStyleClass().removeAll("text-info");
+                        symbolInfoLabel.getStyleClass().add("text-danger");
+                    }
+                } catch (IOException e) {
+                    symbolInfoLabel.setText("Error checking symbol: " + e.getMessage());
+                    symbolInfoLabel.getStyleClass().removeAll("text-info");
+                    symbolInfoLabel.getStyleClass().add("text-danger");
+                }
+            } else {
+                symbolInfoLabel.setText("Enter a valid stock symbol");
+                symbolInfoLabel.getStyleClass().removeAll("text-danger", "text-info");
+            }
+        });
+
+        dialog.getDialogPane().setContent(content);
+
+        // Request focus on the symbol field by default
+        symbolField.requestFocus();
+
+        // Show the dialog and process the result
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == buyButtonType) {
+            try {
+                // Get the values from the form
+                String symbol = symbolField.getText().toUpperCase();
+                int quantity = Integer.parseInt(quantityField.getText());
+
+                // Validate the input
+                if (symbol.isEmpty() || quantity <= 0) {
+                    showErrorDialog("Invalid Input", "Invalid Input", "Please enter a valid stock symbol and quantity.");
+                    return;
+                }
+
+                // Check if the symbol is valid
+                if (!stockMarket.isValidSymbol(symbol)) {
+                    showErrorDialog("Invalid Symbol", "Invalid Stock Symbol", "The stock symbol you entered is not valid.");
+                    return;
+                }
+
+                // Get stock info
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+
+                // Calculate total cost
+                double totalCost = price * quantity;
+
+                // Check if user has enough funds
+                if (totalCost > user.getBalance()) {
+                    showErrorDialog("Insufficient Funds", "Insufficient Funds",
+                            String.format("You don't have enough funds to buy %d shares of %s for $%.2f.",
+                                    quantity, symbol, totalCost));
+                    return;
+                }
+
+                // Proceed with the purchase
+                // Withdraw the funds
+                user.withdraw(totalCost);
+
+                // Add the stock to the portfolio
+                OwnedStock stock = new OwnedStock(symbol, name, price, quantity, price);
+                user.getPortfolio().addStock(stock);
+
+                // Add a transaction record
+                BuyTransaction transaction = new BuyTransaction(symbol, quantity, price, LocalDateTime.now());
+                user.addTransaction(transaction);
+
+                // Update the view
+                updatePortfolioData();
+                updateUserInfo();
+
+                showInfoDialog("Purchase Complete", "Stock Purchased",
+                        String.format("Successfully purchased %d shares of %s (%s) for $%.2f.",
+                                quantity, name, symbol, totalCost));
+
+            } catch (NumberFormatException e) {
+                showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a valid number for the quantity.");
+            } catch (IOException e) {
+                showErrorDialog("API Error", "Could not complete purchase", "Error accessing stock market data: " + e.getMessage());
+            }
+        }
+    }
+
 }
