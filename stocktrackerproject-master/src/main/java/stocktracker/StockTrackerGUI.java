@@ -77,3 +77,13 @@ public class StockTrackerGUI extends Application {
         // Launch the JavaFX application
         launch(args);
     }
+
+    /**
+     * Creates a new user with default settings
+     * This is used when starting the application or when the user chooses to start fresh
+     */
+    private static void createNewUser() {
+        user = new User("New User", 10000.0);
+        System.out.println("New user created with $10,000 starting balance.");
+    }
+}
