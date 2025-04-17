@@ -40,4 +40,10 @@ public class WatchlistController extends BaseController {
     private TableColumn<WatchlistStock, Number> changeColumn;
 
     private ObservableList<WatchlistStock> stockList;
+
+    @Override
+    protected void onInitialize() {
+        setupTable();
+        updateWatchlistData();
+    }
 }
