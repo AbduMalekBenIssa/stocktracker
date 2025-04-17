@@ -78,3 +78,20 @@
                 </HBox>
             </children>
         </HBox>
+
+        <!-- Portfolio Table -->
+        <TableView fx:id="portfolioTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="symbolColumn" prefWidth="100.0" text="Symbol" />
+                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+                <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
+                <TableColumn fx:id="purchasePriceColumn" prefWidth="120.0" text="Purchase Price" />
+                <TableColumn fx:id="currentPriceColumn" prefWidth="120.0" text="Current Price" />
+                <TableColumn fx:id="totalValueColumn" prefWidth="120.0" text="Total Value" />
+                <TableColumn fx:id="profitLossColumn" prefWidth="120.0" text="Profit/Loss" />
+                <TableColumn fx:id="profitLossPercentageColumn" prefWidth="120.0" text="P/L %" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
