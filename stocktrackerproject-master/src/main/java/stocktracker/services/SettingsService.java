@@ -1,3 +1,4 @@
+package stocktracker.services;
 
 import stocktracker.models.Settings;
 
@@ -99,3 +100,4 @@ public class SettingsService {
         settings.setUserName(DEFAULT_USERNAME);
         settings.setCurrency(DEFAULT_CURRENCY);
     }
+} 
