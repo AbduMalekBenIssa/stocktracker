@@ -203,5 +203,16 @@ public class MainViewController {
             updateUserInfo();
         }
 
+
+        /**
+         * Gets the main Scene associated with this controller's view.
+         *
+         * @return The main Scene, or null if the view hasn't been added to a scene yet.
+         */
+        public Scene getScene() {
+            return mainBorderPane != null ? mainBorderPane.getScene() : null;
+        }
     }
+
 }
+
