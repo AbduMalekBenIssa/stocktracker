@@ -244,5 +244,43 @@ public class TransactionController extends BaseController {
         sellTransactionsLabel.setText(String.valueOf(sellCount));
         totalVolumeLabel.setText(String.format("$%.2f", totalVolume));
     }
+    /**
+     * Shows details for a transaction
+     *
+     * @param transaction The transaction to show details for
+     */
+    private void showTransactionDetails(Transaction transaction) {
+        // Create the dialog
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Transaction Details");
+        dialog.setHeaderText("Transaction Details");
+
+        // Create content
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String transactionType = transaction.getClass().getSimpleName().replace("Transaction", "");
+
+        String details = String.format("Type: %s\n", transactionType) +
+                String.format("Symbol: %s\n", transaction.getSymbol()) +
+                String.format("Quantity: %d shares\n", transaction.getQuantity()) +
+                String.format("Price: $%.2f\n", transaction.getPrice()) +
+                String.format("Total Value: $%.2f\n", transaction.getPrice() * transaction.getQuantity()) +
+                String.format("Date: %s\n", formatter.format(transaction.getTimestamp()));
+
+        if (transaction instanceof SellTransaction) {
+            SellTransaction sellTransaction = (SellTransaction) transaction;
+            details += String.format("Profit/Loss: $%.2f\n", sellTransaction.getProfitLoss());
+        }
+
+        // Add content to dialog
+        TextArea textArea = new TextArea(details);
+        textArea.setEditable(false);
+        textArea.setPrefHeight(200);
+        textArea.setPrefWidth(400);
+
+        dialog.getDialogPane().setContent(textArea);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        dialog.showAndWait();
+    }
 
 }
