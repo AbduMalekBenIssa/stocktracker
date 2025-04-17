@@ -68,4 +68,11 @@ public class TransactionController extends BaseController {
 
     private ObservableList<Transaction> allTransactions;
     private ObservableList<Transaction> filteredTransactions;
+
+    @Override
+    protected void onInitialize() {
+        setupTable();
+        setupFilter();
+        loadTransactions();
+    }
 }
