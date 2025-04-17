@@ -61,3 +61,30 @@
                     <Label fx:id="volumeLabel" styleClass="statistic-value" text="" />
                 </VBox>
             </HBox>
+
+            <Separator />
+
+            <!-- Trading Section -->
+            <HBox styleClass="trading-section" spacing="15" alignment="CENTER_LEFT">
+                <Label text="Buy Shares:" />
+                <TextField fx:id="sharesTextField" promptText="Enter quantity" styleClass="shares-input" prefWidth="100" />
+                <Button fx:id="buyButton" text="Buy" styleClass="buy-button" onAction="#handleBuyShares" />
+                <HBox HBox.hgrow="ALWAYS" />
+                <Button fx:id="addToWatchlistButton" text="Add to Watchlist" styleClass="watchlist-button" onAction="#handleAddToWatchlist" />
+            </HBox>
+
+            <Separator />
+
+            <!-- News Section -->
+            <Label text="Latest News" styleClass="section-header" />
+            <ScrollPane fitToWidth="true" styleClass="news-scroll-pane">
+                <VBox fx:id="newsContainer" styleClass="news-container" spacing="10" />
+            </ScrollPane>
+
+            <!-- Refresh Button -->
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Refresh" onAction="#handleRefresh" styleClass="refresh-button" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane> 
