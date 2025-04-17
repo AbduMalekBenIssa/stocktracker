@@ -74,5 +74,12 @@ public abstract class BaseController {
         alert.showAndWait();
     }
 
-
+    /**
+     * Updates the user information in the main view
+     * This should be called after any changes to the user data
+     */
+    protected void updateUserInfo() {
+        mainController.refreshUserInfo();
+    }
 }
+
