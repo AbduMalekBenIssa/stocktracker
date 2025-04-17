@@ -163,4 +163,32 @@ public class WatchlistController extends BaseController {
             showErrorDialog("Refresh Error", "Could not update stock prices", e.getMessage());
         }
     }
+    /**
+     * Shows a dialog to add a new stock to the watchlist
+     */
+    @FXML
+    private void addToWatchlist() {
+        // Create the dialog
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Add to Watchlist");
+        dialog.setHeaderText("Add a Stock to Your Watchlist");
+
+        // Set the button types
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+        // Create the form fields
+        VBox content = new VBox(10);
+        content.getStyleClass().add("dialog-content");
+
+        TextField symbolField = new TextField();
+        symbolField.setPromptText("Stock Symbol (e.g., AAPL)");
+
+        Label symbolInfoLabel = new Label("Enter a valid stock symbol");
+
+        content.getChildren().addAll(
+                new Label("Stock Symbol:"),
+                symbolField,
+                symbolInfoLabel
+        );
 }
