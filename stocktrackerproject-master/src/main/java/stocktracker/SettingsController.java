@@ -94,5 +94,21 @@ public class SettingsController extends BaseController {
             showErrorDialog("Error Loading Data", "Could not load user data from " + fileManager.getDataFilePath(), e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleSaveData() {
+        if (this.user == null) {
+            showErrorDialog("Error Saving Data", "Cannot save data.", "No user data available to save.");
+            return;
+        }
+        try {
+            fileManager.saveUserData(this.user);
+            showInfoDialog("Data Saved", "User data saved successfully to " + fileManager.getDataFilePath(), "");
+        } catch (IOException e) {
+            showErrorDialog("Error Saving Data", "Could not save user data to " + fileManager.getDataFilePath(), e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 }
