@@ -437,4 +437,32 @@ public class MarketViewController extends BaseController {
         mainController.showStockDetails(stock.getSymbol());
     }
 
+    /**
+     * Adds a stock to the watchlist
+     *
+     * @param stock The stock to add to the watchlist
+     */
+    private void addToWatchlist(MarketStock stock) {
+        try {
+            // Check if the stock is already in the watchlist
+            if (user.getWatchlist().containsStock(stock.getSymbol())) {
+                showErrorDialog("Already in Watchlist", "Stock Already in Watchlist",
+                        "The stock " + stock.getSymbol() + " is already in your watchlist.");
+                return;
+            }
+
+            // Add to watchlist
+            WatchlistStock watchlistStock = new WatchlistStock(
+                    stock.getSymbol(), stock.getName(), stock.getPrice(), stock.getChange());
+            user.getWatchlist().addStock(watchlistStock);
+
+            showInfoDialog("Stock Added", "Stock Added to Watchlist",
+                    String.format("Successfully added %s (%s) to your watchlist.",
+                            stock.getName(), stock.getSymbol()));
+
+        } catch (Exception e) {
+            showErrorDialog("Error", "Could not add stock to watchlist", e.getMessage());
+        }
+    }
+
 }
