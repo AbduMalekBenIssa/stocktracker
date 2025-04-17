@@ -214,4 +214,46 @@ public class DashboardController extends BaseController {
             topStocksContainer.getChildren().add(stockLabel);
         }
     }
+
+    /**
+     * Updates the recent transactions list
+     */
+    private void updateRecentTransactions() {
+        recentTransactionsContainer.getChildren().clear();
+
+        List<Transaction> transactions = user.getRecentTransactions(5);
+
+        if (transactions.isEmpty()) {
+            Label noTransactionsLabel = new Label("No recent transactions");
+            noTransactionsLabel.getStyleClass().add("text-secondary");
+            recentTransactionsContainer.getChildren().add(noTransactionsLabel);
+            return;
+        }
+
+        // Format date time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        // Add transactions
+        for (Transaction transaction : transactions) {
+            String type = transaction.getClass().getSimpleName().replace("Transaction", "");
+            String transactionInfo = String.format("%s: %s - %d shares @ $%.2f (%s)",
+                    type,
+                    transaction.getSymbol(),
+                    transaction.getQuantity(),
+                    transaction.getPrice(),
+                    transaction.getTimestamp().format(formatter));
+
+            Label transactionLabel = new Label(transactionInfo);
+            transactionLabel.getStyleClass().addAll("dashboard-item");
+
+            // Add specific style based on transaction type
+            if (type.equals("Buy")) {
+                transactionLabel.getStyleClass().add("transaction-buy");
+            } else if (type.equals("Sell")) {
+                transactionLabel.getStyleClass().add("transaction-sell");
+            }
+
+            recentTransactionsContainer.getChildren().add(transactionLabel);
+        }
+    }
 }
