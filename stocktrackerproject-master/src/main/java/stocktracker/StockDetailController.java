@@ -256,3 +256,12 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+    private void updateWatchlistButtonState() {
+        boolean isInWatchlist = user.getWatchlist().containsStock(currentStock.getSymbol());
+
+        if (isInWatchlist) {
+            addToWatchlistButton.setText("Remove from Watchlist");
+        } else {
+            addToWatchlistButton.setText("Add to Watchlist");
+        }
+    }
