@@ -217,4 +217,28 @@ public class WatchlistController extends BaseController {
                 symbolInfoLabel.getStyleClass().removeAll("text-danger", "text-info");
             }
         });
+        dialog.getDialogPane().setContent(content);
+
+        // Request focus on the symbol field by default
+        symbolField.requestFocus();
+
+        // Show the dialog and process the result
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == addButtonType) {
+            try {
+                // Get the values from the form
+                String symbol = symbolField.getText().toUpperCase();
+
+                // Validate the input
+                if (symbol.isEmpty()) {
+                    showErrorDialog("Invalid Input", "Invalid Input", "Please enter a valid stock symbol.");
+                    return;
+                }
+
+                // Check if the symbol is valid
+                if (!stockMarket.isValidSymbol(symbol)) {
+                    showErrorDialog("Invalid Symbol", "Invalid Stock Symbol", "The stock symbol you entered is not valid.");
+                    return;
+                }
 }
