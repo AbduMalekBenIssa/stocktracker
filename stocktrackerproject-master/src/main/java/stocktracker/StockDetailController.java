@@ -103,3 +103,16 @@ public class StockDetailController extends BaseController {
             System.out.println("No stock symbol set during initialization");
         }
     }
+
+    private void setupChart() {
+        // Configure axis
+        xAxis.setLabel("Time");
+        yAxis.setLabel("Price");
+
+        // Remove legend
+        priceChart.setLegendVisible(false);
+
+        // Make chart look cleaner
+        priceChart.setCreateSymbols(false);
+        priceChart.setAnimated(false);
+    }
