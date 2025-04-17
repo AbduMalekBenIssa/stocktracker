@@ -184,4 +184,34 @@ public class DashboardController extends BaseController {
         portfolioHistoryChart.getData().add(series);
     }
 
+    /**
+     * Updates the top stocks list
+     */
+    private void updateTopStocks() {
+        topStocksContainer.getChildren().clear();
+
+        List<OwnedStock> stocks = user.getPortfolio().getAllStocks();
+
+        if (stocks.isEmpty()) {
+            Label noStocksLabel = new Label("No stocks in portfolio");
+            noStocksLabel.getStyleClass().add("text-secondary");
+            topStocksContainer.getChildren().add(noStocksLabel);
+            return;
+        }
+
+        // Sort stocks by total value
+        stocks.sort((s1, s2) -> Double.compare(s2.getTotalValue(), s1.getTotalValue()));
+
+        // Add top 5 stocks
+        int count = Math.min(5, stocks.size());
+        for (int i = 0; i < count; i++) {
+            OwnedStock stock = stocks.get(i);
+            String stockInfo = String.format("%s (%s) - $%.2f (%d shares)",
+                    stock.getName(), stock.getSymbol(), stock.getTotalValue(), stock.getQuantity());
+
+            Label stockLabel = new Label(stockInfo);
+            stockLabel.getStyleClass().add("dashboard-item");
+            topStocksContainer.getChildren().add(stockLabel);
+        }
+    }
 }
