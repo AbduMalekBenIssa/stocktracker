@@ -156,5 +156,30 @@ public class MainViewController {
         }
 
 
+        /**
+         * Loads a view into the content area
+         *
+         * @param fxmlPath The path to the FXML file
+         */
+        private void loadView(String fxmlPath) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                Parent viewNode = loader.load();
+
+                // If the controller is a BaseController, initialize it
+                Object controller = loader.getController();
+                if (controller instanceof BaseController) {
+                    ((BaseController) controller).initialize(user, stockMarket, this);
+                }
+
+                // Clear existing content and add the new view
+                contentArea.getChildren().clear();
+                contentArea.getChildren().add(viewNode);
+
+            } catch (IOException e) {
+                showErrorDialog("Error Loading View", "Could not load view: " + fxmlPath, e.getMessage());
+            }
+        }
+
     }
 }
