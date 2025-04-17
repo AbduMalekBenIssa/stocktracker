@@ -42,4 +42,10 @@ public abstract class BaseController {
         // Subclasses should override this method to update their views
     }
 
+    /**
+     * Called after the base initialization is complete
+     * Subclasses should implement this method to perform their own initialization
+     */
+    protected abstract void onInitialize();
+
 }
