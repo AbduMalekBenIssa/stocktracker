@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stocktracker.StockDetailController">
+    <children>
+        <VBox styleClass="card" spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+
+            <!-- Stock Header Section -->
+            <HBox styleClass="stock-header" spacing="15" alignment="CENTER_LEFT">
+                <Label fx:id="symbolLabel" styleClass="stock-symbol" text="" />
+                <Label fx:id="nameLabel" styleClass="stock-name" text="" />
+                <HBox HBox.hgrow="ALWAYS" />
+                <VBox alignment="CENTER_RIGHT">
+                    <Label fx:id="priceLabel" styleClass="stock-price" text="" />
+                    <Label fx:id="changeLabel" styleClass="stock-change" text="" />
+                </VBox>
+            </HBox>
+
+            <Separator />
+
+            <!-- Chart Section -->
+            <AreaChart fx:id="priceChart" styleClass="price-chart">
+                <xAxis>
+                    <NumberAxis fx:id="xAxis" label="Time" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Price" />
+                </yAxis>
+            </AreaChart>
+
+            <!-- Stock Statistics Section -->
+            <HBox styleClass="statistics-container" spacing="30">
+                <VBox styleClass="statistic" spacing="5">
+                    <Label styleClass="statistic-title" text="Market Cap" />
+                    <Label fx:id="marketCapLabel" styleClass="statistic-value" text="" />
+                </VBox>
+                <VBox styleClass="statistic" spacing="5">
+                    <Label styleClass="statistic-title" text="P/E Ratio" />
+                    <Label fx:id="peRatioLabel" styleClass="statistic-value" text="" />
+                </VBox>
+                <VBox styleClass="statistic" spacing="5">
+                    <Label styleClass="statistic-title" text="Dividend Yield" />
+                    <Label fx:id="dividendYieldLabel" styleClass="statistic-value" text="" />
+                </VBox>
+                <VBox styleClass="statistic" spacing="5">
+                    <Label styleClass="statistic-title" text="Volume" />
+                    <Label fx:id="volumeLabel" styleClass="statistic-value" text="" />
+                </VBox>
+            </HBox>
