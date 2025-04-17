@@ -360,3 +360,7 @@ public class StockDetailController extends BaseController {
         newsItem.getChildren().addAll(titleLabel, dateLabel, contentLabel);
         newsContainer.getChildren().add(newsItem);
     }
+    @FXML
+    private void handleRefresh() {
+        loadStockData(stockSymbol.get());
+    }
