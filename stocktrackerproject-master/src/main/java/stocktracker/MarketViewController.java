@@ -311,4 +311,24 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    /**
+     * Loads the top gainers data
+     */
+    private void loadTopGainers() throws IOException {
+        List<String> gainers = stockMarket.getTopGainers();
+
+        for (String symbol : gainers) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+
+                gainersData.add(new MarketStock(symbol, name, price, change));
+            } catch (IOException e) {
+                // Skip this stock if there's an error
+                System.out.println("Error loading gainer: " + symbol + " - " + e.getMessage());
+            }
+        }
+    }
+
 }
