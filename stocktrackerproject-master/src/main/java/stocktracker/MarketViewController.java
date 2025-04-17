@@ -392,4 +392,30 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    /**
+     * Gets a list of unusual market movements
+     *
+     * @return A list of unusual market movement descriptions
+     */
+    private List<String> getUnusualMovements() throws IOException {
+        List<String> result = new ArrayList<>();
+
+        // Combine gainers and losers
+        List<MarketStock> allStocks = new ArrayList<>();
+        allStocks.addAll(gainersData);
+        allStocks.addAll(losersData);
+
+        // Find stocks with extreme movements
+        for (MarketStock stock : allStocks) {
+            double change = stock.getChange();
+            if (Math.abs(change) > 10.0) { // Consider >10% change unusual
+                String direction = change > 0 ? "up" : "down";
+                result.add(String.format("%s (%s) is %s %.2f%% to $%.2f",
+                        stock.getName(), stock.getSymbol(), direction, Math.abs(change), stock.getPrice()));
+            }
+        }
+
+        return result;
+    }
+
 }
