@@ -100,4 +100,61 @@ public class DashboardController extends BaseController {
             profitLossLabel.getStyleClass().add("text-danger");
         }
     }
+
+    /**
+     * Updates the asset allocation chart
+     */
+    private void updateAssetAllocationChart() {
+        assetAllocationChart.getData().clear();
+
+        double balance = user.getBalance();
+        double portfolioValue = user.getPortfolio().getTotalValue();
+
+        // Add data to chart
+        if (portfolioValue > 0 || balance > 0) {
+            assetAllocationChart.getData().add(new PieChart.Data("Cash", balance));
+
+            // Get stock allocation
+            Map<String, Double> stockAllocation = new HashMap<>();
+            List<OwnedStock> stocks = user.getPortfolio().getAllStocks();
+
+            for (OwnedStock stock : stocks) {
+                stockAllocation.put(stock.getSymbol(), stock.getTotalValue());
+            }
+
+            // If there are many stocks, group smaller ones into "Other"
+            if (stockAllocation.size() > 5) {
+                // Sort stocks by value
+                List<Map.Entry<String, Double>> sortedStocks = stockAllocation.entrySet()
+                        .stream()
+                        .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
+                        .toList();
+
+                // Add top 4 stocks
+                for (int i = 0; i < 4 && i < sortedStocks.size(); i++) {
+                    Map.Entry<String, Double> entry = sortedStocks.get(i);
+                    assetAllocationChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
+                }
+
+                // Group the rest as "Other"
+                double otherValue = 0;
+                for (int i = 4; i < sortedStocks.size(); i++) {
+                    otherValue += sortedStocks.get(i).getValue();
+                }
+
+                if (otherValue > 0) {
+                    assetAllocationChart.getData().add(new PieChart.Data("Other", otherValue));
+                }
+            } else {
+                // Add all stocks
+                for (Map.Entry<String, Double> entry : stockAllocation.entrySet()) {
+                    assetAllocationChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
+                }
+            }
+        } else {
+            // If there are no assets, show a placeholder
+            assetAllocationChart.getData().add(new PieChart.Data("No Assets", 1));
+        }
+    }
+
 }
