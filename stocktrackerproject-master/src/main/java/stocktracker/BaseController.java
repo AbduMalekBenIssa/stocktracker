@@ -10,7 +10,6 @@ import stocktracker.service.StockMarket;
  * @version 3.0
  * @Tutorial T04
  */
-
 public abstract class BaseController {
 
     protected User user;
@@ -82,4 +81,3 @@ public abstract class BaseController {
         mainController.refreshUserInfo();
     }
 }
-
