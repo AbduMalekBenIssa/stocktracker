@@ -106,4 +106,12 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    @Override
+    protected void onInitialize() {
+        this.marketAnalyzer = new MarketAnalyzer(stockMarket);
+
+        setupTables();
+        loadMarketData();
+    }
+
 }
