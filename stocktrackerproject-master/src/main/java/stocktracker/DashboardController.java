@@ -286,4 +286,3 @@ public class DashboardController extends BaseController {
         updateDashboardData();
     }
 }
-
