@@ -355,4 +355,37 @@ public class WatchlistController extends BaseController {
                                         quantity, stock.getSymbol(), totalCost));
                         return;
                     }
+                    // If the user already owns this stock, we need to handle it accordingly
+                    if (user.getPortfolio().containsStock(stock.getSymbol())) {
+                        OwnedStock existingStock = user.getPortfolio().getStock(stock.getSymbol());
+                        existingStock.addShares(quantity, price);
+                    } else {
+                        // Create a new OwnedStock instance and add it to the portfolio
+                        OwnedStock newStock = new OwnedStock(stock.getSymbol(), stock.getName(),
+                                price, quantity, price);
+                        user.getPortfolio().addStock(newStock);
+                    }
+
+                    // Withdraw the funds
+                    user.withdraw(totalCost);
+
+                    // Add a transaction record
+                    user.addTransaction(new stocktracker.model.BuyTransaction(
+                            stock.getSymbol(), quantity, price, java.time.LocalDateTime.now()));
+
+                    // Update the main view's user info
+                    updateUserInfo();
+
+                    showInfoDialog("Purchase Complete", "Stock Purchased",
+                            String.format("Successfully purchased %d shares of %s (%s) for $%.2f.",
+                                    quantity, stock.getName(), stock.getSymbol(), totalCost));
+
+                } catch (NumberFormatException e) {
+                    showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a valid number for the quantity.");
+                }
+            }
+        } catch (IOException e) {
+            showErrorDialog("API Error", "Could not complete purchase", "Error accessing stock market data: " + e.getMessage());
+        }
+    }
 }
