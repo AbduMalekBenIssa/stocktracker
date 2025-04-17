@@ -42,3 +42,12 @@ public class SettingsService {
         }
         return instance;
     }
+
+    /**
+     * Gets the current Settings object.
+     *
+     * @return The Settings object containing current application settings.
+     */
+    public Settings getSettings() {
+        return settings;
+    }
