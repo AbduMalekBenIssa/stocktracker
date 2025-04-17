@@ -94,3 +94,12 @@ public class StockDetailController extends BaseController {
 
         // Set up chart
         setupChart();
+
+        // If stock symbol was set before initialization, load it now
+        if (stockSymbol.get() != null && !stockSymbol.get().isEmpty()) {
+            System.out.println("Loading initial stock data for symbol: " + stockSymbol.get());
+            loadStockData(stockSymbol.get());
+        } else {
+            System.out.println("No stock symbol set during initialization");
+        }
+    }
