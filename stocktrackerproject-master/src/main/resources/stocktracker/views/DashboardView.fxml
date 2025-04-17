@@ -35,3 +35,19 @@
                     <rowConstraints>
                         <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+                    <children>
+                        <!-- Cash Balance Card -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Cash Balance" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="balanceLabel" styleClass="card-value" text="10,000.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
