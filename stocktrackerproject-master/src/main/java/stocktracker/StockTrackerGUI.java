@@ -27,3 +27,35 @@ public class StockTrackerGUI extends Application {
     private static User user;
     private static StockMarket stockMarket;
     private static String initialDataFile;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Load the main window FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stocktracker/views/MainView.fxml"));
+        Parent root = loader.load();
+
+        // Set the main controller and pass the user and stock market service
+        MainViewController controller = loader.getController();
+        controller.initialize(user, stockMarket);
+
+        // Setup the primary stage
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/stocktracker/css/style.css").toExternalForm());
+
+        primaryStage.setTitle("Stock Tracker");
+        primaryStage.setScene(scene);
+
+        // Try to load application icon if available
+        try {
+            InputStream iconStream = getClass().getResourceAsStream("/stocktracker/images/app_icon.png");
+            if (iconStream != null) {
+                primaryStage.getIcons().add(new Image(iconStream));
+            }
+        } catch (Exception e) {
+            System.out.println("Could not load application icon: " + e.getMessage());
+        }
+
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(700);
+        primaryStage.show();
+    }
