@@ -24,6 +24,7 @@ public class StockApplication {
     private StockMarket stockMarket;
     private Scanner scanner;
     private boolean running;
+    private FileManager fileManager;
 
     /**
      * Constructor for the StockApplication class
@@ -35,18 +36,32 @@ public class StockApplication {
         this.stockMarket = new FinancialModelPrepAPI();
         this.scanner = new Scanner(System.in);
         this.running = true;
+        this.fileManager = FileManager.getInstance();
 
-        // Load data from file if provided
+        // Load data using FileManager instance
+        // If initialDataFile is provided, TEMPORARILY override FileManager path
         if (initialDataFile != null && !initialDataFile.isEmpty()) {
+            String originalPath = fileManager.getDataFilePath(); // Store original path
+            fileManager.setDataFilePath(initialDataFile); // Set path temporarily
             try {
-                this.user = FileManager.loadFromFile(initialDataFile);
-                System.out.println("Data loaded from " + initialDataFile);
+                this.user = fileManager.loadUserData(); // Use instance method
+                System.out.println("Data loaded from command line argument: " + initialDataFile);
             } catch (IOException e) {
-                System.out.println("Error loading data: " + e.getMessage());
+                System.out.println("Error loading data from command line argument: " + e.getMessage());
                 createNewUser();
+            } finally {
+                fileManager.setDataFilePath(originalPath); // Restore original path
             }
         } else {
-            createNewUser();
+            // Load using the default configured path in FileManager
+            try {
+                this.user = fileManager.loadUserData();
+                System.out.println("Data loaded from configured path: " + fileManager.getDataFilePath());
+            } catch (IOException e) {
+                System.out.println("Could not load existing user data: " + e.getMessage());
+                System.out.println("Creating a new user.");
+                createNewUser();
+            }
         }
     }
 
@@ -495,30 +510,54 @@ public class StockApplication {
      * Saves data to a text file
      */
     private void saveData () {
-        System.out.print("Enter filename: ");
-        String filename = scanner.nextLine();
-
+        // Option 1: Always save to the configured path
         try {
-            FileManager.saveToFile(user, filename);
+            fileManager.saveUserData(user);
+            // System.out.println("Data saved to configured path: " + fileManager.getDataFilePath()); // Already printed in method
         } catch (IOException e) {
             System.out.println("Error saving data: " + e.getMessage());
         }
+
+        // Option 2: Ask user for filename (Kept commented out)
+        // System.out.print("Enter filename to save data: ");
+        // String filename = scanner.nextLine();
+        // try {
+        //     // If saving to a specific file, we might need a different method
+        //     // or temporarily change the path in FileManager
+        //     // For simplicity, let's assume we always save to the configured path
+        //     fileManager.saveUserData(user); // Saves to configured path
+        //     // Original static call: FileManager.saveToFile(user, filename);
+        // } catch (IOException e) {
+        //     System.out.println("Error saving data: " + e.getMessage());
+        // }
     }
 
     /**
      * Loads data from a text file
      */
     private void loadData() {
-        System.out.print("Enter filename: ");
-        String filename = scanner.nextLine();
-
+        // Option 1: Always load from the configured path
         try {
-            User newUser = FileManager.loadFromFile(filename);
-            this.user = newUser;
-            System.out.println("Data loaded from " + filename);
+            User loadedUser = fileManager.loadUserData();
+            this.user = loadedUser; // Replace current user data
+            // System.out.println("Data loaded from configured path: " + fileManager.getDataFilePath()); // Printed in method
         } catch (IOException e) {
             System.out.println("Error loading data: " + e.getMessage());
         }
+
+        // Option 2: Ask user for filename (Kept commented out)
+        // System.out.print("Enter filename to load data: ");
+        // String filename = scanner.nextLine();
+        // try {
+        //     // Similar to save, loading a specific file might need
+        //     // a temporary path change or a different method.
+        //     // Assuming we always load from the configured path.
+        //     User loadedUser = fileManager.loadUserData();
+        //     this.user = loadedUser; // Replace current user data
+        //     // Original static call: this.user = FileManager.loadFromFile(filename);
+        // } catch (IOException e) {
+        //     System.out.println("Error loading data: " + e.getMessage());
+        // }
     }
     /**
      * Displays the "Cool Stuff" menu with advanced insights
