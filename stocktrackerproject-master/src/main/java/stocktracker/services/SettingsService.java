@@ -82,3 +82,12 @@ public class SettingsService {
             System.err.println("SettingsService: Error saving properties file: " + e.getMessage());
         }
     }
+
+    /**
+     * Resets all settings in the Settings object to their default values.
+     * Note: This does NOT automatically save the reset settings to the file.
+     * Call saveSettings() afterwards if persistence is desired.
+     */
+    public void resetToDefaults() {
+        setSettingsToDefaults();
+    }
