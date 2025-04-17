@@ -289,4 +289,26 @@ public class MarketViewController extends BaseController {
         });
     }
 
+    /**
+     * Loads market data from the API
+     */
+    private void loadMarketData() {
+        try {
+            // Clear existing data
+            gainersData.clear();
+            losersData.clear();
+            activeData.clear();
+            marketMovementsContainer.getChildren().clear();
+
+            // Get market data
+            loadTopGainers();
+            loadTopLosers();
+            loadMostActive();
+            showMarketMovements();
+
+        } catch (IOException e) {
+            showErrorDialog("Market Data Error", "Failed to load market data", e.getMessage());
+        }
+    }
+
 }
