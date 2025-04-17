@@ -142,4 +142,25 @@ public class WatchlistController extends BaseController {
         int stockCount = stockList.size();
         watchlistCountLabel.setText(String.valueOf(stockCount));
     }
+    /**
+     * Refreshes the stock prices in the watchlist
+     */
+    @FXML
+    private void refreshPrices() {
+        try {
+            // Update each stock price
+            for (WatchlistStock stock : stockList) {
+                double price = stockMarket.getStockPrice(stock.getSymbol());
+                double change = stockMarket.getDailyChangePercentage(stock.getSymbol());
+                stock.update(price, change);
+            }
+
+            // Refresh the table
+            watchlistTable.refresh();
+
+            showInfoDialog("Refresh Complete", "Prices Updated", "Stock prices have been updated with the latest market data.");
+        } catch (IOException e) {
+            showErrorDialog("Refresh Error", "Could not update stock prices", e.getMessage());
+        }
+    }
 }
