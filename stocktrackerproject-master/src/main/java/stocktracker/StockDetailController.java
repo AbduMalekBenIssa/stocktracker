@@ -342,3 +342,21 @@ public class StockDetailController extends BaseController {
         addNewsItem("Industry Analysis", LocalDate.now().minusWeeks(2).format(DateTimeFormatter.ofPattern("MMM d, yyyy")),
                 "Experts predict growth in the sector where " + currentStock.getName() + " operates.");
     }
+
+    private void addNewsItem(String title, String date, String content) {
+        VBox newsItem = new VBox(5);
+        newsItem.getStyleClass().add("news-item");
+
+        Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("news-title");
+
+        Label dateLabel = new Label(date);
+        dateLabel.getStyleClass().add("news-date");
+
+        Label contentLabel = new Label(content);
+        contentLabel.getStyleClass().add("news-content");
+        contentLabel.setWrapText(true);
+
+        newsItem.getChildren().addAll(titleLabel, dateLabel, contentLabel);
+        newsContainer.getChildren().add(newsItem);
+    }
