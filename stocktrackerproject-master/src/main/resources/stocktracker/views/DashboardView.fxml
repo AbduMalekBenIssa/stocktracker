@@ -154,3 +154,13 @@
                         <javafx.scene.layout.RowConstraints minHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
+
+                        <!-- Top Stocks List -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Top Holdings" />
+                                <VBox fx:id="topStocksContainer" spacing="8.0" VBox.vgrow="ALWAYS">
+                                    <!-- Will be populated dynamically -->
+                                </VBox>
+                            </children>
+                        </VBox>
