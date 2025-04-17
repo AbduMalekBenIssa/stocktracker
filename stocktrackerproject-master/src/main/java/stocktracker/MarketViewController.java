@@ -114,4 +114,36 @@ public class MarketViewController extends BaseController {
         loadMarketData();
     }
 
+    /**
+     * Sets up the table columns and data binding
+     */
+    private void setupTables() {
+        // Initialize data lists
+        gainersData = FXCollections.observableArrayList();
+        losersData = FXCollections.observableArrayList();
+        activeData = FXCollections.observableArrayList();
+
+        // Set data sources
+        gainersTable.setItems(gainersData);
+        losersTable.setItems(losersData);
+        activeTable.setItems(activeData);
+
+        // Setup gainers table columns
+        setupTableColumns(
+                gainerSymbolColumn, gainerNameColumn, gainerPriceColumn, gainerChangeColumn, true);
+
+        // Setup losers table columns
+        setupTableColumns(
+                loserSymbolColumn, loserNameColumn, loserPriceColumn, loserChangeColumn, false);
+
+        // Setup active table columns
+        setupActiveTableColumns(
+                activeSymbolColumn, activeNameColumn, activePriceColumn);
+
+        // Set row factories for context menus
+        setupRowFactory(gainersTable);
+        setupRowFactory(losersTable);
+        setupRowFactory(activeTable);
+    }
+
 }
