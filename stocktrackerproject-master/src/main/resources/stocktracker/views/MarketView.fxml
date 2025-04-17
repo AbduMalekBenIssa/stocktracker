@@ -42,6 +42,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+
                 <!-- Top Gainers -->
                 <VBox styleClass="card">
                     <children>
@@ -62,6 +63,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+
                 <!-- Top Losers -->
                 <VBox styleClass="card">
                     <children>
@@ -82,6 +84,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+
                 <!-- Most Active -->
                 <VBox styleClass="card">
                     <children>
@@ -101,6 +104,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+
                 <!-- Help Text -->
                 <Label styleClass="help-text" text="Double-click on a stock to view details or right-click for actions." />
             </children>
