@@ -212,4 +212,40 @@ public class MarketViewController extends BaseController {
         });
     }
 
+    /**
+     * Sets up the active stocks table columns (no change column)
+     *
+     * @param symbolColumn The symbol column
+     * @param nameColumn The name column
+     * @param priceColumn The price column
+     */
+    private void setupActiveTableColumns(
+            TableColumn<MarketStock, String> symbolColumn,
+            TableColumn<MarketStock, String> nameColumn,
+            TableColumn<MarketStock, Number> priceColumn) {
+
+        // Symbol column
+        symbolColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getSymbol()));
+
+        // Name column
+        nameColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getName()));
+
+        // Price column with currency formatting
+        priceColumn.setCellValueFactory(data ->
+                new SimpleDoubleProperty(data.getValue().getPrice()));
+        priceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", value.doubleValue()));
+                }
+            }
+        });
+    }
+
 }
