@@ -227,4 +227,22 @@ public class TransactionController extends BaseController {
         // Sort the table
         transactionTable.sort();
     }
+    /**
+     * Updates the summary information
+     */
+    private void updateSummary() {
+        int totalCount = allTransactions.size();
+        int buyCount = (int) allTransactions.stream().filter(t -> t instanceof BuyTransaction).count();
+        int sellCount = (int) allTransactions.stream().filter(t -> t instanceof SellTransaction).count();
+
+        double totalVolume = allTransactions.stream()
+                .mapToDouble(t -> t.getPrice() * t.getQuantity())
+                .sum();
+
+        totalTransactionsLabel.setText(String.valueOf(totalCount));
+        buyTransactionsLabel.setText(String.valueOf(buyCount));
+        sellTransactionsLabel.setText(String.valueOf(sellCount));
+        totalVolumeLabel.setText(String.format("$%.2f", totalVolume));
+    }
+
 }
