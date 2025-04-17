@@ -50,4 +50,21 @@ public class MainViewController {
         // Optionally immediately refresh UI elements dependent on user
         // refreshUserInfo(); // This will be called separately in SettingsController
     }
+
+    /**
+     * Initializes the controller with user and stock market service
+     *
+     * @param user The user
+     * @param stockMarket The stock market service
+     */
+    public void initialize(User user, StockMarket stockMarket) {
+        this.user = user;
+        this.stockMarket = stockMarket;
+
+        // Update header information
+        updateUserInfo();
+
+        // Load the dashboard as the initial view
+        loadDashboardView();
+    }
 }
