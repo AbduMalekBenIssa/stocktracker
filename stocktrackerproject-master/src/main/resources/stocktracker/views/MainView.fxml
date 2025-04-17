@@ -78,3 +78,8 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Button fx:id="watchlistButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadWatchlistView" styleClass="sidebar-button" text="Watchlist">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
