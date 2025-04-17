@@ -241,4 +241,32 @@ public class WatchlistController extends BaseController {
                     showErrorDialog("Invalid Symbol", "Invalid Stock Symbol", "The stock symbol you entered is not valid.");
                     return;
                 }
+                // Check if the stock is already in the watchlist
+                if (user.getWatchlist().containsStock(symbol)) {
+                    showErrorDialog("Duplicate Stock", "Stock Already in Watchlist",
+                            "The stock " + symbol + " is already in your watchlist.");
+                    return;
+                }
+
+                // Get stock info
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+
+                // Add to watchlist
+                WatchlistStock stock = new WatchlistStock(symbol, name, price, change);
+                user.getWatchlist().addStock(stock);
+
+                // Update the view
+                updateWatchlistData();
+
+                showInfoDialog("Stock Added", "Stock Added to Watchlist",
+                        String.format("Successfully added %s (%s) to your watchlist.", name, symbol));
+
+            } catch (IOException e) {
+                showErrorDialog("API Error", "Could not add stock to watchlist",
+                        "Error accessing stock market data: " + e.getMessage());
+            }
+        }
+    }
 }
