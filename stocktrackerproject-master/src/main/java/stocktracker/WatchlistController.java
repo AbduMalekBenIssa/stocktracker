@@ -21,3 +21,23 @@ import java.util.Optional;
  * @Tutorial T04
  */
 public class WatchlistController extends BaseController {
+    @FXML
+    private Label watchlistCountLabel;
+
+    @FXML
+    private TableView<WatchlistStock> watchlistTable;
+
+    @FXML
+    private TableColumn<WatchlistStock, String> symbolColumn;
+
+    @FXML
+    private TableColumn<WatchlistStock, String> nameColumn;
+
+    @FXML
+    private TableColumn<WatchlistStock, Number> priceColumn;
+
+    @FXML
+    private TableColumn<WatchlistStock, Number> changeColumn;
+
+    private ObservableList<WatchlistStock> stockList;
+}
