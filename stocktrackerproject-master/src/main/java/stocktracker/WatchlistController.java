@@ -269,4 +269,25 @@ public class WatchlistController extends BaseController {
             }
         }
     }
+    /**
+     * Removes a stock from the watchlist
+     *
+     * @param stock The stock to remove
+     */
+    private void removeFromWatchlist(WatchlistStock stock) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Remove from Watchlist");
+        alert.setHeaderText("Remove Stock from Watchlist");
+        alert.setContentText(String.format("Are you sure you want to remove %s (%s) from your watchlist?",
+                stock.getName(), stock.getSymbol()));
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            user.getWatchlist().removeStock(stock.getSymbol());
+            updateWatchlistData();
+            showInfoDialog("Stock Removed", "Stock Removed from Watchlist",
+                    String.format("Successfully removed %s (%s) from your watchlist.",
+                            stock.getName(), stock.getSymbol()));
+        }
+    }
 }
