@@ -16,5 +16,32 @@ import java.io.IOException;
  * @Tutorial T04
  */
 public class SettingsController extends BaseController {
+    @FXML
+    private TextField userNameField;
+
+    @FXML
+    private Button resetButton;
+
+    @FXML
+    private Button saveButton;
+
+    @FXML
+    private Button loadDataButton;
+
+    @FXML
+    private Button saveDataButton;
+
+    private SettingsService settingsService;
+    private Settings settings;
+    private FileManager fileManager;
+
+    @Override
+    protected void onInitialize() {
+        settingsService = SettingsService.getInstance();
+        settings = settingsService.getSettings();
+        fileManager = FileManager.getInstance();
+
+        bindSettings();
+    }
 
 }
