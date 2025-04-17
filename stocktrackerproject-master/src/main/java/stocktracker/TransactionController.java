@@ -106,4 +106,47 @@ public class TransactionController extends BaseController {
                 }
             }
         });
+        totalColumn.setCellValueFactory(cellData -> {
+            double total = cellData.getValue().getPrice() * cellData.getValue().getQuantity();
+            return new SimpleDoubleProperty(total).asObject();
+        });
+        totalColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", value));
+                }
+            }
+        });
+
+        profitLossColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() instanceof SellTransaction) {
+                return new SimpleDoubleProperty(((SellTransaction) cellData.getValue()).getProfitLoss()).asObject();
+            } else {
+                return new SimpleDoubleProperty(0).asObject();
+            }
+        });
+        profitLossColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(String.format("$%.2f", value));
+
+                    if (value > 0) {
+                        setStyle("-fx-text-fill: -fx-success;");
+                    } else if (value < 0) {
+                        setStyle("-fx-text-fill: -fx-danger;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        });
 }
