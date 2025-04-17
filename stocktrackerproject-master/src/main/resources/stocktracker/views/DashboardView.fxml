@@ -13,3 +13,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" styleClass="dashboard-scroll" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stocktracker.DashboardController" stylesheets="@../css/style.css">
+    <content>
+        <VBox spacing="20.0" styleClass="dashboard-container">
+            <children>
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#refreshDashboard" styleClass="button-secondary" text="Refresh Dashboard" />
+                    </children>
+                </HBox>
+
+                <!-- Summary Cards -->
+                <GridPane hgap="20.0" vgap="20.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
