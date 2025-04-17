@@ -9,3 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" styleClass="market-scroll" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stocktracker.MarketViewController">
+    <content>
+        <VBox spacing="20.0" styleClass="market-container">
+            <children>
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" styleClass="page-header">
+                    <children>
+                        <Label styleClass="page-title" text="Market Overview">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
