@@ -83,3 +83,21 @@
                                 </StackPane>
                             </children>
                         </VBox>
+
+                        <!-- Profit/Loss Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="3">
+                            <children>
+                                <Label styleClass="card-header" text="Profit/Loss" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="profitLossLabel" styleClass="card-value" text="0.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
