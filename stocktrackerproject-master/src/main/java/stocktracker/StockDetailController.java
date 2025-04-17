@@ -265,3 +265,14 @@ public class StockDetailController extends BaseController {
             addToWatchlistButton.setText("Add to Watchlist");
         }
     }
+    private String formatMarketCap(double marketCap) {
+        if (marketCap >= 1_000_000_000_000L) {
+            return String.format("$%.2fT", marketCap / 1_000_000_000_000.0);
+        } else if (marketCap >= 1_000_000_000L) {
+            return String.format("$%.2fB", marketCap / 1_000_000_000.0);
+        } else if (marketCap >= 1_000_000L) {
+            return String.format("$%.2fM", marketCap / 1_000_000.0);
+        } else {
+            return String.format("$%.2fK", marketCap / 1_000.0);
+        }
+    }
