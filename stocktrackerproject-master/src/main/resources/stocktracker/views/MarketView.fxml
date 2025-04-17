@@ -42,3 +42,23 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+                <!-- Top Gainers -->
+                <VBox styleClass="card">
+                    <children>
+                        <Label styleClass="card-header" text="Top Gainers 🚀" />
+                        <TableView fx:id="gainersTable" prefHeight="200.0">
+                            <columns>
+                                <TableColumn fx:id="gainerSymbolColumn" prefWidth="100.0" text="Symbol" />
+                                <TableColumn fx:id="gainerNameColumn" prefWidth="300.0" text="Name" />
+                                <TableColumn fx:id="gainerPriceColumn" prefWidth="120.0" text="Price" />
+                                <TableColumn fx:id="gainerChangeColumn" prefWidth="120.0" text="Change %" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                </VBox>
