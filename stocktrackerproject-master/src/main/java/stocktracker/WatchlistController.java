@@ -46,4 +46,29 @@ public class WatchlistController extends BaseController {
         setupTable();
         updateWatchlistData();
     }
+    /**
+     * Sets up the table columns and cell factories
+     */
+    private void setupTable() {
+        // Initialize the observable list
+        stockList = FXCollections.observableArrayList();
+        watchlistTable.setItems(stockList);
+
+        // Setup the columns
+        symbolColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSymbol()));
+        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
+
+        // Format currency values
+        priceColumn.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getCurrentPrice()));
+        priceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", value.doubleValue()));
+                }
+            }
+        });
 }
