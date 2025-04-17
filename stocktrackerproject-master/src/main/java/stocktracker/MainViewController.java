@@ -181,5 +181,20 @@ public class MainViewController {
             }
         }
 
+        /**
+         * Shows an error dialog
+         *
+         * @param title The dialog title
+         * @param header The dialog header
+         * @param content The dialog content
+         */
+        public void showErrorDialog(String title, String header, String content) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(header);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
+
     }
 }
