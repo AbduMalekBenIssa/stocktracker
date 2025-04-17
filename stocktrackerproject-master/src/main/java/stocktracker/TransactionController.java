@@ -75,4 +75,35 @@ public class TransactionController extends BaseController {
         setupFilter();
         loadTransactions();
     }
+    /**
+     * Sets up the transaction table columns
+     */
+    private void setupTable() {
+        // Initialize the observable lists
+        allTransactions = FXCollections.observableArrayList();
+        filteredTransactions = FXCollections.observableArrayList();
+        transactionTable.setItems(filteredTransactions);
+
+        // Setup columns
+        typeColumn.setCellValueFactory(cellData -> {
+            String type = cellData.getValue().getClass().getSimpleName().replace("Transaction", "");
+            return new SimpleStringProperty(type);
+        });
+
+        symbolColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+
+        quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+
+        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        priceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", value));
+                }
+            }
+        });
 }
