@@ -364,3 +364,24 @@ public class StockDetailController extends BaseController {
     private void handleRefresh() {
         loadStockData(stockSymbol.get());
     }
+    @FXML
+    private void handleBuyShares() {
+        try {
+            if (sharesTextField.getText().isEmpty()) {
+                showErrorDialog("Error", "Invalid quantity", "Please enter a valid number of shares.");
+                return;
+            }
+
+            int shares = Integer.parseInt(sharesTextField.getText());
+            if (shares <= 0) {
+                showErrorDialog("Error", "Invalid quantity", "Please enter a positive number of shares.");
+                return;
+            }
+
+            double totalCost = shares * currentStock.getPrice();
+            if (totalCost > user.getBalance()) {
+                showErrorDialog("Insufficient Funds",
+                        "You don't have enough funds to complete this purchase.",
+                        String.format("Cost: $%.2f, Balance: $%.2f", totalCost, user.getBalance()));
+                return;
+            }
