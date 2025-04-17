@@ -462,3 +462,26 @@ public class StockDetailController extends BaseController {
         // Update the user info in the main view
         updateUserInfo();
     }
+    @FXML
+    public void initialize() {
+        System.out.println("*** FXML initialize method called");
+
+        // Check if all UI components are injected properly
+        System.out.println("*** Checking UI components:");
+        System.out.println("symbolLabel = " + (symbolLabel != null ? "OK" : "NULL"));
+        System.out.println("nameLabel = " + (nameLabel != null ? "OK" : "NULL"));
+        System.out.println("priceLabel = " + (priceLabel != null ? "OK" : "NULL"));
+        System.out.println("changeLabel = " + (changeLabel != null ? "OK" : "NULL"));
+        System.out.println("marketCapLabel = " + (marketCapLabel != null ? "OK" : "NULL"));
+        System.out.println("peRatioLabel = " + (peRatioLabel != null ? "OK" : "NULL"));
+        System.out.println("dividendYieldLabel = " + (dividendYieldLabel != null ? "OK" : "NULL"));
+        System.out.println("volumeLabel = " + (volumeLabel != null ? "OK" : "NULL"));
+        System.out.println("priceChart = " + (priceChart != null ? "OK" : "NULL"));
+        System.out.println("xAxis = " + (xAxis != null ? "OK" : "NULL"));
+        System.out.println("yAxis = " + (yAxis != null ? "OK" : "NULL"));
+        System.out.println("sharesTextField = " + (sharesTextField != null ? "OK" : "NULL"));
+        System.out.println("buyButton = " + (buyButton != null ? "OK" : "NULL"));
+        System.out.println("addToWatchlistButton = " + (addToWatchlistButton != null ? "OK" : "NULL"));
+        System.out.println("newsContainer = " + (newsContainer != null ? "OK" : "NULL"));
+    }
+} 
