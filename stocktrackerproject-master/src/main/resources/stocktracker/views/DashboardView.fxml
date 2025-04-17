@@ -123,3 +123,23 @@
                                 </StackPane>
                             </children>
                         </VBox>
+                        <!-- Portfolio History Chart -->
+                        <VBox styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="card-header" text="Portfolio History" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <LineChart fx:id="portfolioHistoryChart" legendVisible="true" createSymbols="false">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                        </LineChart>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
