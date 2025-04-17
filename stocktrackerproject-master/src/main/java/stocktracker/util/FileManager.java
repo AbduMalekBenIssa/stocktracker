@@ -1,5 +1,6 @@
 package stocktracker.util;
 
+import javafx.beans.property.*;
 import stocktracker.model.*;
 import stocktracker.service.StockMarket;
 
@@ -8,50 +9,124 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 /**
- * Class for handling file I/O operations
+ * Class for handling user data file I/O operations and managing data file path setting.
+ * Implements the Singleton pattern.
  *
  * @author Omar Almishri, AbduMalek Ben Issa
- * @version 2.0
+ * @version 2.2
  * @Tutorial T04
  */
 public class FileManager {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+    private static final String PROPERTIES_FILE = "stocktracker.properties";
+
+    // --- Singleton Instance ---
+    private static FileManager instance;
+
+    // --- Configuration Property (File Path Only) ---
+    private final StringProperty dataFilePath = new SimpleStringProperty();
+
+    // --- Property Key (File Path Only) ---
+    private static final String KEY_DATA_FILE_PATH = "data.filePath";
+
+    // --- Default Value (File Path Only) ---
+    private static final String DEFAULT_DATA_FILE_PATH = System.getProperty("user.home") + File.separator + "StockTrackerData";
+
+    // --- Private Constructor for Singleton ---
+    private FileManager() {
+        loadDataConfiguration(); // Load path setting on initialization
+    }
+
+    // --- Get Singleton Instance ---
+    public static synchronized FileManager getInstance() {
+        if (instance == null) {
+            instance = new FileManager();
+        }
+        return instance;
+    }
+
+    // --- Getter for File Path Property (for potential binding elsewhere) ---
+    public StringProperty dataFilePathProperty() {
+        return dataFilePath;
+    }
+
+    // --- Standard Getters/Setters for File Path ---
+    public String getDataFilePath() { return dataFilePath.get(); }
+    public void setDataFilePath(String path) { dataFilePath.set(path); }
+
+    // --- Load/Save/Reset Configuration for File Path Only ---
 
     /**
-     * Saves user data to a text file
-     *
-     * @param user The user to save
-     * @param filename The filename to save to
-     * @throws IOException If there's an error writing to the file
+     * Loads data file path configuration from the shared properties file.
      */
-    public static void saveToFile(User user, String filename) throws IOException {
-        // Add .txt extension if not already present
-        if (!filename.toLowerCase().endsWith(".txt")) {
-            filename += ".txt";
-        }
+    public void loadDataConfiguration() {
+        Properties properties = new Properties();
+        File propertiesFile = new File(PROPERTIES_FILE);
 
-        File file = new File(filename);
-
-        // Check if file exists and prompt for overwrite if it does
-        if (file.exists()) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("File already exists. Do you want to overwrite it? (y/n): ");
-            String response = scanner.nextLine().toLowerCase();
-
-            if (!response.equals("y")) {
-                System.out.println("Save operation cancelled.");
-                return; // Exit without saving
+        if (propertiesFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(propertiesFile)) {
+                properties.load(fis);
+            } catch (IOException e) {
+                System.err.println("FileManager: Error loading properties: " + e.getMessage());
+                // Fallback to default path if loading fails
+                resetDataConfigurationToDefaults();
+                return;
             }
         }
+        // Load file path, using default if key is missing
+        setDataFilePath(properties.getProperty(KEY_DATA_FILE_PATH, DEFAULT_DATA_FILE_PATH));
+    }
 
+    /**
+     * Saves the current data file path configuration to the shared properties file.
+     * Note: Reads existing properties first to avoid overwriting other settings.
+     */
+    public void saveDataConfiguration() {
+        Properties properties = new Properties();
+        File propertiesFile = new File(PROPERTIES_FILE);
+
+        if (propertiesFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(propertiesFile)) {
+                properties.load(fis);
+            } catch (IOException e) {
+                System.err.println("FileManager: Error reading existing properties before save: " + e.getMessage());
+            }
+        }
+        // Update only the file path property
+        properties.setProperty(KEY_DATA_FILE_PATH, getDataFilePath());
+
+        try (FileOutputStream fos = new FileOutputStream(PROPERTIES_FILE)) {
+            properties.store(fos, "Stock Tracker Application Settings (updated by FileManager)");
+        } catch (IOException e) {
+            System.err.println("FileManager: Error saving properties: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Resets the data file path configuration managed by FileManager to its default.
+     * Does NOT automatically save.
+     */
+    public void resetDataConfigurationToDefaults() {
+        setDataFilePath(DEFAULT_DATA_FILE_PATH);
+    }
+
+
+    // --- User Data Save/Load Methods (Unchanged, still use internal dataFilePath) ---
+    public void saveUserData(User user) throws IOException {
+        String filename = getDataFilePath();
+        if (!filename.toLowerCase().endsWith(".txt")) {
+            filename = filename + File.separator + "userdata.txt";
+        }
+        File file = new File(filename);
+        if (file.getParentFile() != null) {
+            file.getParentFile().mkdirs();
+        }
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
-            // Write user info
             writer.println("USER|" + user.getName() + "|" + user.getBalance());
-
-            // Write portfolio stocks
             writer.println("PORTFOLIO_START");
             for (OwnedStock stock : user.getPortfolio().getAllStocks()) {
                 writer.println("OWNED|" + stock.getSymbol() + "|" + stock.getName() + "|"
@@ -59,16 +134,12 @@ public class FileManager {
                         + stock.getPurchasePrice());
             }
             writer.println("PORTFOLIO_END");
-
-            // Write watchlist stocks
             writer.println("WATCHLIST_START");
             for (WatchlistStock stock : user.getWatchlist().getAllStocks()) {
                 writer.println("WATCH|" + stock.getSymbol() + "|" + stock.getName() + "|"
                         + stock.getCurrentPrice() + "|" + stock.getChangePercentage());
             }
             writer.println("WATCHLIST_END");
-
-            // Write transactions
             writer.println("TRANSACTIONS_START");
             for (Transaction transaction : user.getTransactions()) {
                 if (transaction instanceof BuyTransaction) {
@@ -82,117 +153,57 @@ public class FileManager {
                 }
             }
             writer.println("TRANSACTIONS_END");
-
-            System.out.println("Data saved to " + filename);
+            System.out.println("User data saved to " + filename);
         }
     }
 
-    /**
-     * Loads user data from a text file
-     *
-     * @param filename The filename to load from
-     * @param stockMarket The stock market service
-     * @return The loaded user
-     * @throws IOException If there's an error reading the file
-     */
-    public static User loadFromFile(String filename) throws IOException {
-        // Add .txt extension if not already present
+    public User loadUserData() throws IOException {
+        String filename = getDataFilePath();
         if (!filename.toLowerCase().endsWith(".txt")) {
-            filename += ".txt";
+            filename = filename + File.separator + "userdata.txt";
         }
-
         File file = new File(filename);
         if (!file.exists()) {
-            throw new FileNotFoundException("File not found: " + filename);
+            throw new FileNotFoundException("Data file not found at configured path: " + filename);
         }
-
         User user = null;
         Portfolio portfolio = new Portfolio();
         Watchlist watchlist = new Watchlist();
         List<Transaction> transactions = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             String section = "";
-
             while ((line = reader.readLine()) != null) {
-                // Check for section markers
-                if (line.equals("PORTFOLIO_START")) {
-                    section = "PORTFOLIO";
-                    continue;
-                } else if (line.equals("PORTFOLIO_END")) {
-                    section = "";
-                    continue;
-                } else if (line.equals("WATCHLIST_START")) {
-                    section = "WATCHLIST";
-                    continue;
-                } else if (line.equals("WATCHLIST_END")) {
-                    section = "";
-                    continue;
-                } else if (line.equals("TRANSACTIONS_START")) {
-                    section = "TRANSACTIONS";
-                    continue;
-                } else if (line.equals("TRANSACTIONS_END")) {
-                    section = "";
-                    continue;
-                }
-
-                // Process the line based on the current section
+                if (line.equals("PORTFOLIO_START")) { section = "PORTFOLIO"; continue; }
+                else if (line.equals("PORTFOLIO_END")) { section = ""; continue; }
+                else if (line.equals("WATCHLIST_START")) { section = "WATCHLIST"; continue; }
+                else if (line.equals("WATCHLIST_END")) { section = ""; continue; }
+                else if (line.equals("TRANSACTIONS_START")) { section = "TRANSACTIONS"; continue; }
+                else if (line.equals("TRANSACTIONS_END")) { section = ""; continue; }
                 String[] parts = line.split("\\|");
-
                 if (parts[0].equals("USER")) {
-                    String name = parts[1];
-                    double balance = Double.parseDouble(parts[2]);
-                    user = new User(name, balance);
+                    user = new User(parts[1], Double.parseDouble(parts[2]));
                 } else if (section.equals("PORTFOLIO") && parts[0].equals("OWNED")) {
-                    String symbol = parts[1];
-                    String name = parts[2];
-                    double currentPrice = Double.parseDouble(parts[3]);
-                    int quantity = Integer.parseInt(parts[4]);
-                    double purchasePrice = Double.parseDouble(parts[5]);
-
-                    OwnedStock stock = new OwnedStock(symbol, name, currentPrice, quantity, purchasePrice);
+                    OwnedStock stock = new OwnedStock(parts[1], parts[2], Double.parseDouble(parts[3]), Integer.parseInt(parts[4]), Double.parseDouble(parts[5]));
                     portfolio.addStock(stock);
                 } else if (section.equals("WATCHLIST") && parts[0].equals("WATCH")) {
-                    String symbol = parts[1];
-                    String name = parts[2];
-                    double currentPrice = Double.parseDouble(parts[3]);
-                    double changePercentage = Double.parseDouble(parts[4]);
-
-                    WatchlistStock stock = new WatchlistStock(symbol, name, currentPrice, changePercentage);
+                    WatchlistStock stock = new WatchlistStock(parts[1], parts[2], Double.parseDouble(parts[3]), Double.parseDouble(parts[4]));
                     watchlist.addStock(stock);
                 } else if (section.equals("TRANSACTIONS")) {
                     if (parts[0].equals("BUY")) {
-                        String symbol = parts[1];
-                        int quantity = Integer.parseInt(parts[2]);
-                        double price = Double.parseDouble(parts[3]);
-                        LocalDateTime timestamp = LocalDateTime.parse(parts[4], DATE_TIME_FORMATTER);
-
-                        BuyTransaction transaction = new BuyTransaction(symbol, quantity, price, timestamp);
+                        BuyTransaction transaction = new BuyTransaction(parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]), LocalDateTime.parse(parts[4], DATE_TIME_FORMATTER));
                         transactions.add(transaction);
                     } else if (parts[0].equals("SELL")) {
-                        String symbol = parts[1];
-                        int quantity = Integer.parseInt(parts[2]);
-                        double price = Double.parseDouble(parts[3]);
-                        double profitLoss = Double.parseDouble(parts[4]);
-                        LocalDateTime timestamp = LocalDateTime.parse(parts[5], DATE_TIME_FORMATTER);
-
-                        SellTransaction transaction = new SellTransaction(symbol, quantity, price, profitLoss, timestamp);
+                        SellTransaction transaction = new SellTransaction(parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]), Double.parseDouble(parts[4]), LocalDateTime.parse(parts[5], DATE_TIME_FORMATTER));
                         transactions.add(transaction);
                     }
                 }
             }
         }
-
-        if (user == null) {
-            throw new IOException("Invalid file format or no user data found");
-        }
-
-        // Set the loaded data to the user
+        if (user == null) { throw new IOException("Invalid file format or no user data found"); }
         user.setPortfolio(portfolio);
         user.setWatchlist(watchlist);
         user.setTransactions(transactions);
-
         return user;
     }
 }
