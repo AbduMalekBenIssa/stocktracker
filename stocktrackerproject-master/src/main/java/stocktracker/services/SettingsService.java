@@ -51,3 +51,20 @@ public class SettingsService {
     public Settings getSettings() {
         return settings;
     }
+
+    /**
+     * Loads settings from the properties file into the Settings object.
+     * If the file doesn't exist or an error occurs, it sets default values.
+     */
+    public void loadSettings() {
+        try (FileInputStream fis = new FileInputStream(PROPERTIES_FILE)) {
+            properties.load(fis);
+        } catch (IOException e) {
+            System.err.println("SettingsService: Error loading properties file: " + e.getMessage());
+            setSettingsToDefaults();
+            return;
+        }
+
+        settings.setUserName(properties.getProperty(KEY_USERNAME, DEFAULT_USERNAME));
+        settings.setCurrency(properties.getProperty(KEY_CURRENCY, DEFAULT_CURRENCY));
+    }
