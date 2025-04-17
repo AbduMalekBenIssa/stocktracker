@@ -30,3 +30,15 @@ public class SettingsService {
         properties = new Properties();
         loadSettings();
     }
+
+    /**
+     * Gets the singleton instance of the SettingsService.
+     *
+     * @return The singleton instance.
+     */
+    public static synchronized SettingsService getInstance() {
+        if (instance == null) {
+            instance = new SettingsService();
+        }
+        return instance;
+    }
