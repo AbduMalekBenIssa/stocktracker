@@ -71,4 +71,28 @@ public class WatchlistController extends BaseController {
                 }
             }
         });
+        // Change percentage with colored text
+        changeColumn.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getChangePercentage()));
+        changeColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    double change = value.doubleValue();
+                    setText(String.format("%.2f%%", change));
+
+                    if (change > 0) {
+                        setStyle("-fx-text-fill: -fx-success;");
+                        setText("+" + getText());
+                    } else if (change < 0) {
+                        setStyle("-fx-text-fill: -fx-danger;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        });
 }
