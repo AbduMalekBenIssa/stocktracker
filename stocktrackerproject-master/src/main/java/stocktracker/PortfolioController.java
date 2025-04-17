@@ -203,4 +203,34 @@ public class PortfolioController extends BaseController {
             return row;
         });
     }
+    /**
+     * Updates the portfolio data
+     */
+    private void updatePortfolioData() {
+        // Clear the list
+        stockList.clear();
+
+        // Add all stocks from the portfolio
+        stockList.addAll(user.getPortfolio().getAllStocks());
+
+        // Update summary labels
+        double portfolioValue = user.getPortfolio().getTotalValue();
+        double profitLoss = user.getPortfolio().getTotalProfitLoss();
+        int stockCount = stockList.size();
+
+        portfolioValueLabel.setText(String.format("$%.2f", portfolioValue));
+        portfolioCountLabel.setText(String.valueOf(stockCount));
+
+        // Set profit/loss value and style
+        profitLossLabel.setText(String.format("$%.2f", profitLoss));
+        if (profitLoss > 0) {
+            profitLossLabel.getStyleClass().removeAll("text-danger");
+            profitLossLabel.getStyleClass().add("text-success");
+            profitLossLabel.setText("+" + profitLossLabel.getText());
+        } else if (profitLoss < 0) {
+            profitLossLabel.getStyleClass().removeAll("text-success");
+            profitLossLabel.getStyleClass().add("text-danger");
+        }
+    }
+
 }
