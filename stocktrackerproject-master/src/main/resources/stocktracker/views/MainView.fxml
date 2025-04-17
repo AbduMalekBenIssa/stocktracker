@@ -88,3 +88,9 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Separator />
+                <Button fx:id="marketButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadMarketView" styleClass="sidebar-button" text="Market Info">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
