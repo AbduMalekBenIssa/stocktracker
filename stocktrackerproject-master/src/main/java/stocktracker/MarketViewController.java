@@ -418,4 +418,13 @@ public class MarketViewController extends BaseController {
         return result;
     }
 
+    /**
+     * Refreshes the market data
+     */
+    @FXML
+    private void refreshMarketData() {
+        loadMarketData();
+        showInfoDialog("Refresh Complete", "Market Data Updated", "Market data has been refreshed with the latest information.");
+    }
+
 }
