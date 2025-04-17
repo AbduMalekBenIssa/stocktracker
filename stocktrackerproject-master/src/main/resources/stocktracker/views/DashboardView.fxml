@@ -112,3 +112,14 @@
                         <javafx.scene.layout.RowConstraints minHeight="300.0" prefHeight="300.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
+                        <!-- Asset Allocation Chart -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Asset Allocation" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <PieChart fx:id="assetAllocationChart" labelsVisible="true" legendVisible="true" />
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
