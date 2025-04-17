@@ -52,3 +52,30 @@ public class StockDetailController extends BaseController {
 
     @FXML
     private NumberAxis yAxis;
+
+    @FXML
+    private Label marketCapLabel;
+
+    @FXML
+    private Label peRatioLabel;
+
+    @FXML
+    private Label dividendYieldLabel;
+
+    @FXML
+    private Label volumeLabel;
+
+    @FXML
+    private TextField sharesTextField;
+
+    @FXML
+    private Button buyButton;
+
+    @FXML
+    private Button addToWatchlistButton;
+
+    @FXML
+    private VBox newsContainer;
+
+    private Stock currentStock;
+    private StringProperty stockSymbol = new SimpleStringProperty();
