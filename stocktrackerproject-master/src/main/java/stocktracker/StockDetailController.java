@@ -116,3 +116,15 @@ public class StockDetailController extends BaseController {
         priceChart.setCreateSymbols(false);
         priceChart.setAnimated(false);
     }
+    public void setStockSymbol(String symbol) {
+        System.out.println("Setting stock symbol to: " + symbol);
+        this.stockSymbol.set(symbol);
+
+        // Force data load if controller is already initialized
+        if (stockMarket != null) {
+            System.out.println("Controller already initialized, loading data immediately");
+            loadStockData(symbol);
+        } else {
+            System.out.println("Controller not fully initialized yet, will load data later");
+        }
+    }
