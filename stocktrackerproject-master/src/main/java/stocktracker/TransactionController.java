@@ -181,4 +181,24 @@ public class TransactionController extends BaseController {
             applyFilter(newValue);
         });
     }
+    /**
+     * Loads all transactions from the user
+     */
+    private void loadTransactions() {
+        // Get all transactions from the user
+        List<Transaction> transactions = user.getTransactions();
+
+        // Sort by date (newest first)
+        transactions.sort(Comparator.comparing(Transaction::getTimestamp).reversed());
+
+        // Add to observable list
+        allTransactions.clear();
+        allTransactions.addAll(transactions);
+
+        // Apply filter
+        applyFilter(filterComboBox.getSelectionModel().getSelectedItem());
+
+        // Update summary information
+        updateSummary();
+    }
 }
