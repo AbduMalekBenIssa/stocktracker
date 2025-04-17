@@ -59,3 +59,21 @@ public class StockTrackerGUI extends Application {
         primaryStage.setMinHeight(700);
         primaryStage.show();
     }
+
+
+    /**
+     * Main method to launch the application
+     *
+     * @param args Command line arguments
+     */
+    public static void main(String[] args) {
+        // Initialize stock market service
+        stockMarket = new FinancialModelPrepAPI();
+
+        // Always start with a fresh user by default, instead of loading automatically
+        createNewUser();
+        System.out.println("Starting with a new user. Use Settings > Load Data to restore previous data.");
+
+        // Launch the JavaFX application
+        launch(args);
+    }
