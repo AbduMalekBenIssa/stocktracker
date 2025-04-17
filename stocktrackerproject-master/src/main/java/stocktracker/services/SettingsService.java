@@ -68,3 +68,17 @@ public class SettingsService {
         settings.setUserName(properties.getProperty(KEY_USERNAME, DEFAULT_USERNAME));
         settings.setCurrency(properties.getProperty(KEY_CURRENCY, DEFAULT_CURRENCY));
     }
+
+    /**
+     * Saves the current settings from the Settings object to the properties file.
+     */
+    public void saveSettings() {
+        properties.setProperty(KEY_USERNAME, settings.getUserName());
+        properties.setProperty(KEY_CURRENCY, settings.getCurrency());
+
+        try (FileOutputStream fos = new FileOutputStream(PROPERTIES_FILE)) {
+            properties.store(fos, "Stock Tracker Application Settings");
+        } catch (IOException e) {
+            System.err.println("SettingsService: Error saving properties file: " + e.getMessage());
+        }
+    }
