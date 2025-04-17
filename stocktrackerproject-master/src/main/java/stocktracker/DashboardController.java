@@ -59,4 +59,21 @@ public class DashboardController extends BaseController {
         // Update dashboard data
         updateDashboardData();
     }
+
+    /**
+     * Updates all dashboard data
+     */
+    private void updateDashboardData() {
+        // Update summary values
+        updateSummaryValues();
+
+        // Update charts
+        updateAssetAllocationChart();
+        updatePortfolioHistoryChart();
+
+        // Update lists
+        updateTopStocks();
+        updateRecentTransactions();
+    }
+
 }
