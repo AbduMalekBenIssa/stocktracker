@@ -203,3 +203,56 @@ public class StockDetailController extends BaseController {
                     System.out.println("*** ERROR: UI components are not initialized!");
                     return;
                 }
+                // Format currency values
+                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+                NumberFormat percentFormat = NumberFormat.getPercentInstance();
+                percentFormat.setMaximumFractionDigits(2);
+
+                // Update header information
+                System.out.println("*** Setting symbol label to: " + currentStock.getSymbol());
+                symbolLabel.setText(currentStock.getSymbol());
+
+                System.out.println("*** Setting name label to: " + currentStock.getName());
+                nameLabel.setText(currentStock.getName());
+
+                System.out.println("*** Setting price label to: " + currencyFormat.format(currentStock.getPrice()));
+                priceLabel.setText(currencyFormat.format(currentStock.getPrice()));
+
+                // Set change amount and percentage with appropriate styling
+                double changeAmount = currentStock.getChange();
+                double changePercent = currentStock.getChangePercent();
+
+                String changeText = String.format("%+.2f (%+.2f%%)",
+                        changeAmount, changePercent);
+                System.out.println("*** Setting change label to: " + changeText);
+                changeLabel.setText(changeText);
+
+                // Apply CSS style based on whether the change is positive or negative
+                if (changeAmount >= 0) {
+                    changeLabel.getStyleClass().remove("negative");
+                    changeLabel.getStyleClass().add("positive");
+                } else {
+                    changeLabel.getStyleClass().remove("positive");
+                    changeLabel.getStyleClass().add("negative");
+                }
+
+                // Update statistics
+                System.out.println("*** Setting market cap label");
+                marketCapLabel.setText(formatMarketCap(currentStock.getMarketCap()));
+
+                System.out.println("*** Setting P/E ratio label");
+                peRatioLabel.setText(String.format("%.2f", currentStock.getPeRatio()));
+
+                System.out.println("*** Setting dividend yield label");
+                dividendYieldLabel.setText(percentFormat.format(currentStock.getDividendYield() / 100));
+
+                System.out.println("*** Setting volume label");
+                volumeLabel.setText(NumberFormat.getIntegerInstance().format(currentStock.getVolume()));
+
+                System.out.println("*** All UI components updated successfully");
+            } catch (Exception e) {
+                System.out.println("*** ERROR updating stock info: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
