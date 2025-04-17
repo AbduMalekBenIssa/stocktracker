@@ -233,4 +233,31 @@ public class PortfolioController extends BaseController {
         }
     }
 
+    /**
+     * Refreshes the stock prices in the portfolio
+     */
+    @FXML
+    private void refreshPrices() {
+        try {
+            // Update each stock price
+            for (OwnedStock stock : stockList) {
+                double price = stockMarket.getStockPrice(stock.getSymbol());
+                stock.updatePrice(price);
+            }
+
+            // Refresh the table
+            portfolioTable.refresh();
+
+            // Update summary values
+            updatePortfolioData();
+
+            // Update the main view's user info
+            updateUserInfo();
+
+            showInfoDialog("Refresh Complete", "Prices Updated", "Stock prices have been updated with the latest market data.");
+        } catch (IOException e) {
+            showErrorDialog("Refresh Error", "Could not update stock prices", e.getMessage());
+        }
+    }
+
 }
