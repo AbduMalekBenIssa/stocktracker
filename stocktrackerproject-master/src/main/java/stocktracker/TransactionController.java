@@ -201,4 +201,30 @@ public class TransactionController extends BaseController {
         // Update summary information
         updateSummary();
     }
+    /**
+     * Applies a filter to the transactions
+     *
+     * @param filter The filter to apply
+     */
+    private void applyFilter(String filter) {
+        // Clear the filtered list
+        filteredTransactions.clear();
+
+        // Apply the selected filter
+        if (filter.equals("Buy Transactions")) {
+            filteredTransactions.addAll(allTransactions.stream()
+                    .filter(t -> t instanceof BuyTransaction)
+                    .collect(Collectors.toList()));
+        } else if (filter.equals("Sell Transactions")) {
+            filteredTransactions.addAll(allTransactions.stream()
+                    .filter(t -> t instanceof SellTransaction)
+                    .collect(Collectors.toList()));
+        } else {
+            // "All Transactions" or default
+            filteredTransactions.addAll(allTransactions);
+        }
+
+        // Sort the table
+        transactionTable.sort();
+    }
 }
