@@ -94,3 +94,9 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Separator />
+                <Button fx:id="settingsButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadSettingsView" styleClass="sidebar-button" text="Settings">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
