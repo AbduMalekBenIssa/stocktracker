@@ -203,6 +203,7 @@ public class PortfolioController extends BaseController {
             return row;
         });
     }
+
     /**
      * Updates the portfolio data
      */
