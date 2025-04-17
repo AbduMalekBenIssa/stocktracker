@@ -33,4 +33,13 @@ public abstract class BaseController {
         onInitialize();
     }
 
+    /**
+     * Refreshes the UI with the latest data
+     * This method should be implemented by subclasses to update their views
+     */
+    public void refreshView() {
+        // Default implementation does nothing
+        // Subclasses should override this method to update their views
+    }
+
 }
