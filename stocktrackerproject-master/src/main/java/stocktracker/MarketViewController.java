@@ -248,4 +248,45 @@ public class MarketViewController extends BaseController {
         });
     }
 
+    /**
+     * Sets up the row factory for a table to handle context menus and double clicks
+     *
+     * @param table The table to set up
+     */
+    private void setupRowFactory(TableView<MarketStock> table) {
+        table.setRowFactory(tv -> {
+            TableRow<MarketStock> row = new TableRow<>();
+
+            // Handle double click
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    showStockDetails(row.getItem());
+                }
+            });
+
+            // Create context menu
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem addToWatchlistItem = new MenuItem("Add to Watchlist");
+            addToWatchlistItem.setOnAction(e -> addToWatchlist(row.getItem()));
+
+            MenuItem buyStockItem = new MenuItem("Buy Stock");
+            buyStockItem.setOnAction(e -> buyStock(row.getItem()));
+
+            MenuItem viewDetailsItem = new MenuItem("View Details");
+            viewDetailsItem.setOnAction(e -> showStockDetails(row.getItem()));
+
+            contextMenu.getItems().addAll(addToWatchlistItem, buyStockItem, new SeparatorMenuItem(), viewDetailsItem);
+
+            // Only display for non-empty rows
+            row.contextMenuProperty().bind(
+                    javafx.beans.binding.Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
+    }
+
 }
