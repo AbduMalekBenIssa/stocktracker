@@ -73,3 +73,8 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Button fx:id="portfolioButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadPortfolioView" styleClass="sidebar-button" text="Portfolio">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
