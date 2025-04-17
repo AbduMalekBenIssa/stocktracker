@@ -596,4 +596,15 @@ public class PortfolioController extends BaseController {
         }
     }
 
+    /**
+     * Shows detailed information for a stock
+     *
+     * @param stock The stock to show details for
+     */
+    private void showStockDetailsDialog(OwnedStock stock) {
+        // Show the detailed stock view
+        mainController.showStockDetails(stock.getSymbol());
+    }
+
+
 }
