@@ -79,3 +79,18 @@ public class StockDetailController extends BaseController {
 
     private Stock currentStock;
     private StringProperty stockSymbol = new SimpleStringProperty();
+
+    @Override
+    protected void onInitialize() {
+        System.out.println("StockDetailController initialized with symbol: " + stockSymbol.get());
+
+        // Bind the stock symbol property to update the view when it changes
+        stockSymbol.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Stock symbol changed from: " + oldValue + " to: " + newValue);
+            if (newValue != null && !newValue.isEmpty()) {
+                loadStockData(newValue);
+            }
+        });
+
+        // Set up chart
+        setupChart();
