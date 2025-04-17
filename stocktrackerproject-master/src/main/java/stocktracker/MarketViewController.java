@@ -331,4 +331,24 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    /**
+     * Loads the top losers data
+     */
+    private void loadTopLosers() throws IOException {
+        List<String> losers = stockMarket.getTopLosers();
+
+        for (String symbol : losers) {
+            try {
+                String name = stockMarket.getCompanyName(symbol);
+                double price = stockMarket.getStockPrice(symbol);
+                double change = stockMarket.getDailyChangePercentage(symbol);
+
+                losersData.add(new MarketStock(symbol, name, price, change));
+            } catch (IOException e) {
+                // Skip this stock if there's an error
+                System.out.println("Error loading loser: " + symbol + " - " + e.getMessage());
+            }
+        }
+    }
+
 }
