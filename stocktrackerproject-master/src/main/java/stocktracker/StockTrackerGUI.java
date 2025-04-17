@@ -60,7 +60,6 @@ public class StockTrackerGUI extends Application {
         primaryStage.show();
     }
 
-
     /**
      * Main method to launch the application
      *
