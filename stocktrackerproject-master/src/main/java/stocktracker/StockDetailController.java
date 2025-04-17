@@ -334,3 +334,11 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+    private void addDummyNewsItems() {
+        addNewsItem("Quarterly Earnings Report", LocalDate.now().minusDays(2).format(DateTimeFormatter.ofPattern("MMM d, yyyy")),
+                currentStock.getName() + " reported strong Q3 earnings, exceeding analyst expectations.");
+        addNewsItem("New Product Launch", LocalDate.now().minusWeeks(1).format(DateTimeFormatter.ofPattern("MMM d, yyyy")),
+                currentStock.getName() + " announces innovative product line coming next quarter.");
+        addNewsItem("Industry Analysis", LocalDate.now().minusWeeks(2).format(DateTimeFormatter.ofPattern("MMM d, yyyy")),
+                "Experts predict growth in the sector where " + currentStock.getName() + " operates.");
+    }
