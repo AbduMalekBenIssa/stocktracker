@@ -146,4 +146,70 @@ public class MarketViewController extends BaseController {
         setupRowFactory(activeTable);
     }
 
+    /**
+     * Sets up the standard table columns (symbol, name, price, change)
+     *
+     * @param symbolColumn The symbol column
+     * @param nameColumn The name column
+     * @param priceColumn The price column
+     * @param changeColumn The change column
+     * @param isPositiveChange Whether the change is expected to be positive
+     */
+    private void setupTableColumns(
+            TableColumn<MarketStock, String> symbolColumn,
+            TableColumn<MarketStock, String> nameColumn,
+            TableColumn<MarketStock, Number> priceColumn,
+            TableColumn<MarketStock, Number> changeColumn,
+            boolean isPositiveChange) {
+
+        // Symbol column
+        symbolColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getSymbol()));
+
+        // Name column
+        nameColumn.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getName()));
+
+        // Price column with currency formatting
+        priceColumn.setCellValueFactory(data ->
+                new SimpleDoubleProperty(data.getValue().getPrice()));
+        priceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", value.doubleValue()));
+                }
+            }
+        });
+
+        // Change column with formatting and colors
+        changeColumn.setCellValueFactory(data ->
+                new SimpleDoubleProperty(data.getValue().getChange()));
+        changeColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Number value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    double change = value.doubleValue();
+                    setText(String.format("%.2f%%", change));
+
+                    if (change > 0) {
+                        setStyle("-fx-text-fill: -fx-success;");
+                        setText("+" + getText());
+                    } else if (change < 0) {
+                        setStyle("-fx-text-fill: -fx-danger;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        });
+    }
+
 }
