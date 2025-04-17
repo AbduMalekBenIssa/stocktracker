@@ -128,4 +128,18 @@ public class WatchlistController extends BaseController {
             return row;
         });
     }
+    /**
+     * Updates the watchlist data
+     */
+    private void updateWatchlistData() {
+        // Clear the list
+        stockList.clear();
+
+        // Add all stocks from the watchlist
+        stockList.addAll(user.getWatchlist().getAllStocks());
+
+        // Update summary label
+        int stockCount = stockList.size();
+        watchlistCountLabel.setText(String.valueOf(stockCount));
+    }
 }
