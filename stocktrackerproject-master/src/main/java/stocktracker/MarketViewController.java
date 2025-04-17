@@ -427,4 +427,14 @@ public class MarketViewController extends BaseController {
         showInfoDialog("Refresh Complete", "Market Data Updated", "Market data has been refreshed with the latest information.");
     }
 
+    /**
+     * Shows detailed information for a stock
+     *
+     * @param stock The stock to show details for
+     */
+    private void showStockDetails(MarketStock stock) {
+        // Show the detailed stock view
+        mainController.showStockDetails(stock.getSymbol());
+    }
+
 }
