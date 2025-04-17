@@ -192,3 +192,14 @@ public class StockDetailController extends BaseController {
             showErrorDialog("Error Loading Stock", "Failed to load stock data", e.getMessage());
         }
     }
+    private void updateStockInfo() {
+        System.out.println("*** updateStockInfo called");
+
+        // Use Platform.runLater to update UI components on the JavaFX application thread
+        Platform.runLater(() -> {
+            try {
+                // Check if UI components are initialized
+                if (symbolLabel == null || nameLabel == null || priceLabel == null || changeLabel == null) {
+                    System.out.println("*** ERROR: UI components are not initialized!");
+                    return;
+                }
