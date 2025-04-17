@@ -66,5 +66,33 @@ public class SettingsController extends BaseController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleReset() {
+        settingsService.resetToDefaults();
+
+        showInfoDialog("Settings Reset", "Settings have been reset to defaults.", "");
+
+        if (mainController != null) {
+            mainController.refreshUserInfo();
+        }
+    }
+
+    @FXML
+    private void handleLoadData() {
+        try {
+            User loadedUser = fileManager.loadUserData();
+            this.user = loadedUser;
+            if(mainController != null) {
+                mainController.setUser(loadedUser);
+                mainController.refreshUserInfo();
+                mainController.loadDashboardView();
+            }
+            showInfoDialog("Data Loaded", "User data loaded successfully from " + fileManager.getDataFilePath(),
+                    "Note: Some views might require reopening to fully reflect changes.");
+
+        } catch (IOException e) {
+            showErrorDialog("Error Loading Data", "Could not load user data from " + fileManager.getDataFilePath(), e.getMessage());
+            e.printStackTrace();
+        }
 
 }
