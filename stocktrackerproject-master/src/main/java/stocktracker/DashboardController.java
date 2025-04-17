@@ -280,4 +280,10 @@ public class DashboardController extends BaseController {
             showErrorDialog("Refresh Error", "Could not refresh dashboard data", e.getMessage());
         }
     }
+
+    @Override
+    public void refreshView() {
+        updateDashboardData();
+    }
 }
+
