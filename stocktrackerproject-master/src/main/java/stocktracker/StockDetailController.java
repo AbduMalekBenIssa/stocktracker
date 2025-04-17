@@ -128,3 +128,27 @@ public class StockDetailController extends BaseController {
             System.out.println("Controller not fully initialized yet, will load data later");
         }
     }
+    private void loadStockData(String symbol) {
+        System.out.println("*** loadStockData called for symbol: " + symbol);
+        try {
+            if (stockMarket == null) {
+                System.out.println("*** ERROR: stockMarket is null!");
+                return;
+            }
+
+            // Create a stock object with data from the stock market service
+            System.out.println("*** Getting company name for: " + symbol);
+            String name = stockMarket.getCompanyName(symbol);
+            System.out.println("*** Company name: " + name);
+
+            System.out.println("*** Getting stock price for: " + symbol);
+            double price = stockMarket.getStockPrice(symbol);
+            System.out.println("*** Stock price: " + price);
+
+            System.out.println("*** Getting daily change percentage for: " + symbol);
+            double changePercent = stockMarket.getDailyChangePercentage(symbol);
+            System.out.println("*** Change percentage: " + changePercent);
+
+            // Calculate the change amount based on the percentage
+            double changeAmount = price * changePercent / 100;
+            System.out.println("*** Change amount: " + changeAmount);
