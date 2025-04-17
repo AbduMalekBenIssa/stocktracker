@@ -58,3 +58,18 @@
                             </children>
                         </HBox>
                     </children>
+                    <padding>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <left>
+        <VBox prefWidth="200.0" spacing="2.0" styleClass="sidebar">
+            <children>
+                <Button fx:id="dashboardButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadDashboardView" styleClass="sidebar-button" text="Dashboard">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
