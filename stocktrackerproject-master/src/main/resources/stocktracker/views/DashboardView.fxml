@@ -51,3 +51,19 @@
                                 </StackPane>
                             </children>
                         </VBox>
+
+                        <!-- Portfolio Value Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="card-header" text="Portfolio Value" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="portfolioValueLabel" styleClass="card-value" text="0.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
