@@ -12,3 +12,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import stocktracker.model.BuyTransaction;
 import stocktracker.model.SellTransaction;
 import stocktracker.model.Transaction;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Controller for the Transaction view
+ *
+ * @author Omar Almishri, AbduMalek Ben Issa
+ * @version 3.0
+ * @Tutorial T04
+ */
+public class TransactionController extends BaseController {
