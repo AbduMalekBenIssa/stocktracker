@@ -157,4 +157,31 @@ public class DashboardController extends BaseController {
         }
     }
 
+    /**
+     * Updates the portfolio history chart
+     * Note: In a real app, we would need to track portfolio value over time
+     * For this demo, we'll just use mock data
+     */
+    private void updatePortfolioHistoryChart() {
+        portfolioHistoryChart.getData().clear();
+
+        // Create a series for portfolio value
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Portfolio Value");
+
+        // For this demo, we'll create mock data based on the current portfolio value
+        double currentValue = user.getTotalValue();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+
+        for (int i = 30; i >= 0; i--) {
+            LocalDateTime date = now.minusDays(i);
+            // Generate a mock value that fluctuates around the current value
+            double mockValue = currentValue * (0.9 + Math.random() * 0.2);
+            series.getData().add(new XYChart.Data<>(date.format(formatter), mockValue));
+        }
+
+        portfolioHistoryChart.getData().add(series);
+    }
+
 }
