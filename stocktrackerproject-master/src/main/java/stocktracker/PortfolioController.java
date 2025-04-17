@@ -392,4 +392,102 @@ public class PortfolioController extends BaseController {
         }
     }
 
+    /**
+     * Buys more shares of an existing stock
+     *
+     * @param symbol The stock symbol
+     */
+    private void buyStock(String symbol) {
+        try {
+            // Get current price
+            double price = stockMarket.getStockPrice(symbol);
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Buy More Shares");
+            dialog.setHeaderText("Buy Additional Shares of " + symbol);
+
+            // Set the button types
+            ButtonType buyButtonType = new ButtonType("Buy", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(buyButtonType, ButtonType.CANCEL);
+
+            // Create the form fields
+            VBox content = new VBox(10);
+            content.getStyleClass().add("dialog-content");
+
+            Label priceLabel = new Label(String.format("Current Price: $%.2f", price));
+            Label balanceLabel = new Label(String.format("Available Balance: $%.2f", user.getBalance()));
+
+            TextField quantityField = new TextField();
+            quantityField.setPromptText("Number of Shares");
+
+            content.getChildren().addAll(
+                    priceLabel,
+                    new Label("Quantity:"),
+                    quantityField,
+                    balanceLabel
+            );
+
+            dialog.getDialogPane().setContent(content);
+
+            // Request focus on the quantity field by default
+            quantityField.requestFocus();
+
+            // Show the dialog and process the result
+            Optional<ButtonType> result = dialog.showAndWait();
+
+            if (result.isPresent() && result.get() == buyButtonType) {
+                try {
+                    // Get the quantity from the form
+                    int quantity = Integer.parseInt(quantityField.getText());
+
+                    // Validate the input
+                    if (quantity <= 0) {
+                        showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a positive number for the quantity.");
+                        return;
+                    }
+
+                    // Calculate total cost
+                    double totalCost = price * quantity;
+
+                    // Check if user has enough funds
+                    if (totalCost > user.getBalance()) {
+                        showErrorDialog("Insufficient Funds", "Insufficient Funds",
+                                String.format("You don't have enough funds to buy %d shares of %s for $%.2f.",
+                                        quantity, symbol, totalCost));
+                        return;
+                    }
+
+                    // Proceed with the purchase
+                    // Withdraw the funds
+                    user.withdraw(totalCost);
+
+                    // Get the stock from the portfolio
+                    OwnedStock stock = user.getPortfolio().getStock(symbol);
+
+                    // Add the new shares
+                    stock.addShares(quantity, price);
+
+                    // Add a transaction record
+                    BuyTransaction transaction = new BuyTransaction(symbol, quantity, price, LocalDateTime.now());
+                    user.addTransaction(transaction);
+
+                    // Update the view
+                    updatePortfolioData();
+                    updateUserInfo();
+
+                    showInfoDialog("Purchase Complete", "Stock Purchased",
+                            String.format("Successfully purchased %d additional shares of %s for $%.2f.",
+                                    quantity, symbol, totalCost));
+
+                } catch (NumberFormatException e) {
+                    showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a valid number for the quantity.");
+                }
+            }
+        } catch (IOException e) {
+            showErrorDialog("API Error", "Could not complete purchase", "Error accessing stock market data: " + e.getMessage());
+        }
+    }
+
+
 }
