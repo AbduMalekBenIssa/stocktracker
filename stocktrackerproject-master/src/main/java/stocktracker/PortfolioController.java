@@ -606,5 +606,8 @@ public class PortfolioController extends BaseController {
         mainController.showStockDetails(stock.getSymbol());
     }
 
-
+    @Override
+    public void refreshView() {
+        updatePortfolioData();
+    }
 }
