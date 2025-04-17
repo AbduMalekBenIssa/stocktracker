@@ -83,3 +83,8 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+                <Button fx:id="transactionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadTransactionView" styleClass="sidebar-button" text="Transactions">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
