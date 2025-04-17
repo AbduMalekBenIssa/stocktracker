@@ -303,3 +303,15 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+    private void generateRandomPriceData(XYChart.Series<Number, Number> series) {
+        //Generate random price data for demonstration
+        Random random = new Random();
+        double basePrice = currentStock.getPrice() - (random.nextDouble() * 10);
+
+        for (int i = 0; i < 30; i++) {
+            double price = basePrice + (random.nextDouble() * 20 - 10);
+            if (price < 0) price = 0.1; // Ensure price is positive
+            series.getData().add(new XYChart.Data<>(i, price));
+            basePrice = price; // Use the last price as the basis for the next one
+        }
+    }
