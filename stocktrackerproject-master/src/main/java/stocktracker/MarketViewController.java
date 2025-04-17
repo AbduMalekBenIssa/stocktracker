@@ -465,4 +465,102 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    /**
+     * Shows a dialog to buy a stock
+     *
+     * @param stock The stock to buy
+     */
+    private void buyStock(MarketStock stock) {
+        try {
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Buy Stock");
+            dialog.setHeaderText("Buy " + stock.getName() + " (" + stock.getSymbol() + ")");
+
+            // Set the button types
+            ButtonType buyButtonType = new ButtonType("Buy", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(buyButtonType, ButtonType.CANCEL);
+
+            // Create the form fields
+            VBox content = new VBox(10);
+            content.getStyleClass().add("dialog-content");
+
+            Label priceLabel = new Label(String.format("Current Price: $%.2f", stock.getPrice()));
+            Label balanceLabel = new Label(String.format("Available Balance: $%.2f", user.getBalance()));
+
+            TextField quantityField = new TextField();
+            quantityField.setPromptText("Number of Shares");
+
+            content.getChildren().addAll(
+                    priceLabel,
+                    new Label("Quantity:"),
+                    quantityField,
+                    balanceLabel
+            );
+
+            dialog.getDialogPane().setContent(content);
+
+            // Request focus on the quantity field by default
+            quantityField.requestFocus();
+
+            // Show the dialog and process the result
+            java.util.Optional<ButtonType> result = dialog.showAndWait();
+
+            if (result.isPresent() && result.get() == buyButtonType) {
+                try {
+                    // Get the quantity from the form
+                    int quantity = Integer.parseInt(quantityField.getText());
+
+                    // Validate the input
+                    if (quantity <= 0) {
+                        showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a positive number for the quantity.");
+                        return;
+                    }
+
+                    double price = stock.getPrice();
+
+                    // Calculate total cost
+                    double totalCost = price * quantity;
+
+                    // Check if user has enough funds
+                    if (totalCost > user.getBalance()) {
+                        showErrorDialog("Insufficient Funds", "Insufficient Funds",
+                                String.format("You don't have enough funds to buy %d shares of %s for $%.2f.",
+                                        quantity, stock.getSymbol(), totalCost));
+                        return;
+                    }
+
+                    // If the user already owns this stock, handle accordingly
+                    if (user.getPortfolio().containsStock(stock.getSymbol())) {
+                        user.getPortfolio().getStock(stock.getSymbol()).addShares(quantity, price);
+                    } else {
+                        // Create a new OwnedStock and add it to the portfolio
+                        stocktracker.model.OwnedStock newStock = new stocktracker.model.OwnedStock(
+                                stock.getSymbol(), stock.getName(), price, quantity, price);
+                        user.getPortfolio().addStock(newStock);
+                    }
+
+                    // Withdraw the funds
+                    user.withdraw(totalCost);
+
+                    // Add a transaction record
+                    user.addTransaction(new stocktracker.model.BuyTransaction(
+                            stock.getSymbol(), quantity, price, java.time.LocalDateTime.now()));
+
+                    // Update the main view's user info
+                    updateUserInfo();
+
+                    showInfoDialog("Purchase Complete", "Stock Purchased",
+                            String.format("Successfully purchased %d shares of %s (%s) for $%.2f.",
+                                    quantity, stock.getName(), stock.getSymbol(), totalCost));
+
+                } catch (NumberFormatException e) {
+                    showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a valid number for the quantity.");
+                }
+            }
+        } catch (Exception e) {
+            showErrorDialog("Error", "Could not complete purchase", e.getMessage());
+        }
+    }
+
 }
