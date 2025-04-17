@@ -282,5 +282,10 @@ public class TransactionController extends BaseController {
 
         dialog.showAndWait();
     }
+    @Override
+    public void refreshView() {
+        loadTransactions();
+    }
+} 
 
 }
