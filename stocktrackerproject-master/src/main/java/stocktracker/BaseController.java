@@ -59,5 +59,20 @@ public abstract class BaseController {
         mainController.showErrorDialog(title, header, content);
     }
 
+    /**
+     * Shows an info dialog
+     *
+     * @param title The dialog title
+     * @param header The dialog header
+     * @param content The dialog content
+     */
+    protected void showInfoDialog(String title, String header, String content) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 
 }
