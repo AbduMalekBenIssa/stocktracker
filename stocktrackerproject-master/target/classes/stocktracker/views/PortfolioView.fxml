@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" styleClass="portfolio-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stocktracker.PortfolioController" stylesheets="@../css/style.css">
+    <children>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" styleClass="page-header">
+            <children>
+                <Label styleClass="page-title" text="Your Portfolio">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <!-- Summary Cards -->
+        <HBox spacing="20.0">
+            <children>
+                <!-- Portfolio Value Card -->
+                <VBox alignment="CENTER" styleClass="card, summary-card">
+                    <children>
+                        <Label styleClass="card-header-small" text="Portfolio Value" />
+                        <Label fx:id="portfolioValueLabel" styleClass="card-value" text="0.00">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Profit/Loss Card -->
+                <VBox alignment="CENTER" styleClass="card, summary-card">
+                    <children>
+                        <Label styleClass="card-header-small" text="Profit/Loss" />
+                        <Label fx:id="profitLossLabel" styleClass="card-value" text="0.00">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Stock Count Card -->
+                <VBox alignment="CENTER" styleClass="card, summary-card">
+                    <children>
+                        <Label styleClass="card-header-small" text="Stocks in Portfolio" />
+                        <Label fx:id="portfolioCountLabel" styleClass="card-value" text="0">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#refreshPrices" styleClass="button-secondary" text="Refresh Prices" />
+                        <Button mnemonicParsing="false" onAction="#addNewStock" styleClass="button" text="Add New Stock" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+
+        <!-- Portfolio Table -->
+        <TableView fx:id="portfolioTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="symbolColumn" prefWidth="100.0" text="Symbol" />
+                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+                <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
+                <TableColumn fx:id="purchasePriceColumn" prefWidth="120.0" text="Purchase Price" />
+                <TableColumn fx:id="currentPriceColumn" prefWidth="120.0" text="Current Price" />
+                <TableColumn fx:id="totalValueColumn" prefWidth="120.0" text="Total Value" />
+                <TableColumn fx:id="profitLossColumn" prefWidth="120.0" text="Profit/Loss" />
+                <TableColumn fx:id="profitLossPercentageColumn" prefWidth="120.0" text="P/L %" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+
+        <!-- Help Text -->
+        <Label styleClass="help-text" text="Double-click on a stock to view details or right-click for actions." />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

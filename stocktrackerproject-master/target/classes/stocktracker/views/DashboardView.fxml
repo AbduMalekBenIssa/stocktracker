@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" styleClass="dashboard-scroll" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stocktracker.DashboardController" stylesheets="@../css/style.css">
+    <content>
+        <VBox spacing="20.0" styleClass="dashboard-container">
+            <children>
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#refreshDashboard" styleClass="button-secondary" text="Refresh Dashboard" />
+                    </children>
+                </HBox>
+
+                <!-- Summary Cards -->
+                <GridPane hgap="20.0" vgap="20.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <!-- Cash Balance Card -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Cash Balance" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="balanceLabel" styleClass="card-value" text="10,000.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+
+                        <!-- Portfolio Value Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="card-header" text="Portfolio Value" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="portfolioValueLabel" styleClass="card-value" text="0.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+
+                        <!-- Total Value Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="2">
+                            <children>
+                                <Label styleClass="card-header" text="Total Assets" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="totalValueLabel" styleClass="card-value" text="10,000.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+
+                        <!-- Profit/Loss Card -->
+                        <VBox styleClass="card" GridPane.columnIndex="3">
+                            <children>
+                                <Label styleClass="card-header" text="Profit/Loss" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="profitLossLabel" styleClass="card-value" text="0.00">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <!-- Charts Section -->
+                <GridPane hgap="20.0" vgap="20.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <javafx.scene.layout.RowConstraints minHeight="300.0" prefHeight="300.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <!-- Asset Allocation Chart -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Asset Allocation" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <PieChart fx:id="assetAllocationChart" labelsVisible="true" legendVisible="true" />
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+
+                        <!-- Portfolio History Chart -->
+                        <VBox styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="card-header" text="Portfolio History" />
+                                <StackPane VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <LineChart fx:id="portfolioHistoryChart" legendVisible="true" createSymbols="false">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                        </LineChart>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <!-- Bottom Lists Section -->
+                <GridPane hgap="20.0" vgap="20.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <javafx.scene.layout.RowConstraints minHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <!-- Top Stocks List -->
+                        <VBox styleClass="card">
+                            <children>
+                                <Label styleClass="card-header" text="Top Holdings" />
+                                <VBox fx:id="topStocksContainer" spacing="8.0" VBox.vgrow="ALWAYS">
+                                    <!-- Will be populated dynamically -->
+                                </VBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Recent Transactions List -->
+                        <VBox styleClass="card" GridPane.columnIndex="1">
+                            <children>
+                                <Label styleClass="card-header" text="Recent Transactions" />
+                                <VBox fx:id="recentTransactionsContainer" spacing="8.0" VBox.vgrow="ALWAYS">
+                                    <!-- Will be populated dynamically -->
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>

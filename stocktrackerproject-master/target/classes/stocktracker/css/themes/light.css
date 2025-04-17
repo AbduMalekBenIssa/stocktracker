@@ -1,0 +1,197 @@
+/* Light Theme */
+.root, .light-theme {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+
+    /* Professional Light Color Palette */
+    -fx-primary: #FFFFFF;
+    -fx-primary-light: #F5F5F5;
+    -fx-primary-dark: #E0E0E0;
+    -fx-accent: #FF3B30;
+    -fx-secondary: #32D74B;
+    -fx-background: #F8F9FA;
+    -fx-card-background: #FFFFFF;
+
+    /* Text Colors */
+    -fx-text-primary: #2C3E50;
+    -fx-text-secondary: #6C757D;
+    -fx-text-light: #2C3E50;
+
+    /* Status Colors */
+    -fx-success: #28A745;
+    -fx-warning: #FFC107;
+    -fx-danger: #DC3545;
+    -fx-info: #17A2B8;
+
+    /* Accent Colors */
+    -fx-accent-purple: #6F42C1;
+    -fx-accent-blue: #007BFF;
+    -fx-accent-gold: #FFD700;
+    -fx-accent-yellow: #FFC107;
+
+    -fx-background-color: -fx-background;
+}
+
+/* Header Styles */
+.header {
+    -fx-background-color: linear-gradient(to right, -fx-primary, -fx-primary-light);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+}
+
+.app-header {
+    -fx-background-color: transparent;
+    -fx-padding: 20px 25px;
+    -fx-border-color: derive(-fx-primary-dark, -5%);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.app-title {
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.app-subtitle {
+    -fx-text-fill: #6C757D;
+    -fx-font-size: 16px;
+    -fx-opacity: 0.9;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    -fx-background-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 3, 0);
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 15px 25px;
+    -fx-background-radius: 8px;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: derive(-fx-primary-light, -5%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);
+}
+
+/* Card Styles */
+.card {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 2);
+    -fx-border-color: derive(-fx-primary-dark, -5%);
+    -fx-border-radius: 12px;
+}
+
+/* Table Styles */
+.table-view {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: derive(-fx-primary-dark, -5%);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -fx-primary-light;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent transparent derive(-fx-primary-dark, -5%) transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: derive(-fx-primary-light, -2%);
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: derive(-fx-primary-light, -5%);
+}
+
+/* Chart Styles */
+.chart {
+    -fx-background-color: transparent;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.axis {
+    -fx-tick-label-fill: -fx-text-primary;
+}
+
+.axis-label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* Button Styles */
+.button {
+    -fx-background-color: -fx-primary-light;
+    -fx-text-fill: -fx-text-primary;
+    -fx-border-color: derive(-fx-primary-dark, -5%);
+}
+
+.button:hover {
+    -fx-background-color: derive(-fx-primary-light, -5%);
+}
+
+/* Text Field Styles */
+.text-field {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-text-primary;
+    -fx-border-color: derive(-fx-primary-dark, -5%);
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-accent-blue;
+}
+
+/* Pie Chart Styles */
+.pie-chart {
+    -fx-background-color: transparent;
+}
+
+.pie-chart .chart-pie-label {
+    -fx-fill: -fx-text-primary;
+}
+
+.pie-chart .chart-pie-label-line {
+    -fx-stroke: -fx-text-primary;
+}
+
+.pie-chart .chart-legend-item {
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* Transaction Styles */
+.transaction-buy {
+    -fx-text-fill: -fx-success;
+}
+
+.transaction-sell {
+    -fx-text-fill: -fx-danger;
+}
+
+/* Stock Price Display */
+.stock-price {
+    -fx-text-fill: -fx-accent-blue;
+}
+
+.stock-change.positive {
+    -fx-text-fill: -fx-success;
+}
+
+.stock-change.negative {
+    -fx-text-fill: -fx-danger;
+}
