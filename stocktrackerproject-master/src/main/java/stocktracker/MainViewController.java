@@ -126,6 +126,35 @@ public class MainViewController {
             loadView("/stocktracker/views/SettingsView.fxml");
         }
 
+        /**
+         * Shows stock details for a specific symbol
+         *
+         * @param symbol The stock symbol to display
+         */
+        public void showStockDetails(String symbol) {
+            try {
+                System.out.println("Showing stock details for: " + symbol);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/stocktracker/views/StockDetailView.fxml"));
+                Parent viewNode = loader.load();
+
+                StockDetailController controller = loader.getController();
+
+                // Initialize the controller with dependencies first
+                controller.initialize(user, stockMarket, this);
+
+                // Then set the stock symbol to trigger data loading
+                controller.setStockSymbol(symbol);
+
+                // Clear existing content and add the new view
+                contentArea.getChildren().clear();
+                contentArea.getChildren().add(viewNode);
+
+            } catch (IOException e) {
+                showErrorDialog("Error Loading View", "Could not load stock details: " + symbol, e.getMessage());
+            }
+        }
+
 
     }
 }
