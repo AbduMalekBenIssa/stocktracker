@@ -433,3 +433,32 @@ public class StockDetailController extends BaseController {
             sharesTextField.setText("");
         }
     }
+    @FXML
+    private void handleAddToWatchlist() {
+        boolean isInWatchlist = user.getWatchlist().containsStock(currentStock.getSymbol());
+
+        if (isInWatchlist) {
+            // Remove from watchlist
+            user.getWatchlist().removeStock(currentStock.getSymbol());
+            addToWatchlistButton.setText("Add to Watchlist");
+            showInfoDialog("Watchlist Updated",
+                    "Stock removed from watchlist",
+                    currentStock.getSymbol() + " has been removed from your watchlist.");
+        } else {
+            // Add to watchlist
+            WatchlistStock watchlistStock = new WatchlistStock(
+                    currentStock.getSymbol(),
+                    currentStock.getName(),
+                    currentStock.getPrice(),
+                    currentStock.getChangePercent());
+
+            user.getWatchlist().addStock(watchlistStock);
+            addToWatchlistButton.setText("Remove from Watchlist");
+            showInfoDialog("Watchlist Updated",
+                    "Stock added to watchlist",
+                    currentStock.getSymbol() + " has been added to your watchlist.");
+        }
+
+        // Update the user info in the main view
+        updateUserInfo();
+    }
