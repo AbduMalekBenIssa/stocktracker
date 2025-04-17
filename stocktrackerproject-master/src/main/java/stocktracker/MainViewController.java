@@ -77,142 +77,138 @@ public class MainViewController {
             balanceLabel.setText(String.format("$%.2f", user.getBalance()));
             totalValueLabel.setText(String.format("$%.2f", user.getTotalValue()));
         }
+    }
 
-        /**
-         * Loads the dashboard view
-         */
-        @FXML
-        public void loadDashboardView() {
-            loadView("/stocktracker/views/DashboardView.fxml");
-        }
+    /**
+     * Loads the dashboard view
+     */
+    @FXML
+    public void loadDashboardView() {
+        loadView("/stocktracker/views/DashboardView.fxml");
+    }
 
-        /**
-         * Loads the portfolio view
-         */
-        @FXML
-        private void loadPortfolioView() {
-            loadView("/stocktracker/views/PortfolioView.fxml");
-        }
+    /**
+     * Loads the portfolio view
+     */
+    @FXML
+    private void loadPortfolioView() {
+        loadView("/stocktracker/views/PortfolioView.fxml");
+    }
 
-        /**
-         * Loads the watchlist view
-         */
-        @FXML
-        private void loadWatchlistView() {
-            loadView("/stocktracker/views/WatchlistView.fxml");
-        }
+    /**
+     * Loads the watchlist view
+     */
+    @FXML
+    private void loadWatchlistView() {
+        loadView("/stocktracker/views/WatchlistView.fxml");
+    }
 
-        /**
-         * Loads the transaction view
-         */
-        @FXML
-        private void loadTransactionView() {
-            loadView("/stocktracker/views/TransactionView.fxml");
-        }
+    /**
+     * Loads the transaction view
+     */
+    @FXML
+    private void loadTransactionView() {
+        loadView("/stocktracker/views/TransactionView.fxml");
+    }
 
-        /**
-         * Loads the market view
-         */
-        @FXML
-        private void loadMarketView() {
-            loadView("/stocktracker/views/MarketView.fxml");
-        }
+    /**
+     * Loads the market view
+     */
+    @FXML
+    private void loadMarketView() {
+        loadView("/stocktracker/views/MarketView.fxml");
+    }
 
-        /**
-         * Loads the settings view
-         */
-        @FXML
-        private void loadSettingsView() {
-            loadView("/stocktracker/views/SettingsView.fxml");
-        }
+    /**
+     * Loads the settings view
+     */
+    @FXML
+    private void loadSettingsView() {
+        loadView("/stocktracker/views/SettingsView.fxml");
+    }
 
-        /**
-         * Shows stock details for a specific symbol
-         *
-         * @param symbol The stock symbol to display
-         */
-        public void showStockDetails(String symbol) {
-            try {
-                System.out.println("Showing stock details for: " + symbol);
+    /**
+     * Shows stock details for a specific symbol
+     *
+     * @param symbol The stock symbol to display
+     */
+    public void showStockDetails(String symbol) {
+        try {
+            System.out.println("Showing stock details for: " + symbol);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/stocktracker/views/StockDetailView.fxml"));
-                Parent viewNode = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stocktracker/views/StockDetailView.fxml"));
+            Parent viewNode = loader.load();
 
-                StockDetailController controller = loader.getController();
+            StockDetailController controller = loader.getController();
 
-                // Initialize the controller with dependencies first
-                controller.initialize(user, stockMarket, this);
+            // Initialize the controller with dependencies first
+            controller.initialize(user, stockMarket, this);
 
-                // Then set the stock symbol to trigger data loading
-                controller.setStockSymbol(symbol);
+            // Then set the stock symbol to trigger data loading
+            controller.setStockSymbol(symbol);
 
-                // Clear existing content and add the new view
-                contentArea.getChildren().clear();
-                contentArea.getChildren().add(viewNode);
+            // Clear existing content and add the new view
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(viewNode);
 
-            } catch (IOException e) {
-                showErrorDialog("Error Loading View", "Could not load stock details: " + symbol, e.getMessage());
-            }
-        }
-
-
-        /**
-         * Loads a view into the content area
-         *
-         * @param fxmlPath The path to the FXML file
-         */
-        private void loadView(String fxmlPath) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                Parent viewNode = loader.load();
-
-                // If the controller is a BaseController, initialize it
-                Object controller = loader.getController();
-                if (controller instanceof BaseController) {
-                    ((BaseController) controller).initialize(user, stockMarket, this);
-                }
-
-                // Clear existing content and add the new view
-                contentArea.getChildren().clear();
-                contentArea.getChildren().add(viewNode);
-
-            } catch (IOException e) {
-                showErrorDialog("Error Loading View", "Could not load view: " + fxmlPath, e.getMessage());
-            }
-        }
-
-        /**
-         * Shows an error dialog
-         *
-         * @param title The dialog title
-         * @param header The dialog header
-         * @param content The dialog content
-         */
-        public void showErrorDialog(String title, String header, String content) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(title);
-            alert.setHeaderText(header);
-            alert.setContentText(content);
-            alert.showAndWait();
-        }
-
-        /**
-         * Updates the displayed user information after changes
-         */
-        public void refreshUserInfo() {
-            updateUserInfo();
-        }
-
-
-        /**
-         * Gets the main Scene associated with this controller's view.
-         *
-         * @return The main Scene, or null if the view hasn't been added to a scene yet.
-         */
-        public Scene getScene() {
-            return mainBorderPane != null ? mainBorderPane.getScene() : null;
+        } catch (IOException e) {
+            showErrorDialog("Error Loading View", "Could not load stock details: " + symbol, e.getMessage());
         }
     }
 
-}
+    /**
+     * Loads a view into the content area
+     *
+     * @param fxmlPath The path to the FXML file
+     */
+    private void loadView(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent viewNode = loader.load();
 
+            // If the controller is a BaseController, initialize it
+            Object controller = loader.getController();
+            if (controller instanceof BaseController) {
+                ((BaseController) controller).initialize(user, stockMarket, this);
+            }
+
+            // Clear existing content and add the new view
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(viewNode);
+
+        } catch (IOException e) {
+            showErrorDialog("Error Loading View", "Could not load view: " + fxmlPath, e.getMessage());
+        }
+    }
+
+    /**
+     * Shows an error dialog
+     *
+     * @param title The dialog title
+     * @param header The dialog header
+     * @param content The dialog content
+     */
+    public void showErrorDialog(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    /**
+     * Updates the displayed user information after changes
+     */
+    public void refreshUserInfo() {
+        updateUserInfo();
+    }
+
+    /**
+     * Gets the main Scene associated with this controller's view.
+     *
+     * @return The main Scene, or null if the view hasn't been added to a scene yet.
+     */
+    public Scene getScene() {
+        return mainBorderPane != null ? mainBorderPane.getScene() : null;
+    }
+}
