@@ -290,4 +290,18 @@ public class WatchlistController extends BaseController {
                             stock.getName(), stock.getSymbol()));
         }
     }
+    /**
+     * Shows a dialog to buy a stock from the watchlist
+     *
+     * @param stock The stock to buy
+     */
+    private void buyStock(WatchlistStock stock) {
+        try {
+            // Get current price
+            double price = stockMarket.getStockPrice(stock.getSymbol());
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Buy Stock");
+            dialog.setHeaderText("Buy " + stock.getName() + " (" + stock.getSymbol() + ")");
 }
