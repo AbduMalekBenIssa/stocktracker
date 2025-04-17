@@ -91,3 +91,11 @@ public class SettingsService {
     public void resetToDefaults() {
         setSettingsToDefaults();
     }
+
+    /**
+     * Helper method to apply default values to the Settings object.
+     */
+    private void setSettingsToDefaults() {
+        settings.setUserName(DEFAULT_USERNAME);
+        settings.setCurrency(DEFAULT_CURRENCY);
+    }
