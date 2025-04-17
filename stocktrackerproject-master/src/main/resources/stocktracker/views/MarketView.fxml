@@ -62,3 +62,23 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+                <!-- Top Losers -->
+                <VBox styleClass="card">
+                    <children>
+                        <Label styleClass="card-header" text="Top Losers 📉" />
+                        <TableView fx:id="losersTable" prefHeight="200.0">
+                            <columns>
+                                <TableColumn fx:id="loserSymbolColumn" prefWidth="100.0" text="Symbol" />
+                                <TableColumn fx:id="loserNameColumn" prefWidth="300.0" text="Name" />
+                                <TableColumn fx:id="loserPriceColumn" prefWidth="120.0" text="Price" />
+                                <TableColumn fx:id="loserChangeColumn" prefWidth="120.0" text="Change %" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                </VBox>
