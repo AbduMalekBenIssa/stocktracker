@@ -333,4 +333,26 @@ public class WatchlistController extends BaseController {
 
             // Show the dialog and process the result
             Optional<ButtonType> result = dialog.showAndWait();
+
+            if (result.isPresent() && result.get() == buyButtonType) {
+                try {
+                    // Get the quantity from the form
+                    int quantity = Integer.parseInt(quantityField.getText());
+
+                    // Validate the input
+                    if (quantity <= 0) {
+                        showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a positive number for the quantity.");
+                        return;
+                    }
+
+                    // Calculate total cost
+                    double totalCost = price * quantity;
+
+                    // Check if user has enough funds
+                    if (totalCost > user.getBalance()) {
+                        showErrorDialog("Insufficient Funds", "Insufficient Funds",
+                                String.format("You don't have enough funds to buy %d shares of %s for $%.2f.",
+                                        quantity, stock.getSymbol(), totalCost));
+                        return;
+                    }
 }
