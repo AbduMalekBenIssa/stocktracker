@@ -82,3 +82,22 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </padding>
                 </VBox>
+                <!-- Most Active -->
+                <VBox styleClass="card">
+                    <children>
+                        <Label styleClass="card-header" text="Most Actively Traded 🔥" />
+                        <TableView fx:id="activeTable" prefHeight="200.0">
+                            <columns>
+                                <TableColumn fx:id="activeSymbolColumn" prefWidth="100.0" text="Symbol" />
+                                <TableColumn fx:id="activeNameColumn" prefWidth="400.0" text="Name" />
+                                <TableColumn fx:id="activePriceColumn" prefWidth="150.0" text="Price" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                </VBox>
