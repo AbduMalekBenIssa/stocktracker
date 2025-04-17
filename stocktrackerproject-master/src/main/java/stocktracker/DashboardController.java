@@ -256,4 +256,28 @@ public class DashboardController extends BaseController {
             recentTransactionsContainer.getChildren().add(transactionLabel);
         }
     }
+
+    /**
+     * Refreshes the dashboard data
+     * Called when changes may have happened to the data
+     */
+    @FXML
+    private void refreshDashboard() {
+        try {
+            // Update stock prices
+            for (OwnedStock stock : user.getPortfolio().getAllStocks()) {
+                double price = stockMarket.getStockPrice(stock.getSymbol());
+                stock.updatePrice(price);
+            }
+
+            // Update dashboard
+            updateDashboardData();
+
+            // Show success message
+            showInfoDialog("Refresh Complete", "Dashboard Updated", "Latest stock prices and portfolio data have been loaded.");
+
+        } catch (IOException e) {
+            showErrorDialog("Refresh Error", "Could not refresh dashboard data", e.getMessage());
+        }
+    }
 }
