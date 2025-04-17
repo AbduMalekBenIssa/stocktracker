@@ -489,5 +489,111 @@ public class PortfolioController extends BaseController {
         }
     }
 
+    /**
+     * Sells shares of an owned stock
+     *
+     * @param stock The stock to sell
+     */
+    private void sellStock(OwnedStock stock) {
+        try {
+            // Get current price
+            double price = stockMarket.getStockPrice(stock.getSymbol());
+
+            // Create the dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Sell Shares");
+            dialog.setHeaderText("Sell Shares of " + stock.getSymbol());
+
+            // Set the button types
+            ButtonType sellButtonType = new ButtonType("Sell", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(sellButtonType, ButtonType.CANCEL);
+
+            // Create the form fields
+            VBox content = new VBox(10);
+            content.getStyleClass().add("dialog-content");
+
+            Label stockInfoLabel = new Label(String.format("%s (%s)", stock.getName(), stock.getSymbol()));
+            Label priceLabel = new Label(String.format("Current Price: $%.2f", price));
+            Label ownedSharesLabel = new Label(String.format("Owned Shares: %d", stock.getQuantity()));
+
+            TextField quantityField = new TextField();
+            quantityField.setPromptText("Number of Shares to Sell");
+
+            content.getChildren().addAll(
+                    stockInfoLabel,
+                    priceLabel,
+                    ownedSharesLabel,
+                    new Label("Quantity:"),
+                    quantityField
+            );
+
+            dialog.getDialogPane().setContent(content);
+
+            // Request focus on the quantity field by default
+            quantityField.requestFocus();
+
+            // Show the dialog and process the result
+            Optional<ButtonType> result = dialog.showAndWait();
+
+            if (result.isPresent() && result.get() == sellButtonType) {
+                try {
+                    // Get the quantity from the form
+                    int quantity = Integer.parseInt(quantityField.getText());
+
+                    // Validate the input
+                    if (quantity <= 0) {
+                        showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a positive number for the quantity.");
+                        return;
+                    }
+
+                    if (quantity > stock.getQuantity()) {
+                        showErrorDialog("Invalid Quantity", "Too Many Shares",
+                                String.format("You only own %d shares of %s.", stock.getQuantity(), stock.getSymbol()));
+                        return;
+                    }
+
+                    // Calculate total sale value
+                    double totalValue = price * quantity;
+
+                    // Calculate profit/loss
+                    double profitLoss = (price - stock.getPurchasePrice()) * quantity;
+
+                    // Proceed with the sale
+                    // Add the funds to the balance
+                    user.deposit(totalValue);
+
+                    // Remove the shares from the portfolio
+                    if (quantity == stock.getQuantity()) {
+                        // If selling all shares, remove the stock from the portfolio
+                        user.getPortfolio().removeStock(stock.getSymbol());
+                    } else {
+                        // Otherwise, just reduce the quantity
+                        stock.removeShares(quantity);
+                    }
+
+                    // Add a transaction record
+                    SellTransaction transaction = new SellTransaction(stock.getSymbol(), quantity, price, profitLoss, LocalDateTime.now());
+                    user.addTransaction(transaction);
+
+                    // Update the view
+                    updatePortfolioData();
+                    updateUserInfo();
+
+                    String profitLossMessage = profitLoss >= 0
+                            ? String.format(" with a profit of $%.2f", profitLoss)
+                            : String.format(" with a loss of $%.2f", -profitLoss);
+
+                    showInfoDialog("Sale Complete", "Stock Sold",
+                            String.format("Successfully sold %d shares of %s for $%.2f%s.",
+                                    quantity, stock.getSymbol(), totalValue, profitLossMessage));
+
+                } catch (NumberFormatException e) {
+                    showErrorDialog("Invalid Input", "Invalid Quantity", "Please enter a valid number for the quantity.");
+                }
+            }
+        } catch (IOException e) {
+            showErrorDialog("API Error", "Could not complete sale", "Error accessing stock market data: " + e.getMessage());
+        }
+    }
 
 }
