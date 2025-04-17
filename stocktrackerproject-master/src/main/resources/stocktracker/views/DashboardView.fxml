@@ -123,6 +123,7 @@
                                 </StackPane>
                             </children>
                         </VBox>
+
                         <!-- Portfolio History Chart -->
                         <VBox styleClass="card" GridPane.columnIndex="1">
                             <children>
@@ -154,7 +155,6 @@
                         <javafx.scene.layout.RowConstraints minHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-
                         <!-- Top Stocks List -->
                         <VBox styleClass="card">
                             <children>
