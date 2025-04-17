@@ -563,4 +563,8 @@ public class MarketViewController extends BaseController {
         }
     }
 
+    @Override
+    public void refreshView() {
+        loadMarketData();
+    }
 }
