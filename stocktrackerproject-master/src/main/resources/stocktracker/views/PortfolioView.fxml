@@ -39,3 +39,18 @@
                         <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
                     </padding>
                 </VBox>
+
+                <!-- Profit/Loss Card -->
+                <VBox alignment="CENTER" styleClass="card, summary-card">
+                    <children>
+                        <Label styleClass="card-header-small" text="Profit/Loss" />
+                        <Label fx:id="profitLossLabel" styleClass="card-value" text="0.00">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                    </padding>
+                </VBox>
