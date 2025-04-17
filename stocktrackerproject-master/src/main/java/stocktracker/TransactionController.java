@@ -27,3 +27,45 @@ import java.util.stream.Collectors;
  * @Tutorial T04
  */
 public class TransactionController extends BaseController {
+    @FXML
+    private Label totalTransactionsLabel;
+
+    @FXML
+    private Label buyTransactionsLabel;
+
+    @FXML
+    private Label sellTransactionsLabel;
+
+    @FXML
+    private Label totalVolumeLabel;
+
+    @FXML
+    private TableView<Transaction> transactionTable;
+
+    @FXML
+    private TableColumn<Transaction, String> typeColumn;
+
+    @FXML
+    private TableColumn<Transaction, String> symbolColumn;
+
+    @FXML
+    private TableColumn<Transaction, Integer> quantityColumn;
+
+    @FXML
+    private TableColumn<Transaction, Double> priceColumn;
+
+    @FXML
+    private TableColumn<Transaction, Double> totalColumn;
+
+    @FXML
+    private TableColumn<Transaction, Double> profitLossColumn;
+
+    @FXML
+    private TableColumn<Transaction, LocalDateTime> dateColumn;
+
+    @FXML
+    private ComboBox<String> filterComboBox;
+
+    private ObservableList<Transaction> allTransactions;
+    private ObservableList<Transaction> filteredTransactions;
+}
