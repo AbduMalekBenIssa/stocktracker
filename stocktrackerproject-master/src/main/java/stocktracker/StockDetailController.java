@@ -168,3 +168,27 @@ public class StockDetailController extends BaseController {
             stock.setPeRatio(30 + (Math.random() * 10)); // Mock P/E ratio
             stock.setDividendYield(Math.random() * 3); // Mock dividend yield
             stock.setVolume((int)(Math.random() * 10000000)); // Mock volume
+            // Store the stock
+            currentStock = stock;
+
+            if (currentStock != null) {
+                System.out.println("*** Updating UI with stock info");
+                // Update the labels with stock information
+                updateStockInfo();
+
+                // Load price history
+                loadPriceHistory();
+
+                // Load news items
+                loadNewsItems();
+
+                // Update watchlist button state
+                updateWatchlistButtonState();
+            }
+        } catch (Exception e) {
+            // Handle exceptions (show error message, log, etc.)
+            System.out.println("*** ERROR loading stock data: " + e.getMessage());
+            e.printStackTrace();
+            showErrorDialog("Error Loading Stock", "Failed to load stock data", e.getMessage());
+        }
+    }
