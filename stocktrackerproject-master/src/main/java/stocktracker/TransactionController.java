@@ -149,4 +149,23 @@ public class TransactionController extends BaseController {
                 }
             }
         });
+        dateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTimestamp()));
+        dateColumn.setCellFactory(column -> new TableCell<>() {
+            private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+            @Override
+            protected void updateItem(LocalDateTime value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty || value == null) {
+                    setText(null);
+                } else {
+                    setText(formatter.format(value));
+                }
+            }
+        });
+
+        // Set up sorting
+        transactionTable.getSortOrder().add(dateColumn);
+        dateColumn.setSortType(TableColumn.SortType.DESCENDING);
+    }
 }
