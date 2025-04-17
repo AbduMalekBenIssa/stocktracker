@@ -385,3 +385,51 @@ public class StockDetailController extends BaseController {
                         String.format("Cost: $%.2f, Balance: $%.2f", totalCost, user.getBalance()));
                 return;
             }
+            // Execute the purchase
+            // Withdraw money first
+            boolean success = user.withdraw(totalCost);
+
+            if (success) {
+                // Add to portfolio
+                if (user.getPortfolio().containsStock(currentStock.getSymbol())) {
+                    OwnedStock existingStock = user.getPortfolio().getStock(currentStock.getSymbol());
+                    existingStock.addShares(shares, currentStock.getPrice());
+                } else {
+                    OwnedStock ownedStock = new OwnedStock(
+                            currentStock.getSymbol(),
+                            currentStock.getName(),
+                            currentStock.getPrice(),
+                            shares,
+                            currentStock.getPrice()
+                    );
+                    user.getPortfolio().addStock(ownedStock);
+                }
+
+                // Add transaction record
+                BuyTransaction transaction = new BuyTransaction(
+                        currentStock.getSymbol(),
+                        shares,
+                        currentStock.getPrice()
+                );
+                user.addTransaction(transaction);
+
+                showInfoDialog("Purchase Complete",
+                        "Stock purchase successful",
+                        String.format("You purchased %d shares of %s for $%.2f",
+                                shares, currentStock.getSymbol(), totalCost));
+
+                // Clear the text field
+                sharesTextField.clear();
+
+                // Update the user info in the main view
+                updateUserInfo();
+            } else {
+                showErrorDialog("Purchase Failed",
+                        "Failed to complete the purchase",
+                        "There was an error processing your transaction.");
+            }
+        } catch (NumberFormatException e) {
+            showErrorDialog("Error", "Invalid quantity", "Please enter a valid number of shares.");
+            sharesTextField.setText("");
+        }
+    }
