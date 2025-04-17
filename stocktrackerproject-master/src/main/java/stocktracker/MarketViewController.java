@@ -371,4 +371,25 @@ public class MarketViewController extends BaseController {
         }
     }
 
+
+    /**
+     * Shows unusual market movements
+     */
+    private void showMarketMovements() throws IOException {
+        // Call the market analyzer to check for unusual movements
+        List<String> movements = getUnusualMovements();
+
+        if (movements.isEmpty()) {
+            Label noMovementsLabel = new Label("No unusual market movements detected today.");
+            noMovementsLabel.getStyleClass().add("text-secondary");
+            marketMovementsContainer.getChildren().add(noMovementsLabel);
+        } else {
+            for (String movement : movements) {
+                Label movementLabel = new Label(movement);
+                movementLabel.getStyleClass().add("market-movement-item");
+                marketMovementsContainer.getChildren().add(movementLabel);
+            }
+        }
+    }
+
 }
