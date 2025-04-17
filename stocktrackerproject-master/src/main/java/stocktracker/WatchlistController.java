@@ -95,4 +95,37 @@ public class WatchlistController extends BaseController {
                 }
             }
         });
+        // Set row factory for context menu
+        watchlistTable.setRowFactory(tv -> {
+            TableRow<WatchlistStock> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    showStockDetailsDialog(row.getItem());
+                }
+            });
+
+            // Create context menu
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem buyMenuItem = new MenuItem("Buy Stock");
+            buyMenuItem.setOnAction(e -> buyStock(row.getItem()));
+
+            MenuItem removeMenuItem = new MenuItem("Remove from Watchlist");
+            removeMenuItem.setOnAction(e -> removeFromWatchlist(row.getItem()));
+
+            MenuItem detailsMenuItem = new MenuItem("View Details");
+            detailsMenuItem.setOnAction(e -> showStockDetailsDialog(row.getItem()));
+
+            contextMenu.getItems().addAll(buyMenuItem, new SeparatorMenuItem(), removeMenuItem, new SeparatorMenuItem(), detailsMenuItem);
+
+            // Only display context menu for non-empty rows
+            row.contextMenuProperty().bind(
+                    javafx.beans.binding.Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+
+            return row;
+        });
+    }
 }
