@@ -67,4 +67,15 @@ public class MainViewController {
         // Load the dashboard as the initial view
         loadDashboardView();
     }
+
+    /**
+     * Updates the user information displayed in the header
+     */
+    private void updateUserInfo() {
+        if (user != null) {
+            userNameLabel.setText(user.getName());
+            balanceLabel.setText(String.format("$%.2f", user.getBalance()));
+            totalValueLabel.setText(String.format("$%.2f", user.getTotalValue()));
+        }
+    }
 }
