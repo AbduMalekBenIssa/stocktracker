@@ -315,3 +315,22 @@ public class StockDetailController extends BaseController {
             basePrice = price; // Use the last price as the basis for the next one
         }
     }
+    private void loadNewsItems() {
+        System.out.println("*** loadNewsItems called");
+
+        Platform.runLater(() -> {
+            try {
+                // Clear existing news items
+                newsContainer.getChildren().clear();
+
+                // Generate mock news items
+                // In a real app, this would come from a news API
+                addDummyNewsItems();
+
+                System.out.println("*** News items updated successfully");
+            } catch (Exception e) {
+                System.out.println("*** ERROR loading news items: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
