@@ -196,5 +196,12 @@ public class MainViewController {
             alert.showAndWait();
         }
 
+        /**
+         * Updates the displayed user information after changes
+         */
+        public void refreshUserInfo() {
+            updateUserInfo();
+        }
+
     }
 }
