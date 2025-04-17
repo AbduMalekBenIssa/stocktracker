@@ -100,3 +100,30 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </StackPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" styleClass="footer">
+            <children>
+                <Label text="StockSnap v3.0 | © 2025 Omar Almishri, AbduMalek Ben Issa" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>
