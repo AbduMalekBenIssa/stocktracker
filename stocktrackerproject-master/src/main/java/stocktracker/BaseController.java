@@ -48,4 +48,16 @@ public abstract class BaseController {
      */
     protected abstract void onInitialize();
 
+    /**
+     * Shows an error dialog
+     *
+     * @param title The dialog title
+     * @param header The dialog header
+     * @param content The dialog content
+     */
+    protected void showErrorDialog(String title, String header, String content) {
+        mainController.showErrorDialog(title, header, content);
+    }
+
+
 }
