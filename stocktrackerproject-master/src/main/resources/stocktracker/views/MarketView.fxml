@@ -22,3 +22,16 @@
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
+                        <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#refreshMarketData" styleClass="button-secondary" text="Refresh Market Data" />
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+
+                <!-- Market Movements -->
+                <VBox styleClass="card">
+                    <children>
+                        <Label styleClass="card-header" text="Unusual Market Movements" />
+                        <VBox fx:id="marketMovementsContainer" spacing="8.0">
