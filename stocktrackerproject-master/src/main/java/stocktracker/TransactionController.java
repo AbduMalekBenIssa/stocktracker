@@ -286,6 +286,4 @@ public class TransactionController extends BaseController {
     public void refreshView() {
         loadTransactions();
     }
-} 
-
 }

@@ -484,4 +484,4 @@ public class StockDetailController extends BaseController {
         System.out.println("addToWatchlistButton = " + (addToWatchlistButton != null ? "OK" : "NULL"));
         System.out.println("newsContainer = " + (newsContainer != null ? "OK" : "NULL"));
     }
-} 
+}

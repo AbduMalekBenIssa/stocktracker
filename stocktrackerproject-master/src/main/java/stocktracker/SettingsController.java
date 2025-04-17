@@ -1,3 +1,4 @@
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import stocktracker.BaseController;
 import stocktracker.models.Settings;

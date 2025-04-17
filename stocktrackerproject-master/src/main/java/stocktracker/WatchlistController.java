@@ -402,5 +402,4 @@ public class WatchlistController extends BaseController {
     public void refreshView() {
         updateWatchlistData();
     }
-} 
 }
