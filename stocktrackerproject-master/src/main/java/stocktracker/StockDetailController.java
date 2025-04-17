@@ -116,6 +116,7 @@ public class StockDetailController extends BaseController {
         priceChart.setCreateSymbols(false);
         priceChart.setAnimated(false);
     }
+
     public void setStockSymbol(String symbol) {
         System.out.println("Setting stock symbol to: " + symbol);
         this.stockSymbol.set(symbol);
@@ -128,6 +129,7 @@ public class StockDetailController extends BaseController {
             System.out.println("Controller not fully initialized yet, will load data later");
         }
     }
+
     private void loadStockData(String symbol) {
         System.out.println("*** loadStockData called for symbol: " + symbol);
         try {
@@ -154,6 +156,7 @@ public class StockDetailController extends BaseController {
             System.out.println("*** Change amount: " + changeAmount);
 
             // Create a stock object to store the data
+            // In a real app, we would also get market cap, P/E ratio, etc.
             Stock stock = new Stock(symbol, name, price) {
                 @Override
                 public int compareTo(Stock o) {
@@ -168,6 +171,7 @@ public class StockDetailController extends BaseController {
             stock.setPeRatio(30 + (Math.random() * 10)); // Mock P/E ratio
             stock.setDividendYield(Math.random() * 3); // Mock dividend yield
             stock.setVolume((int)(Math.random() * 10000000)); // Mock volume
+
             // Store the stock
             currentStock = stock;
 
@@ -192,6 +196,7 @@ public class StockDetailController extends BaseController {
             showErrorDialog("Error Loading Stock", "Failed to load stock data", e.getMessage());
         }
     }
+
     private void updateStockInfo() {
         System.out.println("*** updateStockInfo called");
 
@@ -203,6 +208,7 @@ public class StockDetailController extends BaseController {
                     System.out.println("*** ERROR: UI components are not initialized!");
                     return;
                 }
+
                 // Format currency values
                 NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
                 NumberFormat percentFormat = NumberFormat.getPercentInstance();
@@ -256,6 +262,7 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+
     private void updateWatchlistButtonState() {
         boolean isInWatchlist = user.getWatchlist().containsStock(currentStock.getSymbol());
 
@@ -265,6 +272,7 @@ public class StockDetailController extends BaseController {
             addToWatchlistButton.setText("Add to Watchlist");
         }
     }
+
     private String formatMarketCap(double marketCap) {
         if (marketCap >= 1_000_000_000_000L) {
             return String.format("$%.2fT", marketCap / 1_000_000_000_000.0);
@@ -276,6 +284,7 @@ public class StockDetailController extends BaseController {
             return String.format("$%.2fK", marketCap / 1_000.0);
         }
     }
+
     private void loadPriceHistory() {
         System.out.println("*** loadPriceHistory called");
 
@@ -303,8 +312,9 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+
     private void generateRandomPriceData(XYChart.Series<Number, Number> series) {
-        //Generate random price data for demonstration
+        // Generate random price data for demonstration
         Random random = new Random();
         double basePrice = currentStock.getPrice() - (random.nextDouble() * 10);
 
@@ -315,6 +325,7 @@ public class StockDetailController extends BaseController {
             basePrice = price; // Use the last price as the basis for the next one
         }
     }
+
     private void loadNewsItems() {
         System.out.println("*** loadNewsItems called");
 
@@ -334,6 +345,7 @@ public class StockDetailController extends BaseController {
             }
         });
     }
+
     private void addDummyNewsItems() {
         addNewsItem("Quarterly Earnings Report", LocalDate.now().minusDays(2).format(DateTimeFormatter.ofPattern("MMM d, yyyy")),
                 currentStock.getName() + " reported strong Q3 earnings, exceeding analyst expectations.");
@@ -360,10 +372,12 @@ public class StockDetailController extends BaseController {
         newsItem.getChildren().addAll(titleLabel, dateLabel, contentLabel);
         newsContainer.getChildren().add(newsItem);
     }
+
     @FXML
     private void handleRefresh() {
         loadStockData(stockSymbol.get());
     }
+
     @FXML
     private void handleBuyShares() {
         try {
@@ -385,6 +399,7 @@ public class StockDetailController extends BaseController {
                         String.format("Cost: $%.2f, Balance: $%.2f", totalCost, user.getBalance()));
                 return;
             }
+
             // Execute the purchase
             // Withdraw money first
             boolean success = user.withdraw(totalCost);
@@ -433,6 +448,7 @@ public class StockDetailController extends BaseController {
             sharesTextField.setText("");
         }
     }
+
     @FXML
     private void handleAddToWatchlist() {
         boolean isInWatchlist = user.getWatchlist().containsStock(currentStock.getSymbol());
@@ -462,6 +478,7 @@ public class StockDetailController extends BaseController {
         // Update the user info in the main view
         updateUserInfo();
     }
+
     @FXML
     public void initialize() {
         System.out.println("*** FXML initialize method called");
