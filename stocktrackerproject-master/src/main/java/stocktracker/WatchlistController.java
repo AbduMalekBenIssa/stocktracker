@@ -191,4 +191,30 @@ public class WatchlistController extends BaseController {
                 symbolField,
                 symbolInfoLabel
         );
+        // Add validation for the symbol
+        symbolField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                try {
+                    String symbol = newValue.toUpperCase();
+                    if (stockMarket.isValidSymbol(symbol)) {
+                        String name = stockMarket.getCompanyName(symbol);
+                        double price = stockMarket.getStockPrice(symbol);
+                        symbolInfoLabel.setText(String.format("%s - Current Price: $%.2f", name, price));
+                        symbolInfoLabel.getStyleClass().removeAll("text-danger");
+                        symbolInfoLabel.getStyleClass().add("text-info");
+                    } else {
+                        symbolInfoLabel.setText("Invalid stock symbol");
+                        symbolInfoLabel.getStyleClass().removeAll("text-info");
+                        symbolInfoLabel.getStyleClass().add("text-danger");
+                    }
+                } catch (IOException e) {
+                    symbolInfoLabel.setText("Error checking symbol: " + e.getMessage());
+                    symbolInfoLabel.getStyleClass().removeAll("text-info");
+                    symbolInfoLabel.getStyleClass().add("text-danger");
+                }
+            } else {
+                symbolInfoLabel.setText("Enter a valid stock symbol");
+                symbolInfoLabel.getStyleClass().removeAll("text-danger", "text-info");
+            }
+        });
 }
