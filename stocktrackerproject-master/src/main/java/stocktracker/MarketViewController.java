@@ -371,7 +371,6 @@ public class MarketViewController extends BaseController {
         }
     }
 
-
     /**
      * Shows unusual market movements
      */
