@@ -2,11 +2,13 @@ package stocktracker;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import stocktracker.model.User;
 import stocktracker.service.StockMarket;
 
@@ -35,6 +37,9 @@ public class MainViewController {
 
     @FXML
     private Label totalValueLabel;
+
+    @FXML
+    private Button aboutButton;
 
     private User user;
     private StockMarket stockMarket;
@@ -210,5 +215,59 @@ public class MainViewController {
      */
     public Scene getScene() {
         return mainBorderPane != null ? mainBorderPane.getScene() : null;
+    }
+
+    /**
+     * Handles the action of the 'About' button in the sidebar.
+     * Displays an information dialog with application details, styled to match the theme.
+     */
+    @FXML
+    private void handleAboutAction() {
+        // Create a custom Dialog
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("About StockSnap");
+        dialog.setHeaderText("StockSnap - Portfolio Management System");
+
+        // Create content VBox
+        VBox contentVBox = new VBox(10);
+        contentVBox.setPadding(new Insets(20));
+
+        // Add content Labels
+        Label developedByLabel = new Label("Developed by: Omar Almishri, AbduMalek Ben Issa");
+        Label tutorialLabel = new Label("Tutorial: T04");
+        Label descriptionLabel = new Label("This application helps you track your stock portfolio, watchlist, and market trends.");
+        descriptionLabel.setWrapText(true);
+        Label contactLabel = new Label("Contact: omar.almishri56@gmail.com, abdumalek.benissa@gmail.com");
+
+        contentVBox.getChildren().addAll(
+                developedByLabel,
+                tutorialLabel,
+                new Separator(),
+                descriptionLabel,
+                new Separator(),
+                contactLabel
+        );
+
+        // Get the DialogPane
+        DialogPane dialogPane = dialog.getDialogPane();
+
+        // Apply the application's stylesheet to the dialog
+        try {
+            String cssPath = getClass().getResource("/stocktracker/css/style.css").toExternalForm();
+            dialogPane.getStylesheets().add(cssPath);
+            // Add a style class for specific styling if needed
+            dialogPane.getStyleClass().add("about-dialog-pane");
+        } catch (NullPointerException e) {
+            System.err.println("Could not load stylesheet for About dialog: /stocktracker/css/style.css not found.");
+        }
+
+        // Set content
+        dialogPane.setContent(contentVBox);
+
+        // Add OK button
+        dialogPane.getButtonTypes().add(ButtonType.OK);
+
+        // Show dialog
+        dialog.showAndWait();
     }
 }

@@ -1,0 +1,173 @@
+┌─────────────────────┐     ┌─────────────────────┐     ┌─────────────────────┐
+│<<Application>>      │     │<<FXML Controller>>  │     │<<Abstract>>         │
+│  StockTrackerGUI    │────▶│ MainViewController  │◀────│   BaseController    │
+├─────────────────────┤     ├─────────────────────┤     ├─────────────────────┤
+│ +main()             │     │ -mainBorderPane     │     │ #user: User         │
+│ +start()            │     │ -contentArea        │     │ #stockMarket        │
+│ -user: User         │◆───▶│ -user: User         │◆───┐│ #mainController     │
+│ -stockMarket        │◆─┐  │ -stockMarket        │◆─┐ │├─────────────────────┤
+└──────────┬──────────┘  │  ├─────────────────────┤ │ │ │ +initialize()       │
+           │             │  │ +initialize()       │ │ │ │ +refreshView()      │
+           │             │  │ +loadDashboardView()│ │ │ │ #onInitialize()     │
+           │             │  │ +loadPortfolioView()│ │ │ │ #showErrorDialog()  │
+           │             │  │ ... (load views)  │ │ │ │ #showInfoDialog()   │
+           │             │  │ +showStockDetails() │ │ │ │ #updateUserInfo()   │
+           │             │  │ +loadView()         │ │ │ └─────────▲─────────┘
+           │             │  │ +refreshUserInfo()  │ │ │           │ Inheritance
+           │             │  │ +getScene()         │ │ │           │
+           │             │  └─────┬───┬───────────┘ │ │   ┌───────┴───────┐ ┌───────────────────────────┐ ┌─────────────────────────┐
+           │             │        │   │ Loads/Manages │   │<<FXML Controller>>│ │<<FXML Controller>>        │ │<<FXML Controller>>      │
+           │             │        │   └───────────────┼───│DashboardController│ │ PortfolioController       │ │  WatchlistController    │
+           │             │        └───────────────────┼───│...                │ │ ...                       │ │  ...                    │
+           │             └────────────────────────────┼───│                   │ │                           │ │                         │
+           │                                          │   └───────────────────┘ └──────────┬────────────────┘ └──────────┬────────────┘
+           └──────────────────────────────────────────┘                              │                                │ Uses List<OwnedStock>
+                                Uses                                                  │ Uses PortfolioAnalyzer       │ Uses List<WatchlistStock>
+                                                                                     │                                │
+                                                                               ┌─────▼─────────────┐          ┌─────▼─────────────┐
+                                                                               │ PortfolioAnalyzer │          │   MarketAnalyzer    │
+                                                                               ├───────────────────┤          ├───────────────────┤
+                                                                               │ -user: User       │◀──◆       │ -stockMarket        │◀─┐
+                                                                               │ -stockMarket      │◀─┐│       ├───────────────────┤ │
+                                                                               ├───────────────────┤ ││       │ +checkUnusualMvmt() │ │
+                                                                               │ +display...()     │ ││       │ +displayTopGainers()│ │
+                                                                               └───────────────────┘ ││       │ ...                 │ │
+                                                                                                   ││       └───────────────────┘ │
+                                                       ┌───────────────────────┐                   ││                             │
+                                                       │<<Interface>>         │                   ││                             │
+                                                       │    StockMarket      │                   ││                             │
+                                                       ├───────────────────────┤                   ││                             │
+                                                       │ +getStockPrice()      │                   ││                             │
+                                                       │ +getDailyChangePerc() │                   ││                             │
+                                                       │ +getCompanyName()     │                   ││                             │
+┌──────────────────┐                                   │ +getTopGainers()      │                   ││                             │
+│<<Data>>          │                                   │ +getTopLosers()       │                   ││                             │
+│      User        │                                   │ +getMostActively()  │                   ││                             │
+├──────────────────┤                                   │ +isValidSymbol()      │                   ││                             │
+│ -name: String    │                                   └─────────▲─────────────┘                   ││                             │
+│ -balance: double │                                             │ Implements                    ││                             │
+│ -portfolio       │◆─────────────────────┐                      │                               ││                             │
+│ -watchlist       │◆──────────────────┐  │            ┌─────────┴──────────────┐                ││                             │
+│ -transactions    │◆───────────────┐ │  │            │   FinancialModelPrepAPI│──────────────◆┼┘                             │
+├──────────────────┤                │ │  │            ├────────────────────────┤                │                              │
+│ +getBalance()    │                │ │  │            │ -API_KEY: String       │                │                              │
+│ +getTotalValue() │                │ │  │            │ -API_URL: String       │                │                              │
+│ +deposit()       │                │ │  │            │ -httpClient: OkHttpClnt│                │                              │
+│ +withdraw()      │                │ │  │            │ -companyNameCache: Map │                │                              │
+│ +getPortfolio()  │                │ │  │            ├────────────────────────┤                │                              │
+│ +getWatchlist()  │                │ │  │            │ +getStockPrice()       │                │                              │
+│ +getTransactions │                │ │  │            │ +getDailyChangePerc()  │                │                              │
+│ +addTransaction()│                │ │  │            │ +getCompanyName()      │                │                              │
+└────────┬─────────┘                │ │  │            │ +getTopGainers()       │                │                              │
+         │                          │ │  │            │ +getTopLosers()        │                │                              │
+         │ Uses                     │ │  │            │ +getMostActively()   │                │                              │
+         │                          │ │  │            │ +isValidSymbol()       │                │                              │
+         │                          │ │  │            └────────────────────────┘                │                              │
+┌────────▼─────────┐                │ │  │                                                      │                              │
+│ <<Utility>>      │                │ │  │            ┌───────────────────────┐                 │                              │
+│   FileManager    │                │ │  │            │<<Service>>           │                 │                              │
+├──────────────────┤                │ │  │            │   SettingsService     │◀────────────────┼──── Uses ────────────────────┘
+│ +saveToFile()    │                │ │  │            ├───────────────────────┤                 │
+│ +loadFromFile()  │                │ │  │            │ +saveSettings()       │                 │
+│ +saveUserData()  │                │ │  │            │ +loadSettings()       │                 │
+│ +loadUserData()  │                │ │  │            └────────┬──────────────┘                 │
+└────────┬─────────┘                │ │  │                     │ Uses                           │
+         │ Used by                  │ │  │                     │                                │
+         │                          │ │  │            ┌────────▼──────────────┐                 │
+         │                          │ │  │            │<<Data>>               │                 │
+         │                          │ │  │            │      Settings         │                 │
+┌────────▼───────────────┐          │ │  │            ├───────────────────────┤                 │
+│<<FXML Controller>>     │          │ │  │            │ -theme: String        │                 │
+│   SettingsController   │──────────┘ │  │            │ -refreshInterval: int │                 │
+├────────────────────────┤            │  │            ├───────────────────────┤                 │
+│ +initialize()          │            │  │            │ +getTheme()           │                 │
+│ #onInitialize()        │            │  │            │ +setTheme()           │                 │
+│ -handleSaveSettings()  │            │  │            │ ...                   │                 │
+│ -handleLoadData()      │            │  │            └───────────────────────┘                 │
+│ -handleSaveData()      │            │  │                                                      │
+│ -handleThemeChange()   │            │  │                                                      │
+│ -applyTheme()          │            │  │                                                      │
+└────────────▲───────────┘            │  │                                                      │
+             │ Inheritance            │  │                                                      │
+             └────────────────────────┘  │                                                      │
+                                         │                                                      │
+                                         │                                                      │
+┌────────────────────────────────────────┘                                                      │
+│                                                                                               │
+│       ┌─────────────────┐             ┌─────────────────┐                                     │
+│       │<<Data>>         │             │<<Data>>         │                                     │
+│       │    Portfolio    │             │    Watchlist    │                                     │
+│       ├─────────────────┤             ├─────────────────┤                                     │
+│       │ -stocks: Map    │◆───────────▶│ -stocks: Map    │◆───────────────────┐                │
+│       │  <String,       │             │  <String,       │                   │                │
+│       │   OwnedStock>   │             │   WatchlistStock>│                   │                │
+│       ├─────────────────┤             ├─────────────────┤                   │                │
+│       │ +addStock()     │             │ +addStock()     │                   │                │
+│       │ +removeStock()  │             │ +removeStock()  │                   │                │
+│       │ +getStock()     │             │ +getStock()     │                   │                │
+│       │ +getAllStocks() │             │ +getAllStocks() │                   │                │
+│       │ +getTotalValue()│             │ +size()         │                   │                │
+│       │ +getTotalPL()   │             └────────┬────────┘                   │                │
+│       └────────┬────────┘                      │                            │                │
+│                │                               │                            │                │
+│                │ Composition                   │ Composition                │                │
+│       ┌────────▼────────┐             ┌────────▼────────┐                   │                │
+│       │<<Data>>         │             │<<Data>>         │                   │                │
+│       │   OwnedStock    │             │ WatchlistStock  │                   │                │
+│       ├─────────────────┤             ├─────────────────┤                   │                │
+│       │ -quantity: int  │             │ -lastChecked    │                   │                │
+│       │ -purchasePrice  │             │ -changePercent  │                   │                │
+│       ├─────────────────┤             ├─────────────────┤                   │                │
+│       │ +getTotalValue()│             │ +update()       │                   │                │
+│       │ +getProfitLoss()│             │ +getLastChecked()│                   │                │
+│       │ +addShares()    │             │ +getChangePercent│                  │                │
+│       │ +removeShares() │             └────────┬────────┘                   │                │
+│       └────────┬────────┘                      │                            │                │
+│                │                               │ Inheritance                │                │
+│                └───────────┬───────────────────┘                            │                │
+│                            │                                                │                │
+│                            ▼ Inheritance                                    │                │
+│                    ┌───────────────┐                                        │                │
+│                    │<<Data>>       │                                        │                │
+│                    │     Stock     │                                        │                │
+│                    ├───────────────┤                                        │                │
+│                    │ #symbol: String│                                        │                │
+│                    │ #name: String  │                                        │                │
+│                    │ #currentPrice │                                        │                │
+│                    ├───────────────┤                                        │                │
+│                    │ +getSymbol()  │                                        │                │
+│                    │ +getName()    │                                        │                │
+│                    │ +getPrice()   │                                        │                │
+│                    │ +updatePrice()│                                        │                │
+│                    │ +compareTo()  │                                        │                │
+│                    │ +equals()     │                                        │                │
+│                    │ +hashCode()   │                                        │                │
+│                    └───────────────┘                                        │                │
+│                                                                             │                │
+└─────────────────────────────────────────────────────────────────────────────┘                │
+                                                                                               │
+                                                                                               │
+                               ┌──────────────────┐                                            │
+                               │<<Abstract>>      │                                            │
+                               │   Transaction    │◄───────────────────────────────────────────┘
+                               ├──────────────────┤       Composition (User has List<Transaction>)
+                               │ #symbol: String  │
+                               │ #quantity: int   │
+                               │ #price: double   │
+                               │ #timestamp       │
+                               ├──────────────────┤
+                               │ +getType():String│ Abstract
+                               │ +getTotalValue() │
+                               └────────┬─────────┘
+                                        │ Inheritance
+                            ┌───────────┴───────────┐
+                            │                       │
+                   ┌────────▼──────┐      ┌─────────▼──────┐
+                   │<<Data>>       │      │<<Data>>       │
+                   │ BuyTransaction│      │ SellTransaction│
+                   ├───────────────┤      ├────────────────┤
+                   │ +getType()    │      │ -profitLoss    │
+                   └───────────────┘      ├────────────────┤
+                                          │ +getProfitLoss()│
+                                          │ +getType()      │
+                                          └─────────────────┘
