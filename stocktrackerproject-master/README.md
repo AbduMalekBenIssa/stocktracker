@@ -1,50 +1,82 @@
-# StockSnap - Stock Portfolio Management System
+# 📈 **StockSnap – Stock Portfolio Management System**
 
-## Authors
+## CPSC 233 – Final Project (Winter 2025)
 
-*   Omar Almishri (omar.almishri56@gmail.com)
-*   AbduMalek Ben Issa (abdumalek.benissa@gmail.com)
+### Submitted by: Omar Almishri & AbduMalek Ben Issa
 
-## Program Description
+### **Overview**
 
-StockSnap is a JavaFX desktop application designed to help users manage and track their stock investments. It allows users to:
+StockSnap is a JavaFX-based desktop application designed to help users manage their personal stock portfolios. This application enables users to:
+Track owned stocks and total portfolio value
+Record and view buy/sell transactions
+Monitor real-time stock data via the Financial Modeling Prep API
+Maintain a watchlist (in case you are unsure of putting money in)
+Visualize portfolio performance and market trends
+Save/load user data to/from file
+Customize application settings (e.g., username)
 
-*   Monitor their portfolio value and performance.
-*   Maintain a watchlist of stocks they are interested in.
-*   View detailed information about specific stocks (fetched via Financial Modeling Prep API).
-*   Record buy and sell transactions.
-*   Analyze portfolio allocation and market trends (top gainers, losers, most active).
-*   Save and load user data (portfolio, watchlist, transactions, balance).
-*   Customize settings like username.
 
-## Class Information
+This app follows Object Oriented principles and is organized into clearly defined packages for model, controller, service, analysis, and utility components.  It also follows using Model-View-Controller (MVC) style for the GUI layout, and is handled through FXML and styled with a CSS file.
 
-The project follows a Model-View-Controller (MVC) pattern enhanced with services and utility classes:
+### **Package Structure**
 
-*   **`stocktracker` (Root Package):** Contains the main application class (`StockTrackerGUI`), the launcher (`Launcher`), FXML controllers for the main views (`MainViewController`, `DashboardController`, `PortfolioController`, `WatchlistController`, `TransactionController`, `MarketViewController`, `StockDetailController`, `SettingsController`), and the base controller (`BaseController`).
-*   **`stocktracker.model`:** Defines the core data structures (POJOs) like `User`, `Stock`, `Portfolio`, `Watchlist`, `Transaction`, `OwnedStock`, `WatchlistStock`, etc.
-*   **`stocktracker.models`:** Contains the `Settings` data model.
-*   **`stocktracker.service`:** Includes the `StockMarket` interface and its implementation `FinancialModelPrepAPI` for fetching real-time market data.
-*   **`stocktracker.services`:** Contains the `SettingsService` for managing application settings.
-*   **`stocktracker.analysis`:** Provides classes like `PortfolioAnalyzer` and `MarketAnalyzer` for processing and presenting data insights.
-*   **`stocktracker.util`:** Contains utility classes, notably `FileManager` for handling data persistence (saving/loading user data).
-*   **`src/main/resources/stocktracker/views`:** Contains the FXML files defining the GUI layout.
-*   **`src/main/resources/stocktracker/css`:** Contains the CSS file (`style.css`) for styling the application.
 
-## Running the Application (Executable JAR)
+stocktracker - Main application launcher and all FXML controllers 
 
-1.  **Prerequisites:** Make sure you have Java Runtime Environment (JRE) version 23 or later installed on your system.
-2.  **Build (if necessary):** If you haven't built the JAR file yet, navigate to the `stocktrackerproject-master` directory in your terminal and run the Maven command:
-    ```bash
-    mvn clean package
-    ```
-    (Ensure Maven is installed and configured in your PATH).
-3.  **Locate the JAR:** The executable JAR file will be created in the `target/` subdirectory. It will likely be named `StockTrackerProject-1.0-SNAPSHOT.jar` (the version might differ).
-4.  **Execute:** Open a terminal or command prompt, navigate to the `stocktrackerproject-master/target/` directory, and run the JAR file using the following command:
+stocktracker.model - Core business models (e.g., User, Stock, Transaction, Portfolio, Watchlist, Settings)
 
-    ```bash
-    java -jar StockTrackerProject-1.0-SNAPSHOT.jar
-    ```
-    (Replace `StockTrackerProject-1.0-SNAPSHOT.jar` with the actual name of the generated JAR file if it's different).
+stocktracker.service - Stock data fetching service (uses HTTP API, handles Stock Market Information, Settings Management)
 
-The StockSnap application window should then launch. 
+stocktracker.analysis - Classes for analyzing stock/portfolio trends
+
+stocktracker.util - File persistence utilities
+
+resources/stocktracker/views/ - FXML files for each view  || resources/stocktracker/css/ - Styling (style.css)
+
+
+### **Technologies Used**
+
+Java 21 (compatible with Java 23+)
+JavaFX (GUI)
+Maven (build tool for dependencies/modules like the API, etc.)
+FXML (layout)
+CSS (UI styling)
+API/HTTP Requests (via FMP API + OKHttp3 module)
+JSON Parsing (using JSON module)
+File I/O (for save/load user state)
+
+
+### **Running the Application**
+
+_Prerequisites_
+
+JDK 21+
+
+JavaFX SDK (for local execution or rebuilding)
+
+If rebuilding: Maven must be installed and configured
+
+
+### **To Run (via JAR file)**
+
+From terminal/command prompt, run this in the Terminal/Git Bash within the directory where the file is located after downloading.
+
+####  *_java -jar StockTrackerProject-1.0-SNAPSHOT.jar_*
+
+The .jar file also exists inside the /target/ folder.
+
+
+### **GitLab Repository**
+
+https://csgit.ucalgary.ca/omar.almishri/stocktrackerprojectdemo3
+
+### **Contact**
+
+Omar Almishri — omar.almishri@ucalgary.ca 
+
+AbduMalek Ben Issa — abdumalek.benissa@ucalgary.ca
+
+
+
+Please reach out if any file is unreadable or you require clarification.
+
