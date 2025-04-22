@@ -733,6 +733,48 @@
     -fx-scale-y: 1.05;
 }
 
+/* About Dialog Styles */
+.about-dialog-pane {
+    -fx-background-color: -fx-primary-dark;
+    -fx-text-fill: -fx-text-light;
+}
+
+.about-dialog-pane .header-panel {
+    -fx-background-color: -fx-primary;
+}
+
+.about-dialog-pane .header-panel .label {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.about-dialog-pane .content {
+    -fx-background-color: -fx-primary-dark;
+    -fx-text-fill: -fx-text-light;
+}
+
+.about-dialog-pane .label {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-size: 14px;
+}
+
+.about-dialog-pane .separator {
+    -fx-background-color: derive(-fx-primary-light, -20%);
+}
+
+.about-dialog-pane .button-bar .button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-text-light;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+}
+
+.about-dialog-pane .button-bar .button:hover {
+    -fx-background-color: derive(-fx-primary, 20%);
+}
+
 /* Remove or comment out the duplicate app-title style at the bottom */
 /* Delete from here to the end of file:
 .app-title {

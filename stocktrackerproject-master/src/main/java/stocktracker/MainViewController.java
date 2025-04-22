@@ -237,15 +237,12 @@ public class MainViewController {
         Label tutorialLabel = new Label("Tutorial: T04");
         Label descriptionLabel = new Label("This application helps you track your stock portfolio, watchlist, and market trends.");
         descriptionLabel.setWrapText(true);
-        Label contactLabel = new Label("Contact: omar.almishri56@gmail.com, abdumalek.benissa@gmail.com");
 
         contentVBox.getChildren().addAll(
                 developedByLabel,
                 tutorialLabel,
                 new Separator(),
-                descriptionLabel,
-                new Separator(),
-                contactLabel
+                descriptionLabel
         );
 
         // Get the DialogPane
