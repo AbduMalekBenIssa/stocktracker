@@ -20,7 +20,6 @@ stocktracker\TransactionController$2.class
 stocktracker\model\OwnedStock.class
 stocktracker\model\Transaction.class
 stocktracker\tests\UserTest.class
-stocktracker\models\Settings.class
 stocktracker\PortfolioController$1.class
 stocktracker\SettingsController.class
 stocktracker\TransactionController$3.class
@@ -40,7 +39,6 @@ stocktracker\model\SellTransaction.class
 stocktracker\StockDetailController.class
 stocktracker\WatchlistController$1.class
 stocktracker\PortfolioController$2.class
-stocktracker\services\SettingsService.class
 stocktracker\TransactionController$4.class
 stocktracker\TransactionController.class
 stocktracker\model\Stock.class
