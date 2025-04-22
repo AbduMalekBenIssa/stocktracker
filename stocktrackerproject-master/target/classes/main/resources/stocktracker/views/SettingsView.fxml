@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="stocktracker.SettingsController">
+    <children>
+        <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <!-- Header with Title and Profile Icon -->
+                <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="app-header">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" spacing="5">
+                            <Label text="StockSnap" styleClass="app-title">
+                                <font>
+                                    <Font name="System Bold" size="36.0" />
+                                </font>
+                            </Label>
+                            <Label text="Portfolio Management System" styleClass="app-subtitle">
+                                <font>
+                                    <Font size="12.0" />
+                                </font>
+                            </Label>
+                        </VBox>
+                    </children>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <StackPane styleClass="profile-icon-container" alignment="CENTER_RIGHT">
+                        <Circle fx:id="profileIcon" radius="20" fill="#E0E0E0" />
+                        <Label text="👤" style="-fx-font-size: 24;">
+                            <StackPane.margin>
+                                <Insets top="2" />
+                            </StackPane.margin>
+                        </Label>
+                    </StackPane>
+                </HBox>
+
+                <Separator>
+                    <VBox.margin>
+                        <Insets top="10" bottom="20" />
+                    </VBox.margin>
+                </Separator>
+
+                <Label text="Settings" style="-fx-font-weight: bold;">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+
+                <!-- User Information Section -->
+                <TitledPane text="User Information" expanded="true">
+                    <content>
+                        <GridPane hgap="10.0" vgap="10.0">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="350.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            </children>
+                        </GridPane>
+                    </content>
+                </TitledPane>
+
+                <!-- Data Operations Section with Notice -->
+                <TitledPane text="Data Operations" expanded="true">
+                    <content>
+                        <VBox spacing="15">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                            <Label fx:id="dataNoticeLabel" text="The application starts with a new user by default." wrapText="true" styleClass="info-label" />
+                            <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                                <Button fx:id="loadDataButton" text="Load Data" onAction="#handleLoadData" />
+                                <Button fx:id="saveDataButton" text="Save Data" onAction="#handleSaveData" />
+                            </HBox>
+                        </VBox>
+                    </content>
+                </TitledPane>
+
+                <!-- Action Buttons for Settings -->
+                <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                    <Button fx:id="saveButton" text="Save Settings" onAction="#handleSaveSettings" />
+                    <Button fx:id="resetButton" text="Reset to Defaults" onAction="#handleReset" />
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
