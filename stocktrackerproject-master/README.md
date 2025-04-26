@@ -1,82 +1,66 @@
-# 📈 **StockSnap – Stock Portfolio Management System**
+# StockSnap - Portfolio Management System
 
-## CPSC 233 – Final Project (Winter 2025)
+## Project Overview
 
-### Submitted by: Omar Almishri & AbduMalek Ben Issa
+StockSnap is a comprehensive desktop application designed to help users track and manage their stock portfolios, monitor market trends, and view their transaction history. This application was developed as a custom class project with the help of Omar Almishri.
 
-### **Overview**
+It provides a user-friendly interface built with JavaFX, offering features for both novice and experienced investors to stay informed about their investments.
 
-StockSnap is a JavaFX-based desktop application designed to help users manage their personal stock portfolios. This application enables users to:
-Track owned stocks and total portfolio value
-Record and view buy/sell transactions
-Monitor real-time stock data via the Financial Modeling Prep API
-Maintain a watchlist (in case you are unsure of putting money in)
-Visualize portfolio performance and market trends
-Save/load user data to/from file
-Customize application settings (e.g., username)
+## Key Features
 
+*   **Dashboard:** Provides a quick overview of your current balance, total portfolio value, and recent activities.
+*   **Portfolio Management:** View your current stock holdings, including quantity, average cost, current value, and overall gain/loss.
+*   **Watchlist:** Keep track of stocks you are interested in but do not currently own.
+*   **Market View:** Browse and search for stocks, view current market prices, and access detailed stock information.
+*   **Stock Details:** In-depth view for individual stocks, including price charts (if implemented), key statistics, latest news, and buy/sell options.
+*   **Transaction History:** Log and review all your past buy and sell transactions.
+*   **Settings:** Customize application settings, including theme preferences (e.g., Dark Mode) and potentially user profile details.
+*   **Real-time Data (Conceptual):** Designed to integrate with stock market APIs for up-to-date pricing and news (API key management required).
+*   **User Management:** Secure login and management of user data (balance, portfolio, etc.).
 
-This app follows Object Oriented principles and is organized into clearly defined packages for model, controller, service, analysis, and utility components.  It also follows using Model-View-Controller (MVC) style for the GUI layout, and is handled through FXML and styled with a CSS file.
+## Technology Stack
 
-### **Package Structure**
+*   **Language:** Java
+*   **Framework:** JavaFX (for the Graphical User Interface)
+*   **Build Tool:** Apache Maven (likely, based on standard Java project structure)
+*   **Styling:** CSS (for customizing the JavaFX UI appearance)
 
+## Setup and Running the Application
 
-stocktracker - Main application launcher and all FXML controllers 
+1.  **Prerequisites:**
+    *   Java Development Kit (JDK) - Version 11 or higher recommended.
+    *   Apache Maven.
+2.  **Clone the Repository:**
+    ```bash
+    git clone <repository-url>
+    cd stocktrackerproject-master
+    ```
+3.  **Build the Project:**
+    *   Open a terminal or command prompt in the project's root directory (`stocktrackerproject-master`).
+    *   Run the Maven build command:
+        ```bash
+        mvn clean package
+        ```
+4.  **Run the Application:**
+    *   After a successful build, you can run the application using the Maven exec plugin or by directly executing the generated JAR file (configuration might vary based on `pom.xml`):
+        ```bash
+        # Example using Maven exec plugin (if configured)
+        mvn javafx:run 
+        
+        # Or running the JAR (check target directory and pom.xml for specifics)
+        # java -jar target/stocktracker-*.jar 
+        ```
 
-stocktracker.model - Core business models (e.g., User, Stock, Transaction, Portfolio, Watchlist, Settings)
+## Important Note on API Keys
 
-stocktracker.service - Stock data fetching service (uses HTTP API, handles Stock Market Information, Settings Management)
+If this application integrates with external stock market APIs (like Alpha Vantage, Finnhub, etc.), it likely requires an API key. 
 
-stocktracker.analysis - Classes for analyzing stock/portfolio trends
+**DO NOT commit your API key directly into the codebase or version control (like Git).**
 
-stocktracker.util - File persistence utilities
+*   **Best Practice:** Use environment variables, configuration files (added to `.gitignore`), or a secure secrets management system to handle API keys.
+*   **Before Committing:** Double-check your code (especially configuration files or constants) to ensure no sensitive information like API keys is included.
 
-resources/stocktracker/views/ - FXML files for each view  || resources/stocktracker/css/ - Styling (style.css)
+## Acknowledgements
 
-
-### **Technologies Used**
-
-Java 21 (compatible with Java 23+)
-JavaFX (GUI)
-Maven (build tool for dependencies/modules like the API, etc.)
-FXML (layout)
-CSS (UI styling)
-API/HTTP Requests (via FMP API + OKHttp3 module)
-JSON Parsing (using JSON module)
-File I/O (for save/load user state)
-
-
-### **Running the Application**
-
-_Prerequisites_
-
-JDK 21+
-
-JavaFX SDK (for local execution or rebuilding)
-
-If rebuilding: Maven must be installed and configured
-
-
-### **To Run (via JAR file)**
-
-From terminal/command prompt, run this in the Terminal/Git Bash within the directory where the file is located after downloading.
-
-####  *_java -jar StockTrackerProject-1.0-SNAPSHOT.jar_*
-
-The .jar file also exists inside the /target/ folder.
-
-
-### **GitLab Repository**
-
-https://csgit.ucalgary.ca/omar.almishri/stocktrackerprojectdemo3
-
-### **Contact**
-
-Omar Almishri — omar.almishri@ucalgary.ca 
-
-AbduMalek Ben Issa — abdumalek.benissa@ucalgary.ca
-
-
-
-Please reach out if any file is unreadable or you require clarification.
+This project was developed as a custom class project. Special thanks to **Omar Almishri** for the collaboration and contributions.
 
